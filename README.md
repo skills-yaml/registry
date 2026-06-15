@@ -6,6 +6,10 @@ Central registry of skills and agents for the skm project.
 
 For the complete skill structure specification, see [SKILL_STRUCTURE.md](./SKILL_STRUCTURE.md).
 
+## Versioning
+
+For versioning rules and best practices for skills and agents, see [VERSIONING.md](./VERSIONING.md).
+
 ```
 registry/
 ├── skills/
