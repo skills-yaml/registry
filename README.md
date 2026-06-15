@@ -15,10 +15,19 @@ registry/
 ├── skills/
 │   ├── software-development/
 │   │   └── spec/          # Spec writing skill
+│   │       ├── SKILL.md
+│   │       ├── latest/ -> v1.0.0/  # Symlink to latest
+│   │       ├── default/ -> v1.0.0/ # Symlink to default
+│   │       └── v1.0.0/    # Pinned version
 │   └── system/
 │       └── devops-manager/ # System monitoring and management
+│           ├── SKILL.md
+│           ├── latest/ -> v1.0.0/
+│           ├── default/ -> v1.0.0/
+│           └── v1.0.0/
 └── agents/
-    └── (future agents)
+    └── claude/         # Agent integration
+        └── MANIFEST.md
 ```
 
 ## Skills
@@ -32,13 +41,26 @@ registry/
 ## Adding New Skills
 
 See [SKILL_STRUCTURE.md](./SKILL_STRUCTURE.md) for complete requirements.
+See [VERSIONING.md](./VERSIONING.md) for versioning rules.
 
 Quick start:
-1. Add your skill directory under the appropriate category in `skills/`
-2. Include a `SKILL.md` file with proper metadata (frontmatter required)
-3. Follow the structure: `skills/<category>/<skill-name>/SKILL.md`
-4. Update this README with the new skill description
-5. Commit and push to GitHub
+1. Add your skill directory: `skills/<category>/<skill-name>/`
+2. Create `SKILL.md` with version in frontmatter
+3. Create version directory: `skills/<category>/<skill-name>/v1.0.0/`
+4. Copy skill files into version directory
+5. Create symlinks: `latest -> v1.0.0` and `default -> v1.0.0`
+6. Update this README with the new skill description
+7. Commit and push to GitHub
+
+Example for new skill at v1.0.0:
+```bash
+mkdir -p skills/my-category/my-skill/v1.0.0
+# Create SKILL.md with version: "1.0.0"
+cp -r my-files/* skills/my-category/my-skill/v1.0.0/
+cd skills/my-category/my-skill
+ln -s v1.0.0 latest
+ln -s v1.0.0 default
+```
 
 ## License
 
