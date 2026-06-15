@@ -60,9 +60,15 @@ Skill versions are defined in two places:
 
 When a skill is installed, `skm` resolves the version as follows:
 
-1. If `version` is specified in `skills.yaml` → use that exact version
-2. If `version: "latest"` → use the highest version available
-3. If `version` is omitted → use the highest version available (same as "latest")
+1. If `version: "1.2.3"` → use exact pinned version from `v1.2.3/`
+2. If `version: "latest"` → follow `latest/` symlink to newest version
+3. If `version: "default"` → follow `default/` symlink to stable version
+4. If `version` is omitted → same as `"latest"` (follow `latest/` symlink)
+
+**Implementation:**
+- `skm` checks if version is a symlink (`latest`, `default`) → follows it
+- `skm` checks if version is exact (`v1.2.3`) → uses that directory
+- `skm` checks if version is semver (`1.2.3`) → resolves to `v1.2.3/`
 
 ### Version Precedence
 
@@ -73,36 +79,45 @@ Versions are sorted using semantic version precedence:
 
 ### Directory Structure with Versions
 
-Skills with multiple versions are stored in a versioned directory structure:
+Skills with multiple versions are stored in an **explicit versioned directory structure** with symlinks for convenience:
 
 ```
 registry/
 └── skills/
     └── <category>/
         └── <skill-name>/
-            ├── SKILL.md              # Latest version metadata
-            ├── v1.0.0/               # Version 1.0.0
+            ├── SKILL.md              # Metadata for latest version
+            ├── latest/ -> v2.0.0/    # Symlink: Always points to latest
+            ├── default/ -> v1.0.0/   # Symlink: Points to default/stable
+            ├── v1.0.0/               # Pinned version 1.0.0
             │   ├── SKILL.md          # Version-specific metadata
             │   └── ...              # Version-specific files
-            ├── v1.1.0/               # Version 1.1.0
+            ├── v1.1.0/               # Pinned version 1.1.0
             │   ├── SKILL.md
             │   └── ...
-            └── v2.0.0/               # Version 2.0.0 (latest)
+            └── v2.0.0/               # Pinned version 2.0.0 (latest)
                 ├── SKILL.md
                 └── ...
 ```
 
-**Note**: The root `SKILL.md` should contain the metadata for the latest stable version.
+**Key:**
+- `latest/` → **Symlink** to the newest version (resolves `latest` alias)
+- `default/` → **Symlink** to the recommended stable version (resolves `default` alias)
+- `vX.Y.Z/` → **Pinned version** directories with actual files
+- Root `SKILL.md` → Metadata for the latest version (used by `skm` for discovery)
 
 ### Version Aliases
 
-The following aliases are supported:
+The following aliases are **symlinks** in the skill directory:
 
-| Alias | Resolves To | Use Case |
-|-------|-------------|----------|
-| `latest` | Highest version | Default, development |
-| `stable` | Highest non-prerelease version | Production |
-| `lts` | Latest Long-Term Support version | Long-term stability |
+| Alias | Symlink Target | Resolves To | Use Case |
+|-------|----------------|-------------|----------|
+| `latest` | `vX.Y.Z/` | Highest version | Default, development |
+| `default` | `vX.Y.Z/` | Recommended stable | Production, CI |
+| `stable` | `vX.Y.Z/` | Highest non-prerelease | Production |
+| `lts` | `vX.Y.Z/` | Latest LTS version | Long-term stability |
+
+**Note:** The `latest` and `default` symlinks must exist in every skill directory. When a new version is released, update these symlinks to point to the appropriate version.
 
 ### Version Metadata in SKILL.md
 
@@ -360,6 +375,52 @@ Each version entry should include:
 | `1` | ❌ | Missing MINOR and PATCH |
 | `latest` | ✅ | Special alias (resolved by skm) |
 | `stable` | ✅ | Special alias (resolved by skm) |
+
+---
+
+## 🔧 Maintenance Workflow
+
+### Releasing a New Version
+
+When releasing version `v2.0.0` of a skill:
+
+```bash
+# 1. Create new version directory
+mkdir -p skills/<category>/<skill-name>/v2.0.0
+
+# 2. Copy files from previous version
+cp -r skills/<category>/<skill-name>/v1.0.0/* skills/<category>/<skill-name>/v2.0.0/
+
+# 3. Update SKILL.md in new version with new version
+# Edit skills/<category>/<skill-name>/v2.0.0/SKILL.md
+
+# 4. Update root SKILL.md to latest version
+# Edit skills/<category>/<skill-name>/SKILL.md (version: "2.0.0")
+
+# 5. Update symlinks
+cd skills/<category>/<skill-name>
+rm latest default
+ln -s v2.0.0 latest
+ln -s v2.0.0 default  # Or keep pointing to v1.0.0 for stability
+
+# 6. Update VERSIONS.md with changelog
+```
+
+### Changing Default Version
+
+To change which version is the default (e.g., keep v1.0.0 as default while v2.0.0 is latest):
+
+```bash
+cd skills/<category>/<skill-name>
+rm default
+ln -s v1.0.0 default  # Point default to stable version
+ln -s v2.0.0 latest    # Point latest to newest version
+```
+
+This allows:
+- `skm add my-skill --version latest` → gets v2.0.0
+- `skm add my-skill --version default` → gets v1.0.0 (stable)
+- `skm add my-skill --version 1.0.0` → gets v1.0.0 explicitly
 
 ---
 
