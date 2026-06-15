@@ -4,6 +4,8 @@ Central registry of skills and agents for the skm project.
 
 ## Structure
 
+For the complete skill structure specification, see [SKILL_STRUCTURE.md](./SKILL_STRUCTURE.md).
+
 ```
 registry/
 ├── skills/
@@ -25,10 +27,14 @@ registry/
 
 ## Adding New Skills
 
+See [SKILL_STRUCTURE.md](./SKILL_STRUCTURE.md) for complete requirements.
+
+Quick start:
 1. Add your skill directory under the appropriate category in `skills/`
-2. Include a `SKILL.md` file with proper metadata
-3. Update this README with the new skill description
-4. Commit and push to GitHub
+2. Include a `SKILL.md` file with proper metadata (frontmatter required)
+3. Follow the structure: `skills/<category>/<skill-name>/SKILL.md`
+4. Update this README with the new skill description
+5. Commit and push to GitHub
 
 ## License
 
