@@ -50,8 +50,9 @@ Metadata:
 
 - `git status --short` before edits: run; worktree clean.
 - `task --list`: passed after the Taskfile was added.
-- `task check`: pending final publication reconciliation.
+- `task check`: passed before and after publication.
 - `task test`: passed with 13 validator regression tests.
+- Registry CI run `34427475083` passed on the published `main` revision.
 
 ## Notes
 

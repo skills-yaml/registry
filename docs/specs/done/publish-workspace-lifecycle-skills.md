@@ -1,12 +1,16 @@
-# Development Spec: Publish Workspace Lifecycle Skills
+# Done Spec: Publish Workspace Lifecycle Skills
 
 ## Status
 
-State: `development`
+State: `done`
 
-Rationale: The user requested implementation of versioned, registry-published
-Workspace lifecycle skills. Publication and end-to-end consumer validation are
-active; completion evidence is pending.
+Rationale: Registry PR #1 published the Workspace packages through `main` at
+`3b6a8cc6a62ce881e10731828cd73bafc8383605`; main CI run `34427475083` passed.
+The packages pin Workspace production revision
+`fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452`. The released SKM 0.4.0 binary
+cloned the published registry, installed `wk-deliver` and its eight exact
+dependencies, passed `skm check`, and converged with all nine links unchanged
+on a second apply.
 
 ## Summary
 
@@ -117,8 +121,10 @@ contract consumed by SKM 0.4.0 and later.
 
 ## Memory Impact
 
-Status: `pending`
+Status: `updated`
 
-Rationale: Record the durable registry namespace, validation contract, package
-set, source revision, and released consumer compatibility after publication
-evidence is final.
+Rationale: The durable namespace and publication contract are recorded in
+`agents/memory/decisions.md`. The released package set, source and registry
+revisions, CI evidence, and SKM compatibility are recorded in
+`agents/memory/facts.md`; corresponding entries are in
+`agents/memory/changelog.md`.
