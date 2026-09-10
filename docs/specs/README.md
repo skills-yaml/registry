@@ -13,6 +13,10 @@ Allowed transitions:
 - `backlog -> development`
 - `development -> done`
 
+## Active Specs
+
+- [Publish Workspace Lifecycle Skills](development/publish-workspace-lifecycle-skills.md)
+
 Legacy or reference spec paths preserved during adoption:
 
 - None recorded.

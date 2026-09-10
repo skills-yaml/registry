@@ -39,12 +39,23 @@ Examples:
 
 Skill versions are defined in two places:
 
-1. **In `SKILL.md` frontmatter** (primary):
+1. **In `SKILL.md` frontmatter** (legacy form):
    ```yaml
    ---
    name: spec
    version: "1.2.3"
    description: "..."
+   ---
+   ```
+
+   Newly published packages use the Agent Skills string metadata map:
+
+   ```yaml
+   ---
+   name: spec
+   description: "..."
+   metadata:
+     skm-version: "1.2.3"
    ---
    ```
 
@@ -87,8 +98,8 @@ registry/
     └── <category>/
         └── <skill-name>/
             ├── SKILL.md              # Metadata for latest version
-            ├── latest/ -> v2.0.0/    # Symlink: Always points to latest
-            ├── default/ -> v1.0.0/   # Symlink: Points to default/stable
+            ├── latest -> v2.0.0      # Symlink: Always points to latest
+            ├── default -> v1.0.0     # Symlink: Points to default/stable
             ├── v1.0.0/               # Pinned version 1.0.0
             │   ├── SKILL.md          # Version-specific metadata
             │   └── ...              # Version-specific files
@@ -101,10 +112,38 @@ registry/
 ```
 
 **Key:**
-- `latest/` → **Symlink** to the newest version (resolves `latest` alias)
-- `default/` → **Symlink** to the recommended stable version (resolves `default` alias)
+- `latest` → **Symlink** to the newest version (resolves `latest` alias)
+- `default` → **Symlink** to the recommended stable version (resolves `default` alias)
 - `vX.Y.Z/` → **Pinned version** directories with actual files
 - Root `SKILL.md` → Metadata for the latest version (used by `skm` for discovery)
+
+The entire root/current payload must match the version selected by `latest`,
+not only `SKILL.md`.
+
+### Exact-version immutability
+
+Once an exact `vMAJOR.MINOR.PATCH` directory reaches the production branch, its
+paths, file types, executable modes, and bytes are immutable. Corrections require
+a new semantic version. `task registry:check` compares published exact versions
+with `origin/main` and rejects deletions, additions, or mutations inside them.
+
+Alias targets and root/current copies may move forward to a newly added version,
+but must remain contained within their package and internally consistent.
+
+### Exact package dependencies
+
+New packages may declare dependencies in `metadata.skm-dependencies`:
+
+```yaml
+metadata:
+  skm-version: "0.1.0"
+  skm-dependencies: "workspace/write-spec@0.2.0, workspace/review-changes@0.2.0"
+```
+
+SKM 0.4.0 and later resolves the transitive closure. Every coordinate must pin
+an exact version in the same trusted registry, exist there, and participate in
+an acyclic graph. Skills remain independently versioned; a bundle or release
+manifest records a tested set without forcing lockstep version bumps.
 
 ### Version Aliases
 
@@ -114,36 +153,31 @@ The following aliases are **symlinks** in the skill directory:
 |-------|----------------|-------------|----------|
 | `latest` | `vX.Y.Z/` | Highest version | Default, development |
 | `default` | `vX.Y.Z/` | Recommended stable | Production, CI |
-| `stable` | `vX.Y.Z/` | Highest non-prerelease | Production |
-| `lts` | `vX.Y.Z/` | Latest LTS version | Long-term stability |
 
-**Note:** The `latest` and `default` symlinks must exist in every skill directory. When a new version is released, update these symlinks to point to the appropriate version.
+**Note:** The `latest` and `default` symlinks are the supported aliases and must
+exist in every skill directory. When a new version is released, update them to
+contained, real exact version directories.
 
 ### Version Metadata in SKILL.md
 
-The `SKILL.md` frontmatter can include version-related fields:
+Legacy `SKILL.md` frontmatter may include version-related top-level fields.
+New packages keep registry values as strings under `metadata`:
 
 ```yaml
 ---
 name: spec
-version: "2.0.0"                    # Current version
 description: "..."
-previous_versions:                  # Optional: List of previous versions
-  - "1.2.3"
-  - "1.1.0"
-  - "1.0.0"
-replaces: "1.2.3"                   # Optional: Version this replaces
-deprecated: false                  # Optional: Mark as deprecated
-superseded_by: "3.0.0"            # Optional: Newer version available
-tags:
-  - lts                           # Optional: Tag for LTS versions
-  - stable
+metadata:
+  skm-version: "2.0.0"
+  deprecated: "false"
+  replaces: "1.2.3"
 ---
 ```
 
-### Version Constraints
+### Version Selectors
 
-When referencing a skill in `skills.yaml`, you can specify version constraints:
+SKM accepts exact versions plus the `latest` and `default` aliases in
+`skills.yaml`. Version ranges and wildcards are not registry selectors.
 
 ```yaml
 skills:
@@ -152,24 +186,14 @@ skills:
     version: "1.2.3"
     source: default
 
-  # Version range (using semver syntax)
-  - name: software-development/spec
-    version: ">=1.0.0 <2.0.0"
-    source: default
-
-  # Wildcard (patch updates only)
-  - name: software-development/spec
-    version: "1.2.x"
-    source: default
-
   # Latest version
   - name: software-development/spec
     version: "latest"
     source: default
 
-  # Latest stable (non-prerelease)
+  # Registry-selected stable default
   - name: software-development/spec
-    version: "stable"
+    version: "default"
     source: default
 ```
 
@@ -234,7 +258,7 @@ registry/
 
 ```bash
 # List all available versions of a skill
-skm list-versions software-development/spec
+skm versions software-development/spec
 
 # Output:
 # Available versions for software-development/spec:
@@ -247,42 +271,38 @@ skm list-versions software-development/spec
 ### Installing Specific Versions
 
 ```bash
-# Install a specific version
-skm add software-development/spec --version 1.2.3
+# Add the skill at its default selector, then switch to an exact version
+skm add software-development/spec
+skm use software-development/spec@1.2.3 --yes
 
-# Install latest version
-skm add software-development/spec --version latest
-
-# Install from a version range
-skm add software-development/spec --version ">=1.0.0 <2.0.0"
+# Or pin `version: "1.2.3"` in skills.yaml and reconcile
+skm install --yes
 ```
 
 ### Updating Skills
 
 ```bash
-# Update to latest version
-skm update software-development/spec
+# Update a skill to its latest version
+skm update-skill software-development/spec --yes
 
-# Update to specific version
-skm update software-development/spec --version 2.0.0
-
-# Check for updates
-skm check-updates
+# Preview a switch to a specific version
+skm use software-development/spec@2.0.0 --dry-run
 ```
 
-### Lock File (skills.lock)
+### Lock File (`skills.lock.yaml`)
 
-The `skm install` command can generate a `skills.lock` file to pin exact versions:
+The `skm install` command generates `skills.lock.yaml` to pin resolved sources,
+versions, integrity values, and adapter outputs. The lockfile is generated by
+SKM and must not be edited manually.
 
 ```yaml
-# skills.lock - Auto-generated, do not edit manually
-version: 1
+# skills.lock.yaml - Auto-generated, do not edit manually
+schema_version: 1
 skills:
-  - name: software-development/spec
+  - id: software-development/spec
     version: "1.2.3"
-    resolved: "2024-01-15T10:30:00Z"
     source: default
-    checksum: sha256:abc123...
+    integrity: sha256:abc123...
 ```
 
 ---
