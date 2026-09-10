@@ -4,7 +4,7 @@ description: Analyze a repository without modifying it, producing an evidence-ba
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/analyze-repository"
   skm-source-integrity: "sha256:35384ee00fddfe361a3581f826eff88a4e5a74f24c7e9d476db3a17ea246ad3d"
   workspace-toolkit-version: "0.3.0"

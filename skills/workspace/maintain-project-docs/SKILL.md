@@ -4,7 +4,7 @@ description: Create, update, reconcile, or review human-facing project documenta
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/maintain-project-docs"
   skm-source-integrity: "sha256:32ae83701cd526406c467daac9171834cf361e67e1945181324c4650246bae20"
   workspace-toolkit-version: "0.3.0"

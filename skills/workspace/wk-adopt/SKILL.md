@@ -4,7 +4,7 @@ description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgr
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
   skm-source-integrity: "sha256:1642df00c2738c5d7e5b82b45e1c4c225c4d64f5e0fee78772bb05459ed6c2d4"
   workspace-toolkit-version: "0.3.0"

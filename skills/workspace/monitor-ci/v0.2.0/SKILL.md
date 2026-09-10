@@ -4,7 +4,7 @@ description: Monitor a continuous-integration run or pull-request checks through
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/monitor-ci"
   skm-source-integrity: "sha256:956a53296e3c54832e5489587550f4caced66d8637974ba509cad8fb79a950cc"
   workspace-toolkit-version: "0.3.0"

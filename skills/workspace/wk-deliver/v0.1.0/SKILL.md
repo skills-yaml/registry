@@ -4,7 +4,7 @@ description: Run the wk.deliver lifecycle facade to implement, validate, review,
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
   skm-source-integrity: "sha256:39d4795350f44be0c5a403367a429c0a8461fddc2e7bb9ce18aad2580609885f"
   workspace-toolkit-version: "0.3.0"

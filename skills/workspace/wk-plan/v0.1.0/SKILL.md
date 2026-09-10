@@ -4,7 +4,7 @@ description: Run the wk.plan lifecycle facade to validate or create an active sp
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/wk-plan"
   skm-source-integrity: "sha256:9049a15bd6760c893c3546f95b59ad169dabe5f562d301723bd004d06e8cd375"
   workspace-toolkit-version: "0.3.0"

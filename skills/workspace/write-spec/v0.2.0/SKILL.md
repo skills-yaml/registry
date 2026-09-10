@@ -4,7 +4,7 @@ description: Turn an accepted problem or feature request into a lifecycle-manage
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/write-spec"
   skm-source-integrity: "sha256:54fd7d431ba24e25d0c06282dcb1b679b93d298294c268a9373dc1cd24dd949d"
   workspace-toolkit-version: "0.3.0"

@@ -4,7 +4,7 @@ description: Run the wk.document lifecycle facade to create or maintain human-fa
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/wk-document"
   skm-source-integrity: "sha256:88fe49cfb973aa25182cf64ffd6ec1411ac86cab92fcc8499e224bfb12ad252d"
   workspace-toolkit-version: "0.3.0"

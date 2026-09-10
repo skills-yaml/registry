@@ -4,7 +4,7 @@ description: Run the wk.spec lifecycle facade to turn an accepted request into a
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/wk-spec"
   skm-source-integrity: "sha256:e034f10d1e49f9a11dca69d920987a1565ab789c91467940cc2e0fc3627fceee"
   workspace-toolkit-version: "0.3.0"
