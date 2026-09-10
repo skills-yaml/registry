@@ -11,6 +11,10 @@ Metadata:
 
 - `AGENTS.md`
 - `README.md`
+- `Taskfile.yml`
+- `.github/workflows/ci.yml`
+- `scripts/validate_registry.py`
+- `scripts/test_validate_registry.py`
 - `docs/tech/task.md`
 - `docs/tech/sdlc.md`
 - `docs/tech/project_structure.md`
@@ -28,7 +32,7 @@ Metadata:
 
 ## Missing / Known Gaps
 
-- No Taskfile exists; task/check/test gates are not currently defined.
+- None recorded.
 
 ## Legacy Spec Paths
 
@@ -36,14 +40,18 @@ Metadata:
 
 ## Quality Gates Available
 
-- No Taskfile detected.
+- `task check`: all repository gates.
+- `task test`: deterministic validator regression tests.
+- `task registry:check`: package, dependency, provenance, integrity, path, and
+  released-version immutability validation.
+- Registry CI runs `task check` for pull requests and pushes to `main`.
 
 ## Validation Run
 
 - `git status --short` before edits: run; worktree clean.
-- `task --list`: skipped; no Taskfile detected.
-- `task check`: skipped; no Taskfile detected.
-- `task test`: skipped; no Taskfile detected.
+- `task --list`: passed after the Taskfile was added.
+- `task check`: pending final publication reconciliation.
+- `task test`: passed with 13 validator regression tests.
 
 ## Notes
 

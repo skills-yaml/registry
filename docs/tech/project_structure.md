@@ -15,6 +15,8 @@ This document records the repository layout and ownership boundaries for `regist
 
 - `README.md`
 - Root source directories and configuration files
+- `Taskfile.yml`, `scripts/`, and `.github/workflows/ci.yml` for deterministic
+  registry validation and CI enforcement
 - `docs/projects/registry/inventory.md`
 
 ## Required Rules
@@ -22,6 +24,8 @@ This document records the repository layout and ownership boundaries for `regist
 - Follow the existing directory layout and nearest local pattern.
 - Keep generated workspace-docs context inside generated markers.
 - Keep legacy specs in place unless a separate migration is explicitly requested.
+- Keep published packages under `skills/<namespace>/<skill-id>/` and registry
+  validation under `scripts/`.
 
 ## Workflow
 

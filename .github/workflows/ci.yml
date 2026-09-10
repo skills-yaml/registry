@@ -1,0 +1,35 @@
+name: Registry CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: registry-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Install validation dependencies
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends --yes python3-yaml
+
+      - name: Install Task 3.44.1
+        env:
+          GOBIN: ${{ runner.temp }}/bin
+        run: go install github.com/go-task/task/v3/cmd/task@v3.44.1
+
+      - name: Run repository gates
+        run: $RUNNER_TEMP/bin/task check
