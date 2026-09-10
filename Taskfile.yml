@@ -1,0 +1,18 @@
+version: "3"
+
+tasks:
+  registry:check:
+    desc: Validate registry packages and released-version immutability
+    cmds:
+      - python3 -B scripts/validate_registry.py --base-ref origin/main
+
+  test:
+    desc: Run deterministic registry validator tests
+    cmds:
+      - python3 -B -m unittest discover -s scripts -p 'test_*.py'
+
+  check:
+    desc: Run all repository quality gates
+    cmds:
+      - task: registry:check
+      - task: test

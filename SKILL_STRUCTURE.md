@@ -33,20 +33,46 @@ Every skill **MUST** have a `SKILL.md` file at its root. This file serves as bot
 
 #### Frontmatter (YAML)
 
-The `SKILL.md` file must start with YAML frontmatter containing:
+The `SKILL.md` file must start with Agent Skills-compatible YAML frontmatter.
+New packages should put registry-specific scalar values in the `metadata` map:
 
 ```yaml
 ---
 name: <skill-name>              # REQUIRED: Short identifier (kebab-case, no spaces)
 description: "<description>"    # REQUIRED: One-sentence description of purpose
-tags:                          # OPTIONAL: List of tags for categorization
-  - <tag1>
-  - <tag2>
-version: "0.1.0"               # OPTIONAL: Version (defaults to "latest")
-authors:                       # OPTIONAL: List of contributors
-  - "Author Name <email>"
+metadata:
+  skm-version: "0.1.0"         # REQUIRED for newly published versions
+  skm-dependencies: "category/other-skill@1.2.3" # OPTIONAL
 ---
 ```
+
+All keys and values under `metadata` must be strings. Existing legacy packages
+may retain a top-level string `version`; newly published packages use
+`metadata.skm-version` so their frontmatter remains portable across Agent Skills
+consumers.
+
+Dependencies are a canonical comma-and-space-separated list of exact package
+coordinates from the same trusted registry. Ranges, aliases, local paths, and
+URLs are not accepted. Dependency graphs must resolve completely and must not
+contain cycles.
+
+### Workspace provenance metadata
+
+Every package in the `workspace` namespace additionally declares these string
+metadata keys:
+
+- `skm-source-repository`
+- `skm-source-revision`
+- `skm-source-path`
+- `skm-source-integrity`
+- `workspace-toolkit-version`
+- `workspace-docs-compatibility`
+- `minimum-skm-version`
+- `skm-adapter-compatibility`
+
+The namespace manifest at `skills/workspace/manifest.yaml` must exactly list
+the current package versions and agree with their shared source and compatibility
+metadata.
 
 #### Skill Name Rules
 
@@ -154,12 +180,18 @@ Before adding a skill to the registry, verify:
 - [ ] Category directory exists and is appropriately named
 - [ ] All referenced files in `SKILL.md` exist
 - [ ] Scripts in `scripts/` are executable (`chmod +x`)
+- [ ] Exact version directories are real directories and have not been modified
+- [ ] `latest` and `default` are contained symlinks to real exact versions
+- [ ] The root/current payload exactly matches the `latest` version
+- [ ] Exact dependencies resolve and the graph is acyclic
+- [ ] Required provenance and integrity metadata validates
+- [ ] `task check` passes
 
 ---
 
 ## 🔗 Linking to Root README
 
-The root `README.md` file links to this document as the authoritative specification for skill structure. See the [Registry README](../README.md) for the high-level overview.
+The root `README.md` file links to this document as the authoritative specification for skill structure. See the [Registry README](./README.md) for the high-level overview.
 
 ---
 
@@ -176,10 +208,8 @@ cat > skills/software-development/code-review/SKILL.md << 'EOF'
 ---
 name: code-review
 description: "Perform thorough code reviews with focus on correctness, performance, and maintainability."
-tags:
-  - code-quality
-  - review
-version: "0.1.0"
+metadata:
+  skm-version: "0.1.0"
 ---
 
 # Code Review
@@ -209,7 +239,8 @@ For a skill to be correctly linked by `skm`:
 
 1. **Directory name** must be the same as the `name` in `SKILL.md` frontmatter
 2. **`SKILL.md`** must exist at the skill's root directory
-3. **Path** must be resolvable (no symlinks, no special characters)
+3. **Payload paths and exact version directories** must be real, contained paths;
+   only the package-root `latest` and `default` aliases may be symlinks
 4. **Name** must pass validation (kebab-case, no `..`, no absolute paths)
 
 The `skm check` command verifies all these requirements.
