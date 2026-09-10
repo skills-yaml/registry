@@ -15,7 +15,11 @@ Allowed transitions:
 
 ## Active Specs
 
-- [Publish Workspace Lifecycle Skills](development/publish-workspace-lifecycle-skills.md)
+- None.
+
+## Completed Specs
+
+- [Publish Workspace Lifecycle Skills](done/publish-workspace-lifecycle-skills.md)
 
 Legacy or reference spec paths preserved during adoption:
 
