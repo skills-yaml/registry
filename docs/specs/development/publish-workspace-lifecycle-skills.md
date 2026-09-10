@@ -59,12 +59,13 @@ contract consumed by SKM 0.4.0 and later.
    boundaries without network access.
 7. Taskfile `check` and `test` entrypoints run the registry validation and test
    suite deterministically.
-8. README and registry contracts explain namespace lookup, independent SemVer,
+8. Pull requests and `main` run the Taskfile gates in read-only registry CI.
+9. README and registry contracts explain namespace lookup, independent SemVer,
    dependency metadata, aliases, publication, and direct invocation of the
    hyphenated `wk-*` package names.
-9. A released SKM 0.4.0 binary installs a representative lifecycle facade and
+10. A released SKM 0.4.0 binary installs a representative lifecycle facade and
    its exact transitive dependencies from this registry, `skm check` succeeds,
-   and a second dry run reports no changes.
+   and a second apply reports the same dependency links as already installed.
 
 ## Affected Areas
 
@@ -72,6 +73,7 @@ contract consumed by SKM 0.4.0 and later.
 - `scripts/validate_registry.py`
 - `scripts/test_validate_registry.py`
 - `Taskfile.yml`
+- `.github/workflows/ci.yml`
 - `README.md`
 - `SKILL_STRUCTURE.md`
 - `VERSIONING.md`
@@ -82,7 +84,7 @@ contract consumed by SKM 0.4.0 and later.
 ## Implementation Plan
 
 1. Add the active spec and task-runner contract.
-2. Implement the registry validator and regression fixtures.
+2. Implement the registry validator, regression fixtures, and CI enforcement.
 3. Generate packages from a clean, revision-verified Workspace source tree.
 4. Update registry documentation and durable memory.
 5. Run local gates, perform correctness and security review, and fix findings.

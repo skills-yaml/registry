@@ -12,6 +12,7 @@ Metadata:
 - `AGENTS.md`
 - `README.md`
 - `Taskfile.yml`
+- `.github/workflows/ci.yml`
 - `scripts/validate_registry.py`
 - `scripts/test_validate_registry.py`
 - `docs/tech/task.md`
@@ -43,6 +44,7 @@ Metadata:
 - `task test`: deterministic validator regression tests.
 - `task registry:check`: package, dependency, provenance, integrity, path, and
   released-version immutability validation.
+- Registry CI runs `task check` for pull requests and pushes to `main`.
 
 ## Validation Run
 
