@@ -4,7 +4,7 @@ description: Diagnose and fix failing continuous-integration checks with the sma
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/fix-ci"
   skm-source-integrity: "sha256:5eae3fdeb1a944ce33781478ce557beea3a6c7bf2176fd0b74beaf654292b714"
   workspace-toolkit-version: "0.3.0"

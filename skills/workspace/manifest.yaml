@@ -2,7 +2,7 @@ schema_version: 1
 namespace: workspace
 toolkit_version: "0.3.0"
 source_repository: "https://github.com/skills-yaml/workspace.git"
-source_revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+source_revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
 workspace_docs_compatibility: "5.x"
 minimum_skm_version: "0.4.0"
 skm_adapter_compatibility: "2.x"

@@ -4,7 +4,7 @@ description: Reproduce, isolate, and fix a reported software defect with regress
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/fix-bug"
   skm-source-integrity: "sha256:1c5020566f1c2577773174330ada1c92f5e1cdaedf908a4ca1180a8d8c9635a8"
   workspace-toolkit-version: "0.3.0"

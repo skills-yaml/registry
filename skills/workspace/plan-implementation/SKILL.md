@@ -4,7 +4,7 @@ description: Build an ordered, evidence-backed implementation plan from an appro
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/plan-implementation"
   skm-source-integrity: "sha256:9cfe3bdaaf66ae68011bb0c8403fa634256092b2384f0851d2368dd4b9196d8b"
   workspace-toolkit-version: "0.3.0"

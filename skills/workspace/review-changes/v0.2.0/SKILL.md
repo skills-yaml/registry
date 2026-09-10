@@ -4,7 +4,7 @@ description: Review a working tree, branch, commit range, or pull request for co
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/review-changes"
   skm-source-integrity: "sha256:8c1459fd3c2d599f8d72a59ac3c4c00e35f6c682a13dea2016e24303e9620cbc"
   workspace-toolkit-version: "0.3.0"

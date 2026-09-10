@@ -4,7 +4,7 @@ description: Adopt, upgrade, repair, or assess the workspace-docs repository str
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
   skm-source-integrity: "sha256:af2bad5d20ee89d6236ae97a087510a33b37f4cfb28c2e1c488462881aff98d3"
   workspace-toolkit-version: "0.3.0"

@@ -4,7 +4,7 @@ description: Implement an approved development specification through validated, 
 metadata:
   skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/implement-spec"
   skm-source-integrity: "sha256:82da8cfca629b132399c53b36b28f1ad21420a47548994da2c0b3c848eff2536"
   workspace-toolkit-version: "0.3.0"

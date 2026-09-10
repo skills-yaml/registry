@@ -4,7 +4,7 @@ description: Run the wk.analyze lifecycle facade to produce a read-only, evidenc
 metadata:
   skm-version: "0.1.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6dbdf01341a8ab5d572179462f1b460ff6259c51"
+  skm-source-revision: "fb4aa64a6121f1f8a57d4848b52fa0ec7cefd452"
   skm-source-path: "workspace/instructions/skills/wk-analyze"
   skm-source-integrity: "sha256:6d10164f7e37cff5a16950c9c85128cdd6d428aeec67d6ca2adbaffbfae1b5ba"
   workspace-toolkit-version: "0.3.0"
