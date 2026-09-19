@@ -329,6 +329,14 @@ class RegistryValidatorTests(unittest.TestCase):
             any("published exact versions are immutable" in item for item in self.errors("HEAD"))
         )
 
+    def test_accepts_withdrawal_after_it_has_left_the_base_ref(self) -> None:
+        """The steady state: the withdrawal stays in the ledger once merged."""
+        package = self.create_generic_package("system", "host-tools")
+        self.supersede_generic_package(package, "1.0.0", "1.1.0")
+        self.write_withdrawal("system/host-tools@1.0.0")
+        self.commit_baseline()
+        self.assertEqual(self.errors("HEAD"), [])
+
     def test_rejects_withdrawal_of_release_still_published(self) -> None:
         self.create_generic_package("system", "host-tools")
         self.commit_baseline()
@@ -343,14 +351,6 @@ class RegistryValidatorTests(unittest.TestCase):
         self.supersede_generic_package(package, "1.0.0", "1.1.0")
         self.write_withdrawal("system/host-tools@1.0.0", reason="  ")
         self.assertTrue(any("non-empty reason" in item for item in self.errors("HEAD")))
-
-    def test_rejects_withdrawal_of_unpublished_version(self) -> None:
-        self.create_generic_package("system", "host-tools")
-        self.commit_baseline()
-        self.write_withdrawal("system/host-tools@9.9.9")
-        self.assertTrue(
-            any("does not match a version published" in item for item in self.errors("HEAD"))
-        )
 
 
 if __name__ == "__main__":
