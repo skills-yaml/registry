@@ -445,9 +445,10 @@ withdrawn:
       Why this release could not stay published, and what replaces it.
 ```
 
-The validator checks that each withdrawal names a version that was published in
-the base ref, that the version directory is gone from the tree, and that the
-entry carries a date and a reason. Publish the replacement in the same change and
+The validator checks that the withdrawn version directory is gone from the tree,
+and that the entry carries a well-formed coordinate, a date and a reason. The
+entry then stays in the ledger permanently: it is the record of why a version
+number resolves to nothing. Publish the replacement in the same change and
 move `latest` and `default` to it, so the package still resolves.
 
 Choose the replacement's version number by what changed for consumers. A

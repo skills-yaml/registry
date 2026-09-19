@@ -630,11 +630,6 @@ class RegistryValidator:
             "skills/{}/{}/v{}".format(*self.split_coordinate(coordinate))
             for coordinate in self.withdrawn
         }
-        for missing in sorted(withdrawn_roots - exact_roots):
-            self.error(
-                WITHDRAWN_FILE,
-                f"withdrawal {missing} does not match a version published in {base_ref}",
-            )
         base_entries = {
             path: entry
             for path, entry in base_entries.items()
