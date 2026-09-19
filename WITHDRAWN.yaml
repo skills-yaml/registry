@@ -1,0 +1,18 @@
+# Withdrawn releases.
+#
+# Published exact versions are append-only: `scripts/validate_registry.py` holds
+# them byte-identical to `origin/main`. A release that must not stay published is
+# removed from the tree and recorded here, with why and when.
+#
+# A withdrawal does not erase anything from Git history. Treat anything a
+# withdrawn release disclosed as already public and respond accordingly.
+schema_version: 1
+withdrawn:
+  - coordinate: system/devops-manager@1.0.0
+    withdrawn: "2026-09-19"
+    reason: >-
+      Published the service inventory of a private host: internal container
+      names, the ports they listen on, and the public hostnames routing to them.
+      Replaced by 1.1.0, which ships guidance for building a per-host inventory
+      instead of an actual one. See
+      docs/specs/done/redact-host-service-inventory.md.

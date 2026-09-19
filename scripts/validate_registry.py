@@ -35,6 +35,8 @@ DEPENDENCY_PATTERN = re.compile(
 REVISION_PATTERN = re.compile(r"[0-9a-f]{40}")
 INTEGRITY_PATTERN = re.compile(r"sha256:[0-9a-f]{64}")
 SOURCE_REPOSITORY = "https://github.com/skills-yaml/workspace.git"
+WITHDRAWN_FILE = "WITHDRAWN.yaml"
+DATE_PATTERN = re.compile(r"\d{4}-\d{2}-\d{2}")
 WORKSPACE_METADATA = {
     "skm-version",
     "skm-source-repository",
@@ -168,6 +170,7 @@ class RegistryValidator:
         self.releases: dict[str, ReleasedSkill] = {}
         self.current: dict[tuple[str, str], ReleasedSkill] = {}
         self.packages: set[tuple[str, str]] = set()
+        self.withdrawn: dict[str, dict[str, Any]] = {}
 
     def error(self, path: Path | str, message: str) -> None:
         if isinstance(path, Path):
@@ -180,6 +183,7 @@ class RegistryValidator:
         self.errors.append(f"{label}: {message}")
 
     def validate(self) -> list[str]:
+        self.load_withdrawals()
         skills_root = self.root / "skills"
         if not skills_root.is_dir() or skills_root.is_symlink():
             self.error(skills_root, "must be a real directory")
@@ -204,6 +208,63 @@ class RegistryValidator:
         if self.base_ref:
             self.validate_immutability(self.base_ref)
         return sorted(set(self.errors))
+
+    @staticmethod
+    def split_coordinate(coordinate: str) -> tuple[str, str, str]:
+        namespace, rest = coordinate.split("/", 1)
+        skill_id, version = rest.split("@", 1)
+        return namespace, skill_id, version
+
+    def load_withdrawals(self) -> None:
+        """Read the ledger of published releases that have been withdrawn.
+
+        Published versions are otherwise append-only. A release that must not stay
+        published, such as one that disclosed private infrastructure, is removed
+        from the tree and recorded here with a reason and a date, so the removal
+        is deliberate and reviewable rather than a silent edit of history.
+        """
+        path = self.root / WITHDRAWN_FILE
+        if path.is_symlink() or (path.exists() and not path.is_file()):
+            self.error(path, "withdrawal ledger must be a real file")
+            return
+        if not path.is_file():
+            return
+        try:
+            document = parse_yaml(path.read_text(encoding="utf-8"), WITHDRAWN_FILE)
+        except (OSError, UnicodeError, ValueError) as error:
+            self.error(path, str(error))
+            return
+        if document.get("schema_version") != 1:
+            self.error(path, "schema_version must be 1")
+        entries = document.get("withdrawn", [])
+        if not isinstance(entries, list):
+            self.error(path, "withdrawn must be a list")
+            return
+        for entry in entries:
+            if not isinstance(entry, dict):
+                self.error(path, "each withdrawal must be a mapping")
+                continue
+            coordinate = entry.get("coordinate")
+            if not isinstance(coordinate, str) or not DEPENDENCY_PATTERN.fullmatch(coordinate):
+                self.error(path, f"invalid withdrawn coordinate {coordinate!r}")
+                continue
+            if coordinate in self.withdrawn:
+                self.error(path, f"duplicate withdrawal {coordinate}")
+                continue
+            reason = entry.get("reason")
+            if not isinstance(reason, str) or not reason.strip():
+                self.error(path, f"{coordinate} must record a non-empty reason")
+            withdrawn_on = entry.get("withdrawn")
+            if not isinstance(withdrawn_on, str) or not DATE_PATTERN.fullmatch(withdrawn_on):
+                self.error(path, f"{coordinate} must record an ISO 8601 withdrawal date")
+            self.withdrawn[coordinate] = entry
+            namespace, skill_id, version = self.split_coordinate(coordinate)
+            version_path = self.root / "skills" / namespace / skill_id / f"v{version}"
+            if version_path.exists():
+                self.error(
+                    version_path,
+                    f"withdrawn release {coordinate} must be removed from the tree",
+                )
 
     def validate_package(self, namespace: str, package_path: Path) -> None:
         skill_id = package_path.name
@@ -565,6 +626,20 @@ class RegistryValidator:
             exact_root = "/".join(parts[:4])
             exact_roots.add(exact_root)
             base_entries[path] = (mode, object_id)
+        withdrawn_roots = {
+            "skills/{}/{}/v{}".format(*self.split_coordinate(coordinate))
+            for coordinate in self.withdrawn
+        }
+        for missing in sorted(withdrawn_roots - exact_roots):
+            self.error(
+                WITHDRAWN_FILE,
+                f"withdrawal {missing} does not match a version published in {base_ref}",
+            )
+        base_entries = {
+            path: entry
+            for path, entry in base_entries.items()
+            if "/".join(path.split("/")[:4]) not in withdrawn_roots
+        }
         if object_format not in hashlib.algorithms_available:
             self.error("git", f"unsupported Git object format: {object_format}")
             return

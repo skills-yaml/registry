@@ -20,6 +20,7 @@ Allowed transitions:
 ## Completed Specs
 
 - [Publish Workspace Lifecycle Skills](done/publish-workspace-lifecycle-skills.md)
+- [Remove Host Service Inventory From The Public Registry](done/redact-host-service-inventory.md)
 
 Legacy or reference spec paths preserved during adoption:
 

@@ -40,3 +40,18 @@ Content:
 Recorded the 19-package Workspace toolkit 0.3.0 publication, canonical source
 and registry commits, passing main CI, and successful SKM 0.4.0 dependency
 install, check, and convergent reapply in `agents/memory/facts.md`.
+
+## 2026-09-19 - Redact Host Service Inventory
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: none
+- Supersedes: none
+
+Content:
+
+`system/devops-manager@1.0.0` published a private host's service inventory to a
+public repository. It was withdrawn and replaced by 1.1.0, and the registry
+gained the withdrawal mechanism recorded in decisions.
+

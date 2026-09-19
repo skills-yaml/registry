@@ -426,6 +426,38 @@ ln -s v2.0.0 default  # Or keep pointing to v1.0.0 for stability
 # 6. Update VERSIONS.md with changelog
 ```
 
+### Withdrawing a Release
+
+Published exact versions are append-only. `scripts/validate_registry.py` holds
+every `vX.Y.Z/` directory byte-identical to `origin/main`, so a release cannot be
+edited, and it cannot simply be deleted either.
+
+A release that must not stay published, such as one that disclosed private
+infrastructure or personal data, is withdrawn: remove its version directory and
+record it in the root `WITHDRAWN.yaml`.
+
+```yaml
+schema_version: 1
+withdrawn:
+  - coordinate: system/devops-manager@1.0.0
+    withdrawn: "2026-09-19"
+    reason: >-
+      Why this release could not stay published, and what replaces it.
+```
+
+The validator checks that each withdrawal names a version that was published in
+the base ref, that the version directory is gone from the tree, and that the
+entry carries a date and a reason. Publish the replacement in the same change and
+move `latest` and `default` to it, so the package still resolves.
+
+Choose the replacement's version number by what changed for consumers. A
+withdrawal that alters what a skill tells an agent to do is at least a minor
+release, not a patch.
+
+**A withdrawal is not erasure.** The content stays in Git history, in forks and
+in anything that already cloned the repository. Treat whatever the release
+disclosed as public, and handle the disclosure itself separately.
+
 ### Changing Default Version
 
 To change which version is the default (e.g., keep v1.0.0 as default while v2.0.0 is latest):
