@@ -30,3 +30,20 @@ metadata map. A namespace manifest records the tested release set, canonical
 source revision, and Workspace, SKM, and adapter compatibility. Registry CI
 enforces structure, provenance, source integrity, dependency, path, alias, and
 released-version immutability checks.
+
+## 2026-09-19 - Withdraw Releases Instead Of Editing Them
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: none
+- Supersedes: none
+
+Content:
+
+Published exact versions stay append-only. A release that must not remain
+published is removed from the tree and recorded in the root `WITHDRAWN.yaml`
+with a date and a reason, and a replacement version is published in the same
+change. `scripts/validate_registry.py` enforces this; undeclared edits and
+undeclared deletions both still fail. A withdrawal does not remove anything from
+Git history.

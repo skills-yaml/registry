@@ -1,12 +1,13 @@
 ---
 name: devops-manager
-version: "1.0.0"
-description: Manage system services, check health, security, and updates on this Debian/Docker machine. Use when the user needs to inspect Docker containers, system logs, update software, or check the status of core services like Nginx or PostgreSQL.
+version: "1.1.0"
+description: Manage services, health, security and updates on a Debian host running Docker. Use when the user needs to inspect Docker containers, read system logs, apply updates, or check core services such as Nginx or PostgreSQL.
 ---
 
 # DevOps Manager
 
-This skill helps you manage and monitor the services running on this system.
+This skill helps you manage and monitor the services running on a Debian host.
+Discover what is running from the host itself; do not assume a fixed service list.
 
 ## Core Workflows
 
@@ -40,7 +41,8 @@ To perform a quick security check:
 
 ## Reference Materials
 
-- **Service Inventory**: See [inventory.md](references/inventory.md) for a list of expected services and their ports.
+- **Service Inventory**: See [inventory.md](references/inventory.md) for how to record the
+  expected services on a host, and why that record stays off a public repository.
 
 ## Troubleshooting
 

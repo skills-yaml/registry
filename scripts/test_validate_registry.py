@@ -246,6 +246,48 @@ class RegistryValidatorTests(unittest.TestCase):
         errors = self.errors()
         self.assertTrue(any("mapping keys must be scalar" in item for item in errors))
 
+    def commit_baseline(self) -> None:
+        subprocess.run(["git", "init", "-q"], cwd=self.root, check=True)
+        subprocess.run(["git", "add", "."], cwd=self.root, check=True)
+        subprocess.run(
+            [
+                "git",
+                "-c",
+                "user.name=Registry Test",
+                "-c",
+                "user.email=registry@example.invalid",
+                "commit",
+                "-qm",
+                "baseline",
+            ],
+            cwd=self.root,
+            check=True,
+        )
+
+    def supersede_generic_package(self, package: Path, old: str, new: str) -> None:
+        """Publish `new`, retire `old`, and point the package at the replacement."""
+        content = (package / f"v{old}" / "SKILL.md").read_text(encoding="utf-8")
+        content = content.replace(f'version: "{old}"', f'version: "{new}"')
+        (package / f"v{new}").mkdir()
+        (package / f"v{new}" / "SKILL.md").write_text(content, encoding="utf-8")
+        (package / "SKILL.md").write_text(content, encoding="utf-8")
+        shutil.rmtree(package / f"v{old}")
+        for alias in ("latest", "default"):
+            (package / alias).unlink()
+            (package / alias).symlink_to(f"v{new}")
+
+    def write_withdrawal(self, coordinate: str, **overrides: object) -> None:
+        entry: dict[str, object] = {
+            "coordinate": coordinate,
+            "withdrawn": "2026-09-19",
+            "reason": "Disclosed private infrastructure.",
+        }
+        entry.update(overrides)
+        (self.root / "WITHDRAWN.yaml").write_text(
+            yaml.safe_dump({"schema_version": 1, "withdrawn": [entry]}, sort_keys=False),
+            encoding="utf-8",
+        )
+
     def test_rejects_mutation_of_published_exact_version(self) -> None:
         package = self.create_package("wk-spec")
         self.write_manifest()
@@ -271,6 +313,44 @@ class RegistryValidatorTests(unittest.TestCase):
             encoding="utf-8",
         )
         self.assertTrue(any("published exact versions are immutable" in item for item in self.errors("HEAD")))
+
+    def test_accepts_declared_withdrawal_of_published_exact_version(self) -> None:
+        package = self.create_generic_package("system", "host-tools")
+        self.commit_baseline()
+        self.supersede_generic_package(package, "1.0.0", "1.1.0")
+        self.write_withdrawal("system/host-tools@1.0.0")
+        self.assertEqual(self.errors("HEAD"), [])
+
+    def test_rejects_undeclared_withdrawal_of_published_exact_version(self) -> None:
+        package = self.create_generic_package("system", "host-tools")
+        self.commit_baseline()
+        self.supersede_generic_package(package, "1.0.0", "1.1.0")
+        self.assertTrue(
+            any("published exact versions are immutable" in item for item in self.errors("HEAD"))
+        )
+
+    def test_rejects_withdrawal_of_release_still_published(self) -> None:
+        self.create_generic_package("system", "host-tools")
+        self.commit_baseline()
+        self.write_withdrawal("system/host-tools@1.0.0")
+        self.assertTrue(
+            any("must be removed from the tree" in item for item in self.errors("HEAD"))
+        )
+
+    def test_rejects_withdrawal_without_a_reason(self) -> None:
+        package = self.create_generic_package("system", "host-tools")
+        self.commit_baseline()
+        self.supersede_generic_package(package, "1.0.0", "1.1.0")
+        self.write_withdrawal("system/host-tools@1.0.0", reason="  ")
+        self.assertTrue(any("non-empty reason" in item for item in self.errors("HEAD")))
+
+    def test_rejects_withdrawal_of_unpublished_version(self) -> None:
+        self.create_generic_package("system", "host-tools")
+        self.commit_baseline()
+        self.write_withdrawal("system/host-tools@9.9.9")
+        self.assertTrue(
+            any("does not match a version published" in item for item in self.errors("HEAD"))
+        )
 
 
 if __name__ == "__main__":
