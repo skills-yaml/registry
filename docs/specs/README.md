@@ -15,7 +15,7 @@ Allowed transitions:
 
 ## Active Specs
 
-- None.
+- [Publish Workspace Skill Bundles](backlog/publish-workspace-skill-bundles.md)
 
 ## Completed Specs
 
