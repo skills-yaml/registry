@@ -44,6 +44,7 @@ registry/
 
 ### System
 - **devops-manager** - Manage system services, health, security, and updates on Debian/Docker machines
+- **gcp-debug** - Debug GCP services with Cloud Logging queries and status checks across Cloud Run, Cloud Functions, GKE and Compute Engine
 
 ### Workspace lifecycle
 
