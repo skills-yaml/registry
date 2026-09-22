@@ -28,6 +28,7 @@ release through `main`; record the integration and release events in the spec.
 ## Active Specs
 
 - [Adopt `develop` As The Integration Branch](development/adopt-develop-integration-branch.md)
+- [Publish Workspace Skill Bundles](backlog/publish-workspace-skill-bundles.md)
 
 ## Completed Specs
 
