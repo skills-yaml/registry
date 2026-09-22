@@ -63,3 +63,18 @@ Registry of reusable skills and agents for the skm ecosystem.
 
 - Preserve project-specific documentation and legacy specs unless a separate migration explicitly changes them.
 - Use available task gates for validation and document any skipped gate with the reason.
+
+### Branch Model
+
+- `develop` is the integration branch. Changes land here first.
+- `main` is the production branch and the published state of the registry. A
+  consumer pinning a skill resolves against `main`.
+- Release by merging `develop` into `main`. Do not commit to `main` directly.
+
+A spec moves to `done` only after the change is released through `main`.
+Integration into `develop` is not release: a skill merged to `develop` is not yet
+installable by consumers. Record both events in the spec.
+
+Released-version immutability is enforced against `origin/main`, so a published
+exact version stays immutable from the moment it reaches production, not from
+the moment it reaches `develop`.
