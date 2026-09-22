@@ -29,6 +29,7 @@ release through `main`; record the integration and release events in the spec.
 
 - [Publish Workspace Lifecycle Skills](done/publish-workspace-lifecycle-skills.md)
 - [Remove Host Service Inventory From The Public Registry](done/redact-host-service-inventory.md)
+- [Add gcp-debug Skill To Registry](done/gcp-debug-spec.md)
 
 Legacy or reference spec paths preserved during adoption:
 
