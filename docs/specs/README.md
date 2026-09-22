@@ -13,9 +13,17 @@ Allowed transitions:
 - `backlog -> development`
 - `development -> done`
 
+This repository's configured branch targets are:
+
+- integration: `develop`
+- production: `main`
+
+A branch name alone is not lifecycle evidence. `done` requires a confirmed
+release through `main`; record the integration and release events in the spec.
+
 ## Active Specs
 
-- None.
+- [Adopt `develop` As The Integration Branch](development/adopt-develop-integration-branch.md)
 
 ## Completed Specs
 
