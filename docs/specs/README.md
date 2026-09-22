@@ -21,6 +21,10 @@ This repository's configured branch targets are:
 A branch name alone is not lifecycle evidence. `done` requires a confirmed
 release through `main`; record the integration and release events in the spec.
 
+## Backlog
+
+- [Agent Portability Baseline For Registry Skills](backlog/agent-portability-baseline.md)
+
 ## Active Specs
 
 - [Adopt `develop` As The Integration Branch](development/adopt-develop-integration-branch.md)
