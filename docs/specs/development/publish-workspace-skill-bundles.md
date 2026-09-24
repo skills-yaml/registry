@@ -4,9 +4,11 @@
 
 State: `development`
 
-Rationale: The user selected the Registry namespace bundle instead of an
-instructionless synthetic skill on 2026-09-24. Schema-2 validation and
-cross-repository generation are active; publication is pending.
+Rationale: PR #11 merged schema-2 namespace bundle validation into `develop`
+at `5bbd6f065ce43911bccedf4e788d7d67152da805` on 2026-09-24 after
+Registry CI passed. A revision-verified Workspace fixture passed staging,
+Registry validation, SKM 0.7 installation, and `skm check`. Reviewed package
+publication through `main` remains pending the Workspace source release.
 
 ## Companion Specifications
 
