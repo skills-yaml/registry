@@ -43,7 +43,8 @@ Metadata:
 - `task check`: all repository gates.
 - `task test`: deterministic validator regression tests.
 - `task registry:check`: package, dependency, provenance, integrity, path, and
-  released-version immutability validation.
+  released-version immutability validation, including namespace schema-2
+  bundle membership when published.
 - Registry CI runs `task check` for pull requests and pushes to `main`.
 
 ## Validation Run

@@ -87,6 +87,13 @@ skills:
 Each package also carries its own canonical source revision, source path,
 source integrity, compatibility, and exact dependency metadata.
 
+Schema-2 namespace manifests may also publish named bundles. The planned
+`workspace/all-workspace-skills` bundle lists every current Workspace package
+once and installs no additional skill. A compatible SKM adds its exact members
+with `skm bundle add workspace/all-workspace-skills --source default --yes`.
+This bundle is pending a released Workspace source and Registry review; the
+currently published Workspace manifest remains schema 1.
+
 ## Adding New Skills
 
 See [SKILL_STRUCTURE.md](./SKILL_STRUCTURE.md) for complete requirements.

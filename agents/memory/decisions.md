@@ -47,3 +47,19 @@ with a date and a reason, and a replacement version is published in the same
 change. `scripts/validate_registry.py` enforces this; undeclared edits and
 undeclared deletions both still fail. A withdrawal does not remove anything from
 Git history.
+
+## 2026-09-24 - Publish Workspace Install-All As A Namespace Bundle
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: after schema-2 publication
+- Supersedes: an instructionless dependency-only metapackage for this purpose
+
+Content:
+
+`workspace/all-workspace-skills` is named membership in the Registry namespace
+manifest. It is generated from Workspace's canonical toolkit bundle, lists
+every current Workspace package exactly once, and creates no invocable
+`SKILL.md` package. Schema-1 history remains valid; schema-2 validation checks
+membership, exact versions, and provenance before Registry publication.

@@ -55,3 +55,16 @@ Content:
 public repository. It was withdrawn and replaced by 1.1.0, and the registry
 gained the withdrawal mechanism recorded in decisions.
 
+## 2026-09-24 - Select Registry Bundle Metadata For Workspace Install-All
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: after schema-2 publication
+- Supersedes: instructionless metapackage design
+
+Content:
+
+Recorded the Registry namespace-bundle decision and schema-2 validation
+contract in `agents/memory/decisions.md`. Workspace publication has not been
+claimed.

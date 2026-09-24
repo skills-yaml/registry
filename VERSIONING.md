@@ -145,6 +145,12 @@ an exact version in the same trusted registry, exist there, and participate in
 an acyclic graph. Skills remain independently versioned; a bundle or release
 manifest records a tested set without forcing lockstep version bumps.
 
+Schema-2 namespace bundles bind named membership to the manifest's exact
+package versions. The `workspace/all-workspace-skills` bundle must contain all
+current Workspace package IDs; it is not an installable synthetic skill. Adding
+a package to the bundle requires a new generated Workspace release, while
+already published exact package directories remain immutable.
+
 ### Version Aliases
 
 The following aliases are **symlinks** in the skill directory:
