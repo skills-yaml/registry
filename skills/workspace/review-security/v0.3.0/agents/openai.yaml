@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Security"
+  short_description: "Review security and trust boundaries"
+  default_prompt: "Use $review-security to perform a threat-focused review of these changes."
