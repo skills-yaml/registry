@@ -6,6 +6,11 @@ tasks:
     cmds:
       - python3 -B scripts/validate_registry.py --base-ref origin/main
 
+  manifest:
+    desc: Regenerate namespace manifests from the package folders
+    cmds:
+      - python3 -B scripts/generate_manifests.py
+
   test:
     desc: Run deterministic registry validator tests
     cmds:
