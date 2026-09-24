@@ -3,7 +3,7 @@
 Status: Development
 
 Purpose: Publish the two skills that let an agent author and review registry
-packages correctly, plus a meta package that installs both.
+packages correctly.
 
 ## 1. Problem Statement
 
@@ -31,9 +31,7 @@ will follow with the user's privileges.
   gates on the first attempt.
 - Publish `skills-yaml/skill-reviewer`: how to review a package for compliance,
   and for unsafe or malicious behavior in its scripts and its instructions.
-- Publish `skills-yaml/authoring-toolkit`: a meta package that installs both
-  through `skm-dependencies` and carries no instructions of its own.
-- Keep all three inside the portability baseline, so they work in every agent
+- Keep both inside the portability baseline, so they work in every agent
   the ecosystem supports.
 
 ### Non-Goals
@@ -44,32 +42,46 @@ will follow with the user's privileges.
   documents as the source of truth and carry only what an author needs in hand.
 - Sandboxing or executing skill scripts. The reviewer reads them; it does not run
   them, and says so explicitly.
+- Publishing a bundle of the two skills. See "Bundle deferred" below.
 
 ## 3. Proposed Design
 
-A new namespace, `skills-yaml`, holding three packages at `0.1.0`:
+A new namespace, `skills-yaml`, holding two packages at `0.1.0`:
 
 ```
 skills/skills-yaml/
-├── skill-creator/      SKILL.md + references/ + templates/
-├── skill-reviewer/     SKILL.md + references/
-└── authoring-toolkit/  SKILL.md only; depends on the other two
+├── skill-creator/   SKILL.md + references/ + templates/
+└── skill-reviewer/  SKILL.md + references/
 ```
 
 Each follows the published layout: a root payload identical to `latest`, an
 exact `v0.1.0/` directory, and contained `latest` and `default` symlinks.
 
-The meta package declares:
+### Bundle deferred
 
-```yaml
-metadata:
-  skm-version: "0.1.0"
-  skm-dependencies: "skills-yaml/skill-creator@0.1.0, skills-yaml/skill-reviewer@0.1.0"
-```
+An earlier draft added a third package, `authoring-toolkit`: a `SKILL.md` with no
+instructions that declared both skills in `skm-dependencies`. It was removed
+before merge, for two reasons.
 
-`skm` 0.4.0 and later resolves the transitive closure, so installing the toolkit
-installs both skills. Its description states that it is a bundle, so an agent
-scanning descriptions does not invoke it expecting instructions.
+**It used a dependency to express a bundle.** A dependency states that one skill
+needs another to function. A bundle states that several skills are offered
+together. The two skills here do not need each other, so declaring them as
+dependencies of a third package misstates the relationship.
+
+**A skill with no instructions costs every agent.** It is indexed, listed as an
+invocable skill, and may be loaded by a model expecting a procedure. Its
+description could only ask the model not to use it.
+
+The correct home is a namespace manifest bundle: named membership, no skill, no
+dependency. The schema-2 manifest specified in
+`backlog/publish-workspace-skill-bundles.md` provides exactly this, but only for
+the `workspace` namespace. Generalizing it is a proposed amendment to that
+specification and its SKM and Workspace companions. Once a generic manifest is
+supported, the bundle is added as `skills/skills-yaml/manifest.yaml`.
+
+Removing the package before merge avoids a withdrawal. Published versions are
+immutable from the moment they reach `main`, so a package that should never have
+existed would otherwise need a `WITHDRAWN.yaml` entry.
 
 ### Why a namespace rather than adding to `system`
 
@@ -79,25 +91,23 @@ without diluting a functional category.
 
 ### Portability
 
-All three stay within `name` plus `description` and a string `metadata` map. No
+Both stay within `name` plus `description` and a string `metadata` map. No
 agent-specific frontmatter. Names are kebab-case and match their directories;
 descriptions stay under 1024 characters, the limit that binds first.
 
 ## 4. Verification and Acceptance Criteria
 
-- [x] Three packages exist under `skills/skills-yaml/` with root payloads
+- [x] Two packages exist under `skills/skills-yaml/` with root payloads
       matching `v0.1.0` exactly. The validator's root/current comparison covers
       this.
 - [x] `latest` and `default` resolve to `v0.1.0` in each.
-- [x] The meta package's dependencies resolve to published coordinates and the
-      graph stays acyclic; the dependency check passes.
-- [x] Every relative link in every `SKILL.md` resolves from both the root payload
+- [x] Every relative link in each `SKILL.md` resolves from both the root payload
       and the version directory, checked from both locations.
 - [x] Frontmatter uses `metadata.skm-version`; no agent-specific field appears in
-      any of the three. Names are 13 to 17 characters, descriptions 248 to 359,
+      either. Names are 13 and 14 characters, descriptions 310 and 359,
       against limits of 64 and 1024.
 - [x] The README catalog lists the namespace.
-- [x] `task check` passes: 25 packages, 25 exact releases, immutability clean
+- [x] `task check` passes: 24 packages, 24 exact releases, immutability clean
       against `origin/main`. `task test`: 18 tests.
 
 ## 6. Integration And Release
@@ -118,6 +128,8 @@ release event is confirmed, per the branch model in `AGENTS.md`.
   *Mitigation*: It states plainly that it is a structured reading of a package by
   a fallible reviewer, that it never executes what it reviews, and that a clean
   review is not proof of safety.
-- *Risk*: The meta package is invoked by a model expecting instructions.
-  *Mitigation*: Its description says it installs the other two and contains no
-  procedure.
+- *Risk*: Users wanting both skills must add two entries until the generic
+  bundle lands.
+  *Mitigation*: Two entries is the normal case today, and the bundle will expand
+  into exactly those two explicit entries when it arrives, so no configuration
+  written now needs to change.
