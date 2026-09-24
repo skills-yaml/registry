@@ -1,6 +1,6 @@
 # Spec: Generate Namespace Manifests
 
-Status: Development
+Status: Done
 
 Purpose: Stop authors from copying package versions into namespace manifests by
 hand, and publish the `skills-yaml/authoring-toolkit` bundle.
@@ -81,8 +81,14 @@ generator does not add a gate of its own.
 
 ## 5. Integration And Release
 
-Integrated into `develop`: pending.
-Released through `main`: pending.
+Integrated into `develop` through PR #15, merged 2026-09-24.
+Released through `main` in PR #16, merge commit `301aa47`, on 2026-09-24.
+
+Verified after release against the public registry
+(`https://github.com/skills-yaml/registry.git`) with SKM 0.7.0: `skm search`
+lists `skills-yaml/authoring-toolkit`, `skm add --kind bundle --yes` writes both
+members pinned to 0.1.0 and links them for Claude and into `.agents/skills`,
+`skm check` passes, and a second apply changes nothing.
 
 ## 6. Risks and Mitigations
 
