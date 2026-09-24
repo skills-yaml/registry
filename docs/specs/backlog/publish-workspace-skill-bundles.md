@@ -6,7 +6,8 @@ State: `backlog`
 
 Rationale: The namespace-manifest extension and validation contract are
 specified, but no schema-2 Workspace release has been generated, reviewed, or
-published.
+published. A proposed amendment, at the end of this specification, generalizes
+schema 2 to any namespace and awaits agreement from the companion owners.
 
 ## Companion Specifications
 
@@ -287,3 +288,105 @@ Status: `pending`
 Rationale: Schema-2 distribution and validation are proposed durable registry
 contracts, but no release has been published. Resolve memory when the final
 contract and publication evidence are known.
+
+## Amendment: Generic Namespace Manifests
+
+Proposed 2026-09-24. Not yet agreed with the owners of the companion
+specifications; see "Coordination" below.
+
+### Motivation
+
+Schema 2 is specified for the `workspace` namespace only. Every other namespace
+that wants to publish a bundle has no mechanism, and the workaround is worse than
+the gap: an earlier revision of registry PR #9 published a meta package as a
+`SKILL.md` with no instructions, declaring its members through
+`skm-dependencies`. That misstated the relationship — a dependency says one
+skill needs another to function — and a skill with no instructions is still
+indexed and listed as invocable by every agent. It was removed before merge.
+
+A bundle is named membership. It belongs in a namespace manifest, in any
+namespace.
+
+### SKM already reads any namespace manifest
+
+The released SKM search change reads `skills/<namespace>/manifest.yaml` for
+every namespace: locally by iterating namespace directories
+(`src/search.rs` on `main`, lines 212–226) and remotely from any
+`skills/<namespace>/manifest.yaml` blob (lines 276–292). Its parser requires only
+`schema_version` 1 or 2, a `namespace` equal to the directory, a non-empty
+`packages` mapping of valid names, and bundle members that are keys of
+`packages`. It requires no Workspace provenance field.
+
+So the Registry validator is the only component blocking generic manifests. A
+manifest published in any namespace becomes visible in `skm search` as soon as
+it lands on `main`.
+
+### Schema change
+
+Schema 2 is split into a generic core, required of every namespace manifest, and
+a provenance block, required only for generated namespaces.
+
+**Generic core — every namespace manifest:**
+
+```yaml
+schema_version: 2
+namespace: <namespace>          # equals the containing directory
+packages:
+  <skill-id>: "<exact-semver>"  # exactly the namespace's current versions
+bundles:                        # optional outside generated namespaces
+  <bundle-id>:
+    packages:
+      - <skill-id>
+```
+
+**Provenance block — generated namespaces only:** `toolkit_version`,
+`source_repository`, `source_revision`, `workspace_docs_compatibility`,
+`minimum_skm_version` and `skm_adapter_compatibility`. The `workspace` namespace
+keeps every current requirement, including the non-empty `bundles` mapping and
+the complete `all-workspace-skills` bundle. Nothing in the Workspace-generated
+contract loosens.
+
+A hand-authored namespace such as `skills-yaml` carries the core only. Its
+manifest is reviewed like any other change, because nothing generates it.
+
+### Validation rules for any namespace
+
+- A manifest is optional outside generated namespaces, and must not exist in a
+  namespace that publishes no packages.
+- `namespace` equals the containing directory.
+- `packages` lists exactly the current version of every package in the
+  namespace, as the Workspace rule already requires. A bundle cannot drift from
+  what is published.
+- Bundle identifiers follow the package identifier rules.
+- Every bundle member is a key of `packages`, listed once, in deterministic
+  order.
+- Unknown top-level keys are rejected, as today.
+
+### Unchanged
+
+- Dependencies stay dependencies. Bundles do not replace `skm-dependencies`, as
+  the non-goals of this specification already state.
+- Exact-version immutability, and every Workspace provenance check.
+- Membership is never inferred from directories.
+
+### Acceptance criteria added by this amendment
+
+- [ ] A schema-2 manifest carrying only the generic core validates in a
+      non-generated namespace.
+- [ ] A manifest listing a version that is not the namespace's current version
+      is rejected.
+- [ ] A manifest in a namespace with no packages is rejected.
+- [ ] The `workspace` namespace still fails validation when any provenance field
+      is missing.
+- [ ] `skills/skills-yaml/manifest.yaml` publishing an `authoring-toolkit` bundle
+      of `skill-creator` and `skill-reviewer` validates, and appears in
+      `skm search`.
+
+### Coordination
+
+This amends a specification written in coordination with
+`All Workspace Skills Bundle` (Workspace) and `Install Workspace Skill Bundles`
+(SKM). The companions receive matching amendment notes. The rollout order they
+define is unaffected for `workspace`; generic manifests in other namespaces can
+be published independently of it, since the released SKM reader already accepts
+them.
