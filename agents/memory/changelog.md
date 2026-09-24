@@ -68,3 +68,16 @@ Content:
 Recorded the Registry namespace-bundle decision and schema-2 validation
 contract in `agents/memory/decisions.md`. Workspace publication has not been
 claimed.
+
+## 2026-09-24 - Generate Namespace Manifests
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: none
+- Supersedes: none
+
+Content:
+
+Added `scripts/generate_manifests.py` and `task manifest`, and published the
+`skills-yaml/authoring-toolkit` bundle through a generated manifest.

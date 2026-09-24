@@ -1,6 +1,6 @@
 # Spec: Adopt `develop` As The Integration Branch
 
-Status: Development
+Status: Done
 
 Purpose: Give the registry a two-stage branch flow, so a change can be
 integrated and validated before it becomes the published state consumers
@@ -59,12 +59,12 @@ only be withdrawn under `WITHDRAWN.yaml`.
 
 ## 4. Verification and Acceptance Criteria
 
-- [ ] `develop` exists and matches `main` at creation.
-- [ ] CI runs on pushes to `develop` and passes.
-- [ ] `AGENTS.md` and `docs/specs/README.md` describe the model consistently.
-- [ ] A pull request targeting `develop` runs the gates and can be merged.
-- [ ] `task check` and `task test` pass on `develop`.
-- [ ] This spec moves to `done` only after `develop` is merged to `main`.
+- [x] `develop` exists and matches `main` at creation.
+- [x] CI runs on pushes to `develop` and passes.
+- [x] `AGENTS.md` and `docs/specs/README.md` describe the model consistently.
+- [x] A pull request targeting `develop` runs the gates and can be merged.
+- [x] `task check` and `task test` pass on `develop`.
+- [x] This spec moves to `done` only after `develop` is merged to `main`.
 
 ## 5. Risks and Mitigations
 
@@ -79,3 +79,14 @@ only be withdrawn under `WITHDRAWN.yaml`.
   *Mitigation*: The rule is written where agents working in this repository read
   it. Enforcement through branch protection is available but deliberately not
   part of this change.
+
+## 6. Integration And Release
+
+Integrated into `develop` through PR #6, merged 2026-09-22.
+Released through `main` in PR #13, merge commit `c8a75a8`, on 2026-09-24.
+
+The branch model has been used since then. One finding is worth recording: the
+Workspace publication workflow opens its pull requests against `main`, not
+`develop` (PR #14). That left `develop` three commits behind `main`, and it was
+fast-forwarded on 2026-09-24. The Workspace workflow should target `develop`, or
+`develop` has to be synchronized after every Workspace release.

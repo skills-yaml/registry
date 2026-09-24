@@ -82,6 +82,13 @@ skill dependencies. Workspace schema 2 retains all provenance fields; other
 namespaces may use the core `schema_version`, `namespace`, `packages`, and
 optional `bundles` fields.
 
+In a namespace maintained by hand, the `packages` section of the manifest is
+generated rather than written. Authors edit only the `bundles` section and then
+run `task manifest`, which rebuilds the file from the package folders, sorts it,
+and adds a comment explaining which part is generated. The Workspace manifest is
+never touched by this command, because the Workspace packager generates it
+together with its provenance fields.
+
 #### Skill Name Rules
 
 - Must be **kebab-case** (lowercase, hyphens only)

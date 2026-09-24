@@ -87,12 +87,28 @@ skills:
 Each package also carries its own canonical source revision, source path,
 source integrity, compatibility, and exact dependency metadata.
 
-Schema-2 namespace manifests may also publish named bundles. The planned
-`workspace/all-workspace-skills` bundle lists every current Workspace package
-once and installs no additional skill. A compatible SKM adds its exact members
-with `skm bundle add workspace/all-workspace-skills --source default --yes`.
-This bundle is pending a released Workspace source and Registry review; the
-currently published Workspace manifest remains schema 1.
+Schema-2 namespace manifests can also publish named bundles, which are groups
+of skills that are offered together. Two bundles are published today:
+`workspace/all-workspace-skills`, which contains every current Workspace
+package, and `skills-yaml/authoring-toolkit`, which contains `skill-creator` and
+`skill-reviewer`. A bundle installs no extra skill of its own. With SKM 0.7.0 or
+later, you can preview a bundle and then add its skills to your project:
+
+```sh
+skm add skills-yaml/authoring-toolkit --source default --kind bundle --dry-run
+skm add skills-yaml/authoring-toolkit --source default --kind bundle --yes
+```
+
+`skm bundle add skills-yaml/authoring-toolkit --source default --yes` does the
+same thing. SKM writes each member into `skills.yaml` as a separate entry pinned
+to an exact version.
+
+To publish a bundle in a namespace you maintain by hand, write only the
+`bundles` section of `skills/<namespace>/manifest.yaml` and run `task manifest`.
+The command fills in the rest of the file from the package folders, so you never
+have to copy version numbers into it yourself. Run it again whenever you publish
+a new version of a package in that namespace; `task check` fails if the manifest
+is out of date.
 
 ## Adding New Skills
 
