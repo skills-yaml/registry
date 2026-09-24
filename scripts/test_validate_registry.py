@@ -119,6 +119,19 @@ class RegistryValidatorTests(unittest.TestCase):
             encoding="utf-8",
         )
 
+    def write_bundle_manifest(self, members: list[str] | None = None) -> Path:
+        self.write_manifest()
+        path = self.root / "skills/workspace/manifest.yaml"
+        manifest = yaml.safe_load(path.read_text(encoding="utf-8"))
+        manifest["schema_version"] = 2
+        manifest["bundles"] = {
+            "all-workspace-skills": {
+                "packages": members if members is not None else sorted(self.packages)
+            }
+        }
+        path.write_text(yaml.safe_dump(manifest, sort_keys=False), encoding="utf-8")
+        return path
+
     def create_generic_package(
         self,
         namespace: str,
@@ -157,6 +170,58 @@ class RegistryValidatorTests(unittest.TestCase):
         self.create_package("wk-spec", dependencies=("workspace/write-spec@0.1.0",))
         self.write_manifest()
         self.assertEqual(self.errors(), [])
+
+    def test_accepts_schema_two_workspace_bundle(self) -> None:
+        self.create_package("write-spec")
+        self.create_package("wk-spec")
+        self.write_bundle_manifest()
+        self.assertEqual(self.errors(), [])
+
+    def test_rejects_incomplete_or_malformed_workspace_bundle(self) -> None:
+        self.create_package("write-spec")
+        self.create_package("wk-spec")
+        cases = {
+            "missing": ["write-spec"],
+            "duplicate": ["write-spec", "write-spec", "wk-spec"],
+            "unknown": ["write-spec", "wk-spec", "other"],
+            "unsorted": ["write-spec", "wk-spec"],
+        }
+        for name, members in cases.items():
+            with self.subTest(name=name):
+                self.write_bundle_manifest(members)
+                self.assertTrue(any("all-workspace-skills" in error or "bundle" in error for error in self.errors()))
+
+    def test_rejects_workspace_bundle_without_provenance(self) -> None:
+        self.create_package("write-spec")
+        path = self.write_bundle_manifest()
+        manifest = yaml.safe_load(path.read_text(encoding="utf-8"))
+        del manifest["source_revision"]
+        path.write_text(yaml.safe_dump(manifest, sort_keys=False), encoding="utf-8")
+        self.assertTrue(any("source_revision" in error for error in self.errors()))
+
+    def test_rejects_malformed_schema_without_crashing(self) -> None:
+        self.create_package("write-spec")
+        path = self.write_bundle_manifest()
+        manifest = yaml.safe_load(path.read_text(encoding="utf-8"))
+        manifest["schema_version"] = [2]
+        path.write_text(yaml.safe_dump(manifest, sort_keys=False), encoding="utf-8")
+        self.assertTrue(any("unsupported namespace manifest schema" in error for error in self.errors()))
+
+    def test_accepts_generic_namespace_bundle(self) -> None:
+        self.create_generic_package("skills-yaml", "skill-creator")
+        self.create_generic_package("skills-yaml", "skill-reviewer")
+        manifest = {
+            "schema_version": 2,
+            "namespace": "skills-yaml",
+            "packages": {"skill-creator": "1.0.0", "skill-reviewer": "1.0.0"},
+            "bundles": {"authoring-toolkit": {"packages": ["skill-creator", "skill-reviewer"]}},
+        }
+        path = self.root / "skills/skills-yaml/manifest.yaml"
+        path.write_text(yaml.safe_dump(manifest, sort_keys=False), encoding="utf-8")
+        self.assertEqual(self.errors(), [])
+        manifest["packages"]["skill-creator"] = "1.0.1"
+        path.write_text(yaml.safe_dump(manifest, sort_keys=False), encoding="utf-8")
+        self.assertTrue(any("package inventory" in error for error in self.errors()))
 
     def test_accepts_exact_dependency_from_another_namespace(self) -> None:
         self.create_generic_package("shared", "helper")

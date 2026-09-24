@@ -13,14 +13,29 @@ Allowed transitions:
 - `backlog -> development`
 - `development -> done`
 
+This repository's configured branch targets are:
+
+- integration: `develop`
+- production: `main`
+
+A branch name alone is not lifecycle evidence. `done` requires a confirmed
+release through `main`; record the integration and release events in the spec.
+
+## Backlog
+
+- [Agent Portability Baseline For Registry Skills](backlog/agent-portability-baseline.md)
+
 ## Active Specs
 
-- None.
+- [Adopt `develop` As The Integration Branch](development/adopt-develop-integration-branch.md)
+- [Publish The `skills-yaml` Authoring Namespace](development/publish-skill-authoring-namespace.md)
+- [Publish Workspace Skill Bundles](development/publish-workspace-skill-bundles.md)
 
 ## Completed Specs
 
 - [Publish Workspace Lifecycle Skills](done/publish-workspace-lifecycle-skills.md)
 - [Remove Host Service Inventory From The Public Registry](done/redact-host-service-inventory.md)
+- [Add gcp-debug Skill To Registry](done/gcp-debug-spec.md)
 
 Legacy or reference spec paths preserved during adoption:
 

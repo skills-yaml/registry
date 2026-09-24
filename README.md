@@ -44,6 +44,14 @@ registry/
 
 ### System
 - **devops-manager** - Manage system services, health, security, and updates on Debian/Docker machines
+- **gcp-debug** - Debug GCP services with Cloud Logging queries and status checks across Cloud Run, Cloud Functions, GKE and Compute Engine
+
+### Skills-yaml
+
+Authoring tools for this registry's own contract.
+
+- **skill-creator** - Author a skill package that passes the registry gates on the first attempt
+- **skill-reviewer** - Review a package for registry compliance, then for unsafe or malicious behavior in its scripts and instructions
 
 ### Workspace lifecycle
 
@@ -78,6 +86,13 @@ skills:
 `skills/workspace/manifest.yaml` is the release-set ledger for the namespace.
 Each package also carries its own canonical source revision, source path,
 source integrity, compatibility, and exact dependency metadata.
+
+Schema-2 namespace manifests may also publish named bundles. The planned
+`workspace/all-workspace-skills` bundle lists every current Workspace package
+once and installs no additional skill. A compatible SKM adds its exact members
+with `skm bundle add workspace/all-workspace-skills --source default --yes`.
+This bundle is pending a released Workspace source and Registry review; the
+currently published Workspace manifest remains schema 1.
 
 ## Adding New Skills
 

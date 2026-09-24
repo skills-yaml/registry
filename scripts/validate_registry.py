@@ -197,14 +197,16 @@ class RegistryValidator:
                 self.error(namespace_path, "namespace must use kebab-case")
                 continue
             for package_path in sorted(namespace_path.iterdir()):
-                if package_path.name == "manifest.yaml" and namespace == "workspace":
+                if package_path.name == "manifest.yaml":
                     continue
                 if not package_path.is_dir() or package_path.is_symlink():
                     self.error(package_path, "skill package must be a real directory")
                     continue
                 self.validate_package(namespace, package_path)
         self.validate_dependencies()
-        self.validate_workspace_manifest(skills_root / "workspace" / "manifest.yaml")
+        for namespace_path in sorted(skills_root.iterdir()):
+            if namespace_path.is_dir() and not namespace_path.is_symlink():
+                self.validate_namespace_manifest(namespace_path.name, namespace_path / "manifest.yaml")
         if self.base_ref:
             self.validate_immutability(self.base_ref)
         return sorted(set(self.errors))
@@ -518,18 +520,20 @@ class RegistryValidator:
         for coordinate in sorted(graph):
             visit(coordinate)
 
-    def validate_workspace_manifest(self, path: Path) -> None:
-        workspace_packages = {
+    def validate_namespace_manifest(self, namespace: str, path: Path) -> None:
+        current_packages = {
             skill_id: release
-            for (namespace, skill_id), release in self.current.items()
-            if namespace == "workspace"
+            for (package_namespace, skill_id), release in self.current.items()
+            if package_namespace == namespace
         }
-        if not workspace_packages:
+        if not current_packages:
             if path.exists() or path.is_symlink():
-                self.error(path, "must not exist without Workspace packages")
+                self.error(path, "must not exist without namespace packages")
+            return
+        if namespace != "workspace" and not path.exists() and not path.is_symlink():
             return
         if not path.is_file() or path.is_symlink():
-            self.error(path, "must be a real file when Workspace packages are published")
+            self.error(path, "namespace manifest must be a real file")
             return
         if path.stat().st_size > 256 * 1024:
             self.error(path, "must not exceed 262144 bytes")
@@ -539,22 +543,20 @@ class RegistryValidator:
         except (OSError, UnicodeError, ValueError) as error:
             self.error(path, str(error))
             return
-        allowed = {
-            "schema_version",
-            "namespace",
-            "toolkit_version",
-            "source_repository",
-            "source_revision",
-            "workspace_docs_compatibility",
-            "minimum_skm_version",
+        allowed = {"schema_version", "namespace", "packages", "bundles"}
+        provenance_fields = {
+            "toolkit_version", "source_repository", "source_revision",
+            "workspace_docs_compatibility", "minimum_skm_version",
             "skm_adapter_compatibility",
-            "packages",
         }
-        unknown = sorted(set(manifest) - allowed)
+        if namespace == "workspace":
+            allowed.update(provenance_fields)
+        unknown = sorted(set(manifest) - allowed, key=str)
         if unknown:
-            self.error(path, "unknown manifest fields: " + ", ".join(unknown))
-        if manifest.get("schema_version") != 1 or manifest.get("namespace") != "workspace":
-            self.error(path, "schema_version must be 1 and namespace must be workspace")
+            self.error(path, "unknown manifest fields: " + ", ".join(map(str, unknown)))
+        schema = manifest.get("schema_version")
+        if not isinstance(schema, int) or schema not in ({1, 2} if namespace == "workspace" else {2}) or manifest.get("namespace") != namespace:
+            self.error(path, "unsupported namespace manifest schema or namespace")
         packages_value = manifest.get("packages")
         if not isinstance(packages_value, dict) or not all(
             isinstance(key, str) and isinstance(value, str)
@@ -562,9 +564,45 @@ class RegistryValidator:
         ):
             self.error(path, "packages must map skill ids to exact version strings")
             return
-        expected = {skill_id: release.version for skill_id, release in workspace_packages.items()}
-        if packages_value != dict(sorted(expected.items())):
-            self.error(path, "package inventory must exactly match Workspace root/current releases")
+        expected = {skill_id: release.version for skill_id, release in current_packages.items()}
+        if packages_value != expected or list(packages_value) != sorted(packages_value):
+            self.error(path, "package inventory must exactly match sorted namespace root/current releases")
+        if any(not NAME_PATTERN.fullmatch(skill_id) or not SEMVER_PATTERN.fullmatch(version)
+               for skill_id, version in packages_value.items()):
+            self.error(path, "packages contain an invalid exact coordinate")
+
+        bundles = manifest.get("bundles")
+        if schema == 1 and "bundles" in manifest:
+            self.error(path, "schema 1 cannot declare bundles")
+        if schema == 2 and namespace == "workspace" and not isinstance(bundles, dict):
+            self.error(path, "schema 2 Workspace manifest requires bundles")
+        if bundles is not None:
+            if not isinstance(bundles, dict) or (namespace == "workspace" and schema == 2 and not bundles):
+                self.error(path, "bundles must be a non-empty mapping for Workspace schema 2")
+            else:
+                if not all(isinstance(key, str) for key in bundles) or list(bundles) != sorted(bundles, key=str):
+                    self.error(path, "bundle identifiers must be sorted")
+                for bundle_id, bundle in bundles.items():
+                    if not isinstance(bundle_id, str) or not NAME_PATTERN.fullmatch(bundle_id):
+                        self.error(path, f"invalid bundle identifier: {bundle_id!r}")
+                        continue
+                    if not isinstance(bundle, dict) or set(bundle) != {"packages"}:
+                        self.error(path, f"bundle {bundle_id} must contain only packages")
+                        continue
+                    members = bundle["packages"]
+                    if not isinstance(members, list) or not members or any(
+                        not isinstance(item, str) or not NAME_PATTERN.fullmatch(item) for item in members
+                    ):
+                        self.error(path, f"bundle {bundle_id} has invalid members")
+                        continue
+                    if members != sorted(set(members)) or any(item not in packages_value for item in members):
+                        self.error(path, f"bundle {bundle_id} has duplicate, unsorted, or unknown members")
+                if namespace == "workspace" and schema == 2:
+                    all_bundle = bundles.get("all-workspace-skills")
+                    if not isinstance(all_bundle, dict) or all_bundle.get("packages") != sorted(packages_value):
+                        self.error(path, "all-workspace-skills must contain every namespace package exactly once")
+        if namespace != "workspace":
+            return
         field_map = {
             "toolkit_version": "workspace-toolkit-version",
             "source_repository": "skm-source-repository",
@@ -580,7 +618,7 @@ class RegistryValidator:
                 continue
             mismatched = sorted(
                 skill_id
-                for skill_id, release in workspace_packages.items()
+                for skill_id, release in current_packages.items()
                 if release.metadata.get(metadata_field) != value
             )
             if mismatched:
