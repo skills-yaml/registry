@@ -27,12 +27,13 @@ release through `main`; record the integration and release events in the spec.
 
 ## Active Specs
 
-- [Adopt `develop` As The Integration Branch](development/adopt-develop-integration-branch.md)
-- [Publish The `skills-yaml` Authoring Namespace](development/publish-skill-authoring-namespace.md)
+- [Generate Namespace Manifests](development/generate-namespace-manifests.md)
 - [Publish Workspace Skill Bundles](development/publish-workspace-skill-bundles.md)
 
 ## Completed Specs
 
+- [Adopt `develop` As The Integration Branch](done/adopt-develop-integration-branch.md)
+- [Publish The `skills-yaml` Authoring Namespace](done/publish-skill-authoring-namespace.md)
 - [Publish Workspace Lifecycle Skills](done/publish-workspace-lifecycle-skills.md)
 - [Remove Host Service Inventory From The Public Registry](done/redact-host-service-inventory.md)
 - [Add gcp-debug Skill To Registry](done/gcp-debug-spec.md)

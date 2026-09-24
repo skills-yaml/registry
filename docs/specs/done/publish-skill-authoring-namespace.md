@@ -1,6 +1,6 @@
 # Spec: Publish The `skills-yaml` Authoring Namespace
 
-Status: Development
+Status: Done
 
 Purpose: Publish the two skills that let an agent author and review registry
 packages correctly.
@@ -112,9 +112,12 @@ descriptions stay under 1024 characters, the limit that binds first.
 
 ## 6. Integration And Release
 
-Integrated into `develop`: pending.
-Released through `main`: pending. This spec stays in `development` until the
-release event is confirmed, per the branch model in `AGENTS.md`.
+Integrated into `develop` through PR #9, merged 2026-09-24.
+Released through `main` in PR #13, merge commit `c8a75a8`, on 2026-09-24.
+
+The bundle deferred in section 3 is published separately, as
+`skills/skills-yaml/manifest.yaml`, under
+`generate-namespace-manifests.md`.
 
 ## 5. Risks and Mitigations
 

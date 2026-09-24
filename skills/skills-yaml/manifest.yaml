@@ -1,0 +1,12 @@
+# The packages section is generated from the package folders by
+# `task manifest`. Edit only the bundles section, then run it again.
+schema_version: 2
+namespace: skills-yaml
+packages:
+  skill-creator: "0.1.0"
+  skill-reviewer: "0.1.0"
+bundles:
+  authoring-toolkit:
+    packages:
+      - skill-creator
+      - skill-reviewer
