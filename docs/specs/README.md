@@ -29,7 +29,7 @@ release through `main`; record the integration and release events in the spec.
 
 - [Adopt `develop` As The Integration Branch](development/adopt-develop-integration-branch.md)
 - [Publish The `skills-yaml` Authoring Namespace](development/publish-skill-authoring-namespace.md)
-- [Publish Workspace Skill Bundles](backlog/publish-workspace-skill-bundles.md)
+- [Publish Workspace Skill Bundles](development/publish-workspace-skill-bundles.md)
 
 ## Completed Specs
 

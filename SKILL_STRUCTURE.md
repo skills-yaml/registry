@@ -74,6 +74,14 @@ The namespace manifest at `skills/workspace/manifest.yaml` must exactly list
 the current package versions and agree with their shared source and compatibility
 metadata.
 
+Schema-2 namespace manifests may define `bundles` whose members are exact
+package IDs from the same manifest. Members are unique and sorted; the special
+Workspace `all-workspace-skills` bundle must cover the entire current package
+map. Bundle metadata does not create a `SKILL.md` package or replace actual
+skill dependencies. Workspace schema 2 retains all provenance fields; other
+namespaces may use the core `schema_version`, `namespace`, `packages`, and
+optional `bundles` fields.
+
 #### Skill Name Rules
 
 - Must be **kebab-case** (lowercase, hyphens only)

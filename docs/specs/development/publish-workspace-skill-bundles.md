@@ -1,13 +1,12 @@
-# Backlog Spec: Publish Workspace Skill Bundles
+# Development Spec: Publish Workspace Skill Bundles
 
 ## Status
 
-State: `backlog`
+State: `development`
 
-Rationale: The namespace-manifest extension and validation contract are
-specified, but no schema-2 Workspace release has been generated, reviewed, or
-published. A proposed amendment, at the end of this specification, generalizes
-schema 2 to any namespace and awaits agreement from the companion owners.
+Rationale: The user selected the Registry namespace bundle instead of an
+instructionless synthetic skill on 2026-09-24. Schema-2 validation and
+cross-repository generation are active; publication is pending.
 
 ## Companion Specifications
 
@@ -283,11 +282,11 @@ implementation while preserving schema and compatibility semantics.
 
 ## Memory Impact
 
-Status: `pending`
+Status: `updated`
 
-Rationale: Schema-2 distribution and validation are proposed durable registry
-contracts, but no release has been published. Resolve memory when the final
-contract and publication evidence are known.
+Rationale: The user-selected Registry namespace bundle and schema-2
+validation contract are recorded in `agents/memory/decisions.md` and
+`agents/memory/changelog.md`. Publication evidence remains pending.
 
 ## Amendment: Generic Namespace Manifests
 
