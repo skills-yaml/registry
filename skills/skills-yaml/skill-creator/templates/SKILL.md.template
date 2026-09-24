@@ -1,0 +1,30 @@
+---
+name: <skill-name>
+description: <What it does, then when it should trigger. Under 1024 characters.>
+metadata:
+  skm-version: "0.1.0"
+---
+
+# <Skill Name>
+
+<One paragraph: the problem this solves and the shape of the answer. Write for an
+agent about to act, not for a reader browsing.>
+
+## When to use
+
+- <Concrete situation a user would describe>
+- <Another>
+
+## Workflow
+
+1. <First action, stated imperatively>
+2. <Next>
+3. <Next>
+
+## <Domain section>
+
+<The substance: rules, commands, decision criteria. Lead with the common case.>
+
+## Support files
+
+- **<What it covers>**: `references/<file>.md`
