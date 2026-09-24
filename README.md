@@ -46,6 +46,13 @@ registry/
 - **devops-manager** - Manage system services, health, security, and updates on Debian/Docker machines
 - **gcp-debug** - Debug GCP services with Cloud Logging queries and status checks across Cloud Run, Cloud Functions, GKE and Compute Engine
 
+### Skills-yaml
+
+Authoring tools for this registry's own contract.
+
+- **skill-creator** - Author a skill package that passes the registry gates on the first attempt
+- **skill-reviewer** - Review a package for registry compliance, then for unsafe or malicious behavior in its scripts and instructions
+
 ### Workspace lifecycle
 
 The `workspace` namespace publishes 19 independently versioned packages from
