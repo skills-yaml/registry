@@ -103,6 +103,14 @@ skm add skills-yaml/authoring-toolkit --source default --kind bundle --yes
 same thing. SKM writes each member into `skills.yaml` as a separate entry pinned
 to an exact version.
 
+`skm search <query>` lists skills and bundles from your registries in one
+result list, with the `skm add` command for each result. It never changes your
+project.
+
+SKM 0.7.0 has no `skm workspace` command. For Workspace Docs assessment,
+adoption, upgrade or repair, add the `workspace/wk-adopt` skill with
+`skm add workspace/wk-adopt --source default` and invoke it in your agent.
+
 To publish a bundle in a namespace you maintain by hand, write only the
 `bundles` section of `skills/<namespace>/manifest.yaml` and run `task manifest`.
 The command fills in the rest of the file from the package folders, so you never
