@@ -239,12 +239,17 @@ cat > skills/software-development/code-review/references/checklist.md << 'EOF'
 - [ ] Functionality...
 EOF
 
-# 4. Test locally
+# 4. Test locally, straight from your checkout
 cd /path/to/project
-skm init
-# Edit skills.yaml to include the new skill
-skm install
+skm init --non-interactive     # only if the project has no skills.yaml yet
+skm dev link /path/to/registry/skills/software-development/code-review
+skm dev list                   # shows the link and the agents it reaches
 ```
+
+`skm dev link` links the folder you are editing into your agents without
+publishing it. Remove the link with `skm dev unlink code-review` when you are
+done. Once the skill is published, consumers add it with
+`skm add software-development/code-review`.
 
 ---
 

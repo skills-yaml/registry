@@ -476,10 +476,14 @@ ln -s v1.0.0 default  # Point default to stable version
 ln -s v2.0.0 latest    # Point latest to newest version
 ```
 
-This allows:
-- `skm add my-skill --version latest` → gets v2.0.0
-- `skm add my-skill --version default` → gets v1.0.0 (stable)
-- `skm add my-skill --version 1.0.0` → gets v1.0.0 explicitly
+Consumers select a version with the `version` field of the skill's entry in
+`skills.yaml`. `skm add` has no version flag:
+
+- `version: latest` → gets v2.0.0
+- `version: default` → gets v1.0.0 (stable)
+- `version: "1.0.0"` → gets v1.0.0 explicitly
+
+`skm use my-category/my-skill@1.0.0` rewrites that field and re-links the skill.
 
 ---
 
