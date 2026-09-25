@@ -74,10 +74,10 @@ description could only ask the model not to use it.
 
 The correct home is a namespace manifest bundle: named membership, no skill, no
 dependency. The schema-2 manifest specified in
-`backlog/publish-workspace-skill-bundles.md` provides exactly this, but only for
-the `workspace` namespace. Generalizing it is a proposed amendment to that
-specification and its SKM and Workspace companions. Once a generic manifest is
-supported, the bundle is added as `skills/skills-yaml/manifest.yaml`.
+[`Publish Workspace Skill Bundles`](publish-workspace-skill-bundles.md) initially
+provided this for the `workspace` namespace. Its generic manifest amendment was
+later released, and `skills/skills-yaml/manifest.yaml` now publishes the
+bundle.
 
 Removing the package before merge avoids a withdrawal. Published versions are
 immutable from the moment they reach `main`, so a package that should never have

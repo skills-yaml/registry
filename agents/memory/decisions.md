@@ -53,7 +53,7 @@ Git history.
 - Type: decision
 - Source: user
 - Confidence: high
-- Review: after schema-2 publication
+- Review: none
 - Supersedes: an instructionless dependency-only metapackage for this purpose
 
 Content:

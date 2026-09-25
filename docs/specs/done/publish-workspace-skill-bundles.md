@@ -1,14 +1,20 @@
-# Development Spec: Publish Workspace Skill Bundles
+# Done Spec: Publish Workspace Skill Bundles
 
 ## Status
 
-State: `development`
+State: `done`
 
 Rationale: PR #11 merged schema-2 namespace bundle validation into `develop`
 at `5bbd6f065ce43911bccedf4e788d7d67152da805` on 2026-09-24 after
-Registry CI passed. A revision-verified Workspace fixture passed staging,
-Registry validation, SKM 0.7 installation, and `skm check`. Reviewed package
-publication through `main` remains pending the Workspace source release.
+Registry CI passed. PRs #15 and #16 integrated and released the generic
+namespace manifest contract. Workspace released toolkit 0.4.2 source at
+`ec01dd7abe4b0a14d40fc1a9ff3ae56f739c115e`. Generated Registry PR #19
+passed CI and integrated the 20-package release into `develop` at
+`65ee895d89362ffd475a236883d51257037f6b51`; Registry PR #20 passed CI
+and released it through `main` at
+`3cfdaf3d7d0eb2bf0e6c461f8dc4ab8317811df7` on 2026-09-25. Released
+SKM 0.7 previewed and installed all 20 bundle members from the published
+Registry, passed `skm check`, and planned no additions on repetition.
 
 ## Companion Specifications
 
@@ -279,8 +285,8 @@ revisions retain the schema-1 manifest for older consumers.
 
 ## Open Questions
 
-None for backlog entry. Exact release versions are coordinated during
-implementation while preserving schema and compatibility semantics.
+None. The released Workspace namespace selects toolkit 0.4.2 and the exact
+package versions in `skills/workspace/manifest.yaml`.
 
 ## Memory Impact
 
@@ -288,12 +294,15 @@ Status: `updated`
 
 Rationale: The user-selected Registry namespace bundle and schema-2
 validation contract are recorded in `agents/memory/decisions.md` and
-`agents/memory/changelog.md`. Publication evidence remains pending.
+`agents/memory/changelog.md`. Confirmed publication and consumer verification
+are recorded in `agents/memory/facts.md`.
 
 ## Amendment: Generic Namespace Manifests
 
-Proposed 2026-09-24. Not yet agreed with the owners of the companion
-specifications; see "Coordination" below.
+Proposed 2026-09-24; implemented and released through the generic namespace
+manifest work in Registry PRs #15 and #16. The published
+`skills-yaml/authoring-toolkit` bundle and SKM 0.7 verification are recorded in
+`docs/specs/done/generate-namespace-manifests.md`.
 
 ### Motivation
 
@@ -372,22 +381,21 @@ manifest is reviewed like any other change, because nothing generates it.
 
 ### Acceptance criteria added by this amendment
 
-- [ ] A schema-2 manifest carrying only the generic core validates in a
+- [x] A schema-2 manifest carrying only the generic core validates in a
       non-generated namespace.
-- [ ] A manifest listing a version that is not the namespace's current version
+- [x] A manifest listing a version that is not the namespace's current version
       is rejected.
-- [ ] A manifest in a namespace with no packages is rejected.
-- [ ] The `workspace` namespace still fails validation when any provenance field
+- [x] A manifest in a namespace with no packages is rejected.
+- [x] The `workspace` namespace still fails validation when any provenance field
       is missing.
-- [ ] `skills/skills-yaml/manifest.yaml` publishing an `authoring-toolkit` bundle
+- [x] `skills/skills-yaml/manifest.yaml` publishing an `authoring-toolkit` bundle
       of `skill-creator` and `skill-reviewer` validates, and appears in
       `skm search`.
 
 ### Coordination
 
-This amends a specification written in coordination with
+This amendment shares the namespace manifest contract with
 `All Workspace Skills Bundle` (Workspace) and `Install Workspace Skill Bundles`
-(SKM). The companions receive matching amendment notes. The rollout order they
-define is unaffected for `workspace`; generic manifests in other namespaces can
-be published independently of it, since the released SKM reader already accepts
-them.
+(SKM). Its generic implementation was released independently, before the
+Workspace publication, because the released SKM reader already accepted
+generic namespace manifests.
