@@ -1,0 +1,6 @@
+interface:
+  display_name: "wk.document"
+  short_description: "Maintain validated project documentation"
+  default_prompt: "Use $wk-document to create or update the requested project documentation and validate it."
+policy:
+  allow_implicit_invocation: false
