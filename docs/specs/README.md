@@ -27,10 +27,11 @@ release through `main`; record the integration and release events in the spec.
 
 ## Active Specs
 
-- [Publish Workspace Skill Bundles](development/publish-workspace-skill-bundles.md)
+None.
 
 ## Completed Specs
 
+- [Publish Workspace Skill Bundles](done/publish-workspace-skill-bundles.md)
 - [Generate Namespace Manifests](done/generate-namespace-manifests.md)
 - [Adopt `develop` As The Integration Branch](done/adopt-develop-integration-branch.md)
 - [Publish The `skills-yaml` Authoring Namespace](done/publish-skill-authoring-namespace.md)

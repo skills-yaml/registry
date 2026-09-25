@@ -81,3 +81,17 @@ Content:
 
 Added `scripts/generate_manifests.py` and `task manifest`, and published the
 `skills-yaml/authoring-toolkit` bundle through a generated manifest.
+
+## 2026-09-25 - Publish Workspace Bundle From Toolkit 0.4.2
+
+- Type: fact
+- Source: repo
+- Confidence: high
+- Review: none
+- Supersedes: none
+
+Content:
+
+Recorded in `agents/memory/facts.md` the Registry `develop` integration and
+`main` publication of toolkit 0.4.2's 20-member bundle, and the live SKM 0.7
+installation and convergence check.
