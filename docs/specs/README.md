@@ -27,7 +27,7 @@ release through `main`; record the integration and release events in the spec.
 
 ## Active Specs
 
-None.
+- [Open A Docs Review For Each Upstream Release](development/notify-docs-on-upstream-release.md)
 
 ## Completed Specs
 
