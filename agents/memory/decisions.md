@@ -94,3 +94,20 @@ The README presents the registry, skm, and `skills.yaml` independently of any
 one publisher. Each namespace gets a short README entry; detail specific to one
 namespace, such as the Workspace lifecycle facades, provenance, and `wk-adopt`
 adoption, lives in `docs/namespaces/<namespace>.md`.
+
+## 2026-09-26 - Open A Docs Review Issue For Each Upstream Release
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: after the first automated issue
+- Supersedes: none
+
+Content:
+
+Every production release of skm, and every Workspace toolkit version that
+reaches `main`, opens one `docs-review` issue in this registry. The
+`Upstream Release` workflow opens it; nothing edits documentation
+automatically. skm pre-releases on `development` do not trigger it. skm issues
+diff the released help against `docs/upstream/skm-cli.txt`, which is refreshed
+when a review closes.
