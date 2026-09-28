@@ -95,3 +95,16 @@ Content:
 Recorded in `agents/memory/facts.md` the Registry `develop` integration and
 `main` publication of toolkit 0.4.2's 20-member bundle, and the live SKM 0.7
 installation and convergence check.
+
+## 2026-09-25 - Record Namespace Documentation Separation
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: none
+- Supersedes: none
+
+Content:
+
+Recorded in `decisions.md` that namespace-specific documentation moves to
+`docs/namespaces/`, starting with `docs/namespaces/workspace.md`.

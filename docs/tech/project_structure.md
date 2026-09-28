@@ -26,6 +26,9 @@ This document records the repository layout and ownership boundaries for `regist
 - Keep legacy specs in place unless a separate migration is explicitly requested.
 - Keep published packages under `skills/<namespace>/<skill-id>/` and registry
   validation under `scripts/`.
+- Keep documentation specific to one namespace under
+  `docs/namespaces/<namespace>.md`; `README.md` lists each namespace briefly and
+  stays independent of any one publisher.
 
 ## Workflow
 

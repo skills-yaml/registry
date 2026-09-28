@@ -53,41 +53,16 @@ Authoring tools for this registry's own contract.
 - **skill-creator** - Author a skill package that passes the registry gates on the first attempt
 - **skill-reviewer** - Review a package for registry compliance, then for unsafe or malicious behavior in its scripts and instructions
 
-### Workspace lifecycle
+### Workspace
 
-The `workspace` namespace publishes 19 independently versioned packages from
-Workspace toolkit 0.3.0. Focused packages can be installed directly. The seven
-public lifecycle facades preserve the conceptual `wk.*` vocabulary while using
-portable kebab-case package and invocation names:
+Skills from the [Workspace toolkit](https://github.com/skills-yaml/workspace),
+including the seven `wk-*` lifecycle facades such as `workspace/wk-spec` and
+`workspace/wk-deliver`. See [docs/namespaces/workspace.md](./docs/namespaces/workspace.md)
+for the package list, provenance rules, and Workspace Docs adoption.
 
-| Concept | Registry package | Direct invocation |
-| --- | --- | --- |
-| `wk.adopt` | `workspace/wk-adopt` | `$wk-adopt` |
-| `wk.analyze` | `workspace/wk-analyze` | `$wk-analyze` |
-| `wk.document` | `workspace/wk-document` | `$wk-document` |
-| `wk.spec` | `workspace/wk-spec` | `$wk-spec` |
-| `wk.plan` | `workspace/wk-plan` | `$wk-plan` |
-| `wk.deliver` | `workspace/wk-deliver` | `$wk-deliver` |
-| `wk.review` | `workspace/wk-review` | `$wk-review` |
+## Bundles
 
-For example, `workspace/wk-deliver@0.1.0` declares exact dependencies on its
-focused planning, implementation, review, security, CI, and remediation skills.
-SKM 0.4.0 or later resolves that dependency closure and installs Codex skills
-under `.agents/skills/`.
-
-Use exact versions for reproducible automation:
-
-```yaml
-skills:
-  - name: workspace/wk-spec
-    version: "0.1.0"
-```
-
-`skills/workspace/manifest.yaml` is the release-set ledger for the namespace.
-Each package also carries its own canonical source revision, source path,
-source integrity, compatibility, and exact dependency metadata.
-
-Schema-2 namespace manifests can also publish named bundles, which are groups
+Schema-2 namespace manifests can publish named bundles, which are groups
 of skills that are offered together. Two bundles are published today:
 `workspace/all-workspace-skills`, which contains every current Workspace
 package, and `skills-yaml/authoring-toolkit`, which contains `skill-creator` and
@@ -106,10 +81,6 @@ to an exact version.
 `skm search <query>` lists skills and bundles from your registries in one
 result list, with the `skm add` command for each result. It never changes your
 project.
-
-SKM 0.7.0 has no `skm workspace` command. For Workspace Docs assessment,
-adoption, upgrade or repair, add the `workspace/wk-adopt` skill with
-`skm add workspace/wk-adopt --source default` and invoke it in your agent.
 
 To publish a bundle in a namespace you maintain by hand, write only the
 `bundles` section of `skills/<namespace>/manifest.yaml` and run `task manifest`.
