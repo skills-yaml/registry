@@ -1,0 +1,4 @@
+interface:
+  display_name: "Monitor CI"
+  short_description: "Monitor CI through a terminal outcome"
+  default_prompt: "Use $monitor-ci to watch the current CI run and report transitions through its terminal outcome."
