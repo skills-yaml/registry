@@ -77,13 +77,24 @@ without them the hourly fallback still opens the issue.
 - [x] The release-reading step runs against the live `prod-latest` release,
       verifying checksum and version.
 - [x] `actionlint`, `task check` and `task test` pass.
-- [ ] After merge to `main`, a manual run opens `Docs review: skm 0.8.0` and a
-      second run opens nothing.
+- [x] After merge to `main`, a manual run opens `Docs review: skm 0.8.0` and a
+      second run opens nothing. Run `36546469460` opened #32; run
+      `36547618419` found it and opened nothing.
 - [ ] skm sends `skm-released` after its next production release.
 
 ## 5. Integration And Release
 
-Pending.
+Integrated into `develop` through PR #28, merge commit `88501dd`, on
+2026-09-29. Released through `main` in PR #31, merge commit `7d16561`, on
+2026-09-29.
+
+Workspace toolkit 0.5.0 (`cf03dcb`) and 0.6.0 (`e891976`) reached `main` before
+the workflow existed, so #33 was opened by hand with the script's output for
+0.4.2 → 0.6.0.
+
+The spec stays in `development` until skills-yaml/skm PR #67, merged into skm
+`development` at `a8ad8d7`, sends its first `skm-released` dispatch from a
+production release. That also needs the App credentials in skills-yaml/skm.
 
 ## 6. Risks and Mitigations
 
