@@ -26,6 +26,8 @@ This document records the repository layout and ownership boundaries for `regist
 - Keep legacy specs in place unless a separate migration is explicitly requested.
 - Keep published packages under `skills/<namespace>/<skill-id>/` and registry
   validation under `scripts/`.
+- Keep `docs/upstream/skm-cli.txt` as the skm help the docs were last reviewed
+  against; replace it only when closing a `docs-review` issue.
 - Keep documentation specific to one namespace under
   `docs/namespaces/<namespace>.md`; `README.md` lists each namespace briefly and
   stays independent of any one publisher.
