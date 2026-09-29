@@ -1,0 +1,646 @@
+# skm 0.7.0
+
+## skm
+
+Agent Skill Manager (skm) - Manage agent skills via skills.yaml
+
+Usage: skm <COMMAND>
+
+Commands:
+  version       Show the installed version and managed build identity
+  init          Create or edit skills.yaml with sequential prompts, or create defaults for scripts
+  install       Install and symlink all skills specified in skills.yaml
+  add           Add a registry skill or published bundle to this project
+  bundle        Add every skill in a published registry bundle to this project
+  search        Search configured registries for skills and published bundles
+  remove        Remove a skill from skills.yaml and unlink it from agent directories
+  list          List all defined skills and verify their current linkage status
+  check         Verify all skills match layout expectations and are correctly linked (useful for CI)
+  update        Check for or install a verified SKM release update
+  cache-update  Update local cache of skill registries
+  setup         Run first-time setup (initialize base config and cache)
+  init-config   Initialize global base configuration with default registry
+  versions      List all available versions for a skill
+  use           Switch a skill to a specific version
+  update-skill  Update a skill to its latest version
+  clean         Clean up SKM artifacts (broken symlinks, cache, etc.)
+  config        Manage SKM configuration
+  registry      Manage skill registries
+  dev           Manage local development skills
+  help          Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+
+## skm version
+
+Show the installed version and managed build identity
+
+Usage: skm version
+
+Options:
+  -h, --help  Print help
+
+## skm init
+
+Create or edit skills.yaml with sequential prompts, or create defaults for scripts
+
+Usage: skm init [OPTIONS]
+
+Options:
+      --name <NAME>
+          Override the project name (new configurations default to the current folder name)
+  -i, --interactive
+          Open the interactive prompts (the default)
+      --advanced
+          Compatibility alias for the complete interactive prompt flow
+  -g, --global
+          Prepare for global installation; skills.yaml stays in the current directory
+      --non-interactive
+          Use non-interactive mode with default values
+      --toolkit-manifest <TOOLKIT_MANIFEST>
+          Select a repository-local Workspace toolkit manifest
+      --toolkit-version <TOOLKIT_VERSION>
+          Pin the selected toolkit version [default: 0.1.0]
+      --bundle <BUNDLE>
+          Select a toolkit bundle; repeat for multiple bundles
+      --profile <PROFILE>
+          Select an additional role profile; repeat for multiple profiles
+      --workspace-standard <WORKSPACE_STANDARD>
+          Pin a workspace standard, for example workspace-docs@5.0.0
+      --workspace-source <WORKSPACE_SOURCE>
+          Select a repository-local workspace standard source
+      --workspace-revision <WORKSPACE_REVISION>
+          Pin an immutable Git revision for a remote workspace source
+      --workspace-integrity <WORKSPACE_INTEGRITY>
+          Pin the expected SHA-256 package integrity for a remote workspace source
+  -h, --help
+          Print help
+
+## skm install
+
+Install and symlink all skills specified in skills.yaml
+
+Usage: skm install [OPTIONS]
+
+Options:
+  -g, --global   Link skills globally (to user home directory) instead of project-local
+      --dry-run  Preview the complete plan without writing
+      --json     Emit the plan as JSON
+  -y, --yes      Confirm non-interactive application
+  -h, --help     Print help
+
+## skm add
+
+Add a registry skill or published bundle to this project
+
+Usage: skm add [OPTIONS] <NAME>
+
+Arguments:
+  <NAME>  Skill or bundle ID (e.g. software-development/spec)
+
+Options:
+      --source <SOURCE>  Source registry name (defaults to 'default')
+      --kind <KIND>      Select skill or bundle explicitly when an ID names both [possible values: skill, bundle]
+      --path <PATH>      Path to a local skill directory (for local offline skills)
+  -g, --global           Link skills globally instead of project-local
+      --dry-run          Preview a bundle without writing
+      --json             Emit a bundle plan as JSON without writing
+      --yes              Apply a published bundle to this project
+  -h, --help             Print help
+
+## skm bundle
+
+Add every skill in a published registry bundle to this project
+
+Usage: skm bundle <COMMAND>
+
+Commands:
+  add   Expand a published registry bundle into exact project skill pins
+  help  Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help
+
+## skm bundle add
+
+Expand a published registry bundle into exact project skill pins
+
+Usage: skm bundle add [OPTIONS] <BUNDLE>
+
+Arguments:
+  <BUNDLE>  Published bundle ID in namespace/name form
+
+Options:
+      --source <SOURCE>  Configured registry containing the bundle [default: default]
+      --dry-run          Preview all skill and link changes without writing
+      --json             Emit a JSON plan without writing
+      --yes              Apply the complete project change
+  -h, --help             Print help
+
+## skm search
+
+Search configured registries for skills and published bundles
+
+Usage: skm search [OPTIONS] <QUERY>
+
+Arguments:
+  <QUERY>  Skill or bundle ID, or part of one
+
+Options:
+  -r, --registry <REGISTRY>  Search only this configured registry
+      --json                 Emit deterministic JSON search results
+  -l, --limit <LIMIT>        Maximum number of results to display [default: 50]
+  -h, --help                 Print help
+
+## skm remove
+
+Remove a skill from skills.yaml and unlink it from agent directories
+
+Usage: skm remove [OPTIONS] <SKILL_NAME>
+
+Arguments:
+  <SKILL_NAME>  Name of the skill to remove
+
+Options:
+  -g, --global   Remove from global agent directories instead of project-local
+  -y, --yes      Skip confirmation prompt
+      --force    Remove even if target is not a symlink (use with caution)
+      --dry-run  Preview actions without making changes
+  -v, --verbose  Show verbose output
+  -h, --help     Print help
+
+## skm list
+
+List all defined skills and verify their current linkage status
+
+Usage: skm list [OPTIONS]
+
+Options:
+  -g, --global  List global links status instead of project-local
+  -h, --help    Print help
+
+## skm check
+
+Verify all skills match layout expectations and are correctly linked (useful for CI)
+
+Usage: skm check [OPTIONS]
+
+Options:
+  -g, --global  Verify global links status instead of project-local
+  -h, --help    Print help
+
+## skm update
+
+Check for or install a verified SKM release update
+
+Usage: skm update [OPTIONS]
+
+Options:
+      --channel <CHANNEL>  Switch to a release channel before following it for future updates [possible values: prod, development]
+      --check              Only check whether an update is available
+  -y, --yes                Confirm a non-interactive update
+  -h, --help               Print help
+
+## skm cache-update
+
+Update local cache of skill registries
+
+Usage: skm cache-update [OPTIONS]
+
+Options:
+      --registry <REGISTRY>  Specific registry to update (updates all if not specified)
+  -h, --help                 Print help
+
+## skm setup
+
+Run first-time setup (initialize base config and cache)
+
+Usage: skm setup
+
+Options:
+  -h, --help  Print help
+
+## skm init-config
+
+Initialize global base configuration with default registry
+
+Usage: skm init-config
+
+Options:
+  -h, --help  Print help
+
+## skm versions
+
+List all available versions for a skill
+
+Usage: skm versions [OPTIONS] <SKILL_NAME>
+
+Arguments:
+  <SKILL_NAME>  Name of the skill
+
+Options:
+  -r, --registry <REGISTRY>  Specific registry to query
+      --json                 Output in JSON format
+      --stable-only          Only show stable versions
+      --pre                  Include prerelease versions
+  -l, --limit <LIMIT>        Limit number of versions shown [default: 50]
+  -h, --help                 Print help
+
+## skm use
+
+Switch a skill to a specific version
+
+Usage: skm use [OPTIONS] <SKILL_VERSION>
+
+Arguments:
+  <SKILL_VERSION>  Skill and version (format: skill@v1.2.0)
+
+Options:
+  -g, --global   Apply to global configuration
+  -y, --yes      Skip confirmation
+      --dry-run  Preview changes
+  -h, --help     Print help
+
+## skm update-skill
+
+Update a skill to its latest version
+
+Usage: skm update-skill [OPTIONS] <SKILL_NAME>
+
+Arguments:
+  <SKILL_NAME>  Name of the skill to update
+
+Options:
+  -g, --global   Update in global configuration
+  -y, --yes      Skip confirmation
+      --dry-run  Preview changes
+      --pre      Update to prerelease version
+  -h, --help     Print help
+
+## skm clean
+
+Clean up SKM artifacts (broken symlinks, cache, etc.)
+
+Usage: skm clean <COMMAND>
+
+Commands:
+  symlinks  Clean up broken and orphaned symlinks
+  cache     Clean up registry cache
+  reset     Reset SKM to clean state
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help
+
+## skm clean symlinks
+
+Clean up broken and orphaned symlinks
+
+Usage: skm clean symlinks [OPTIONS]
+
+Options:
+  -g, --global    Clean global symlinks
+      --broken    Only clean broken symlinks
+      --orphaned  Only clean orphaned symlinks
+      --all       Clean all symlinks (broken + orphaned)
+      --dry-run   Preview what would be removed
+  -y, --yes       Skip confirmation
+  -v, --verbose   Show verbose output
+  -h, --help      Print help
+
+## skm clean cache
+
+Clean up registry cache
+
+Usage: skm clean cache [OPTIONS] [REGISTRY]
+
+Arguments:
+  [REGISTRY]  Specific registry to clean
+
+Options:
+      --all           Clean all registry caches
+      --old-versions  Remove old skill versions
+  -k, --keep <KEEP>   Keep N most recent versions [default: 5]
+      --dry-run       Preview what would be removed
+  -y, --yes           Skip confirmation
+      --stats         Show cache statistics
+  -v, --verbose       Show verbose output
+  -h, --help          Print help
+
+## skm clean reset
+
+Reset SKM to clean state
+
+Usage: skm clean reset [OPTIONS]
+
+Options:
+      --config                   Reset configuration files
+      --cache                    Clear all caches
+      --symlinks                 Remove all symlinks
+      --all                      Reset everything
+      --backup                   Create backup before reset
+      --backup-dir <BACKUP_DIR>  Directory to store backups
+      --dry-run                  Preview what would be removed
+  -y, --yes                      Skip confirmation
+  -h, --help                     Print help
+
+## skm config
+
+Manage SKM configuration
+
+Usage: skm config <COMMAND>
+
+Commands:
+  get       Get a configuration value
+  set       Set a configuration value
+  unset     Remove a configuration value
+  show      Show full configuration
+  reset     Reset configuration to defaults
+  validate  Validate configuration files
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help
+
+## skm config get
+
+Get a configuration value
+
+Usage: skm config get [OPTIONS] <KEY>
+
+Arguments:
+  <KEY>  Configuration key (supports dot notation)
+
+Options:
+  -g, --global   Get from global configuration
+  -p, --project  Get from project configuration
+      --json     Output in JSON format
+      --default  Show default value if key not found
+  -h, --help     Print help
+
+## skm config set
+
+Set a configuration value
+
+Usage: skm config set [OPTIONS] <KEY> <VALUE>
+
+Arguments:
+  <KEY>    Configuration key
+  <VALUE>  Value to set
+
+Options:
+  -g, --global   Set in global configuration
+  -p, --project  Set in project configuration
+      --json     Parse value as JSON
+      --dry-run  Preview changes without applying
+  -y, --yes      Skip confirmation for sensitive changes
+  -h, --help     Print help
+
+## skm config unset
+
+Remove a configuration value
+
+Usage: skm config unset [OPTIONS] <KEY>
+
+Arguments:
+  <KEY>  Configuration key to remove
+
+Options:
+  -g, --global   Unset from global configuration
+  -p, --project  Unset from project configuration
+      --dry-run  Preview changes without applying
+  -y, --yes      Skip confirmation
+  -h, --help     Print help
+
+## skm config show
+
+Show full configuration
+
+Usage: skm config show [OPTIONS]
+
+Options:
+  -g, --global   Show global configuration
+  -p, --project  Show project configuration
+      --all      Show both configurations
+      --json     Output in JSON format
+      --yaml     Output in YAML format
+      --paths    Show configuration file paths
+  -h, --help     Print help
+
+## skm config reset
+
+Reset configuration to defaults
+
+Usage: skm config reset [OPTIONS]
+
+Options:
+  -g, --global   Reset global configuration
+  -p, --project  Reset project configuration
+  -y, --yes      Skip confirmation
+      --dry-run  Preview what would be reset
+  -h, --help     Print help
+
+## skm config validate
+
+Validate configuration files
+
+Usage: skm config validate [OPTIONS]
+
+Options:
+  -g, --global   Validate global configuration
+  -p, --project  Validate project configuration
+      --all      Validate all configurations
+      --strict   Perform strict validation
+  -h, --help     Print help
+
+## skm registry
+
+Manage skill registries
+
+Usage: skm registry <COMMAND>
+
+Commands:
+  add      Add a new skill registry
+  remove   Remove a skill registry
+  list     List all configured registries
+  update   Update a registry cache
+  default  Set the default registry
+  info     Show detailed registry information
+  help     Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help
+
+## skm registry add
+
+Add a new skill registry
+
+Usage: skm registry add [OPTIONS] <NAME> <URL>
+
+Arguments:
+  <NAME>  Name for the new registry
+  <URL>   Git URL of the registry
+
+Options:
+      --set-default    Set this registry as the default
+      --skip-validate  Skip URL validation
+      --json           Output in JSON format
+  -h, --help           Print help
+
+## skm registry remove
+
+Remove a skill registry
+
+Usage: skm registry remove [OPTIONS] <NAME>
+
+Arguments:
+  <NAME>  Name of the registry to remove
+
+Options:
+  -f, --force    Force removal even if it's the default
+  -y, --yes      Skip confirmation
+      --dry-run  Preview what would be removed
+  -h, --help     Print help
+
+## skm registry list
+
+List all configured registries
+
+Usage: skm registry list [OPTIONS]
+
+Options:
+      --json     Output in JSON format
+  -v, --verbose  Show detailed information
+  -h, --help     Print help
+
+## skm registry update
+
+Update a registry cache
+
+Usage: skm registry update [OPTIONS] [NAME]
+
+Arguments:
+  [NAME]  Name of the registry to update
+
+Options:
+      --all    Update all registries
+      --force  Force update even if already up-to-date
+  -h, --help   Print help
+
+## skm registry default
+
+Set the default registry
+
+Usage: skm registry default <NAME>
+
+Arguments:
+  <NAME>  Name of the registry to set as default
+
+Options:
+  -h, --help  Print help
+
+## skm registry info
+
+Show detailed registry information
+
+Usage: skm registry info [OPTIONS] <NAME>
+
+Arguments:
+  <NAME>  Name of the registry
+
+Options:
+      --json  Output in JSON format
+  -h, --help  Print help
+
+## skm dev
+
+Manage local development skills
+
+Usage: skm dev <COMMAND>
+
+Commands:
+  link    Link a local directory as a development skill
+  unlink  Unlink a development skill
+  list    List all linked development skills
+  show    Show information about a development skill
+  mode    Toggle development mode
+  help    Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help  Print help
+
+## skm dev link
+
+Link a local directory as a development skill
+
+Usage: skm dev link [OPTIONS] <PATH>
+
+Arguments:
+  <PATH>  Path to local skill directory
+
+Options:
+  -n, --name <NAME>      Skill name (defaults to directory name)
+  -s, --source <SOURCE>  Registry source to override
+  -g, --global           Link globally instead of in current project
+      --all-agents       Link to all available agents
+      --agent <AGENT>    Link to specific agent(s)
+  -f, --force            Override existing skill without warning
+  -v, --verbose          Show verbose output
+  -h, --help             Print help
+
+## skm dev unlink
+
+Unlink a development skill
+
+Usage: skm dev unlink [OPTIONS] <SKILL_NAME>
+
+Arguments:
+  <SKILL_NAME>  Name of the development skill to unlink
+
+Options:
+  -g, --global   Unlink from global scope
+  -y, --yes      Skip confirmation
+  -v, --verbose  Show verbose output
+  -h, --help     Print help
+
+## skm dev list
+
+List all linked development skills
+
+Usage: skm dev list [OPTIONS]
+
+Options:
+  -g, --global  Show global development skills
+      --all     Show both project and global
+      --json    Output in JSON format
+      --paths   Show full paths
+  -h, --help    Print help
+
+## skm dev show
+
+Show information about a development skill
+
+Usage: skm dev show [OPTIONS] <SKILL_NAME>
+
+Arguments:
+  <SKILL_NAME>  Name of the development skill
+
+Options:
+  -g, --global  Show from global scope
+      --json    Output in JSON format
+  -h, --help    Print help
+
+## skm dev mode
+
+Toggle development mode
+
+Usage: skm dev mode [OPTIONS] <ACTION>
+
+Arguments:
+  <ACTION>  Action: on, off, or status
+
+Options:
+  -g, --global  Apply to global configuration
+  -h, --help    Print help

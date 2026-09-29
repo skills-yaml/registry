@@ -108,3 +108,16 @@ Content:
 
 Recorded in `decisions.md` that namespace-specific documentation moves to
 `docs/namespaces/`, starting with `docs/namespaces/workspace.md`.
+
+## 2026-09-26 - Record Upstream Release Docs Review Decision
+
+- Type: decision
+- Source: user
+- Confidence: high
+- Review: none
+- Supersedes: none
+
+Content:
+
+Recorded in `decisions.md` that upstream production releases open a
+`docs-review` issue through the `Upstream Release` workflow.

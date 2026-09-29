@@ -1,0 +1,155 @@
+name: Upstream Release
+
+# Opens one "Docs review" issue per production release of skm or Workspace, so
+# the registry and site documentation are checked against what users can
+# install. See docs/specs for the design and docs/upstream/ for the snapshot.
+
+on:
+  # skm's release workflow sends this after a production release. The payload
+  # only wakes this workflow; the release itself is read from skm-release.json.
+  #   gh api repos/skills-yaml/registry/dispatches -f event_type=skm-released
+  repository_dispatch:
+    types: [skm-released]
+  # Fallback for a missed or unconfigured dispatch.
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+  # A Workspace release becomes installable when its manifest reaches main.
+  push:
+    branches: [main]
+    paths: [skills/workspace/manifest.yaml]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: upstream-release-${{ github.event_name == 'push' && 'workspace' || 'skm' }}
+  cancel-in-progress: false
+
+env:
+  LABEL: docs-review
+
+jobs:
+  skm:
+    name: skm production release
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Read the production release
+        id: release
+        run: |
+          mkdir -p "$RUNNER_TEMP/skm"
+          cd "$RUNNER_TEMP/skm"
+          gh release download prod-latest --repo skills-yaml/skm \
+            --pattern skm-release.json --pattern skm-linux-x86_64.tar.gz
+          version="$(jq -r .version skm-release.json)"
+          commit="$(jq -r .commit skm-release.json)"
+          expected="$(jq -r '.assets["skm-linux-x86_64.tar.gz"].sha256' skm-release.json)"
+          test "$(jq -r .channel skm-release.json)" = prod
+          echo "$expected  skm-linux-x86_64.tar.gz" | sha256sum --check --strict
+          tar -xzf skm-linux-x86_64.tar.gz skm
+          test "$(SKM_NO_UPDATE_CHECK=1 ./skm --version)" = "skm $version"
+          {
+            echo "version=$version"
+            echo "commit=$commit"
+            echo "title=Docs review: skm $version"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Skip a release that already has an issue
+        id: existing
+        env:
+          TITLE: ${{ steps.release.outputs.title }}
+        run: |
+          url="$(gh issue list --repo "$GITHUB_REPOSITORY" --state all --limit 100 \
+            --search "\"$TITLE\" in:title" --json title,url \
+            | jq -r --arg t "$TITLE" '[.[] | select(.title == $t)][0].url // empty')"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          if [ -n "$url" ]; then echo "Already tracked: $url" >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Capture the released command help
+        if: steps.existing.outputs.url == ''
+        run: python3 -B scripts/upstream_release.py skm-cli --binary "$RUNNER_TEMP/skm/skm" > "$RUNNER_TEMP/skm-cli.txt"
+
+      - name: Upload the captured help
+        if: steps.existing.outputs.url == ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: skm-cli.txt
+          path: ${{ runner.temp }}/skm-cli.txt
+          if-no-files-found: error
+
+      - name: Open the tracking issue
+        if: steps.existing.outputs.url == ''
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          COMMIT: ${{ steps.release.outputs.commit }}
+        run: |
+          python3 -B scripts/upstream_release.py skm-issue \
+            --version "$VERSION" --commit "$COMMIT" \
+            --release-url "https://github.com/skills-yaml/skm/releases/tag/prod-latest" \
+            --captured "$RUNNER_TEMP/skm-cli.txt" --run-url "$RUN_URL" > "$RUNNER_TEMP/issue.json"
+          gh label create "$LABEL" --repo "$GITHUB_REPOSITORY" --color 0e8a16 \
+            --description "Documentation review after an upstream release" 2>/dev/null || true
+          jq -r .body "$RUNNER_TEMP/issue.json" > "$RUNNER_TEMP/body.md"
+          url="$(gh issue create --repo "$GITHUB_REPOSITORY" --label "$LABEL" \
+            --title "$(jq -r .title "$RUNNER_TEMP/issue.json")" --body-file "$RUNNER_TEMP/body.md")"
+          echo "Opened $url" >> "$GITHUB_STEP_SUMMARY"
+
+  workspace:
+    name: Workspace toolkit release
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Compare the Workspace manifest
+        id: compare
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          git show "$BEFORE:skills/workspace/manifest.yaml" > "$RUNNER_TEMP/old.yaml" 2>/dev/null || : > "$RUNNER_TEMP/old.yaml"
+          python3 -B scripts/upstream_release.py workspace \
+            --old "$RUNNER_TEMP/old.yaml" --new skills/workspace/manifest.yaml \
+            --commit "$GITHUB_SHA" --repository "$GITHUB_REPOSITORY" > "$RUNNER_TEMP/issue.json"
+          if [ -s "$RUNNER_TEMP/issue.json" ]; then
+            echo "title=$(jq -r .title "$RUNNER_TEMP/issue.json")" >> "$GITHUB_OUTPUT"
+          else
+            echo "The toolkit version did not change." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Open the tracking issue
+        if: steps.compare.outputs.title != ''
+        env:
+          TITLE: ${{ steps.compare.outputs.title }}
+        run: |
+          existing="$(gh issue list --repo "$GITHUB_REPOSITORY" --state all --limit 100 \
+            --search "\"$TITLE\" in:title" --json title,url \
+            | jq -r --arg t "$TITLE" '[.[] | select(.title == $t)][0].url // empty')"
+          if [ -n "$existing" ]; then
+            echo "Already tracked: $existing" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          gh label create "$LABEL" --repo "$GITHUB_REPOSITORY" --color 0e8a16 \
+            --description "Documentation review after an upstream release" 2>/dev/null || true
+          jq -r .body "$RUNNER_TEMP/issue.json" > "$RUNNER_TEMP/body.md"
+          url="$(gh issue create --repo "$GITHUB_REPOSITORY" --label "$LABEL" \
+            --title "$TITLE" --body-file "$RUNNER_TEMP/body.md")"
+          echo "Opened $url" >> "$GITHUB_STEP_SUMMARY"
