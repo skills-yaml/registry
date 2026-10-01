@@ -1,0 +1,6 @@
+interface:
+  display_name: "wk.spec"
+  short_description: "Create a lifecycle-managed development spec"
+  default_prompt: "Use $wk-spec to turn this accepted request into a complete lifecycle-managed specification."
+policy:
+  allow_implicit_invocation: false
