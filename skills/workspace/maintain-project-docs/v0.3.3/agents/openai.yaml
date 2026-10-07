@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Project Docs"
+  short_description: "Create and maintain project documentation"
+  default_prompt: "Use $maintain-project-docs to update the project documentation and validate the result."
