@@ -2,15 +2,16 @@
 name: analyze-repository
 description: Analyze a repository without modifying it, producing an evidence-backed account of its purpose, structure, technology stack, development lifecycle, policies, documentation state, active work, risks, and evidence gaps. Use when a repository needs assessment, onboarding context, or current-state discovery before planning work.
 metadata:
-  skm-version: "0.3.3"
+  skm-version: "0.4.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/analyze-repository"
-  skm-source-integrity: "sha256:7dd4583b5d5e6c48477addead52435548fab6dbfd6a3c8565d5f3930265d9ddf"
-  workspace-toolkit-version: "0.8.0"
+  skm-source-integrity: "sha256:befc8cd24da5fffed829dd5ebda8dab3dd6fc15389e7e04819b062119c839036"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/design-domain-model@0.1.0"
 ---
 
 # Analyze Repository
@@ -52,6 +53,15 @@ Include concise evidence using repository-relative paths, identify commands
 that were actually run, and state limitations. Recommend next actions only
 when they follow directly from the evidence. Do not edit files, create specs,
 or persist memory while operating in this skill.
+
+## Assess Existing Modeling Evidence
+
+When domain/data/schema architecture is relevant, identify existing glossaries,
+context/ownership decisions, logical models, contracts, migrations and their
+consumers. Distinguish observed structure from intended business behavior; names
+and absent diagrams are not evidence of correctness or nonconformance. For a
+focused modeling assessment use $design-domain-model in read-only assess mode.
+Do not create design artifacts or infer unapproved domain rules during analysis.
 
 ## Pinned Lifecycle Assessment
 
