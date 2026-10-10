@@ -2,15 +2,16 @@
 name: plan-implementation
 description: Build an ordered, evidence-backed implementation plan from an approved development specification. Use when a feature, migration, or refactor has an active spec and needs dependency ordering, concrete file areas, validation strategy, compatibility handling, and completion gates before code changes begin.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/plan-implementation"
-  skm-source-integrity: "sha256:a64816d1907513d12e5e82c9825d7009124ada8982edfbce1a4010e79f0aa24b"
-  workspace-toolkit-version: "0.8.0"
+  skm-source-integrity: "sha256:845bdf920eb6040fd71da863b6241174bbf2400fba25f25bbbf227aa452ec7c2"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/design-domain-model@0.1.0"
 ---
 
 # Plan Implementation
@@ -80,6 +81,16 @@ Call out critical-path decisions, parallel-safe work, known risks, and any
 acceptance criterion not covered by a planned validation. Persist the plan only
 when requested or required by repository policy. Do not modify implementation
 files while operating in a planning-only role.
+
+## Domain and Schema Design Handoff
+
+For model/schema changes, consume the evidence from $design-domain-model or
+equivalent existing artifacts. Resolve material domain decisions before dependent
+implementation; order invariant enforcement, storage/conversion changes, public
+contracts and consumer migration by their actual dependencies. Preserve engine
+policy and supported reader/writer versions. Select changed-component checks
+first, then affected consumers; schema parsing alone cannot verify business rules
+or data restoration. A small change can use a concise model delta.
 
 ## Pinned SDLC Contract
 

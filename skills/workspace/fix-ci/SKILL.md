@@ -2,12 +2,12 @@
 name: fix-ci
 description: Diagnose and fix failing continuous-integration checks with the smallest verified change. Use when CI or pull-request checks are failing and the user authorizes implementation, including log inspection, local reproduction, regression coverage, and rerun monitoring.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.4.4"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/fix-ci"
   skm-source-integrity: "sha256:51da73b7aa50cd10ef1d40db13bf93cc748f24af34e2b4dc818098edb0b42d64"
-  workspace-toolkit-version: "0.8.0"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

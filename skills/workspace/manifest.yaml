@@ -1,32 +1,34 @@
 schema_version: 2
 namespace: workspace
-toolkit_version: "0.8.0"
+toolkit_version: "0.9.0"
 source_repository: "https://github.com/skills-yaml/workspace.git"
-source_revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+source_revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
 workspace_docs_compatibility: "7.x"
 minimum_skm_version: "0.7.0"
 skm_adapter_compatibility: "2.x"
 packages:
-  address-review-feedback: "0.4.3"
-  adopt-workspace-structure: "0.7.0"
-  analyze-repository: "0.3.3"
-  coordinate-multi-agent-development: "0.2.3"
-  fix-bug: "0.4.3"
-  fix-ci: "0.4.3"
-  implement-spec: "0.4.3"
-  maintain-project-docs: "0.3.3"
-  monitor-ci: "0.4.3"
-  plan-implementation: "0.4.3"
-  review-changes: "0.4.3"
-  review-security: "0.4.3"
-  wk-adopt: "0.3.3"
-  wk-analyze: "0.3.3"
-  wk-deliver: "0.3.3"
-  wk-document: "0.3.3"
-  wk-plan: "0.3.3"
-  wk-review: "0.3.3"
-  wk-spec: "0.3.3"
-  write-spec: "0.4.3"
+  address-review-feedback: "0.4.4"
+  adopt-workspace-structure: "0.7.1"
+  analyze-repository: "0.4.0"
+  coordinate-multi-agent-development: "0.2.4"
+  design-domain-model: "0.1.0"
+  fix-bug: "0.4.4"
+  fix-ci: "0.4.4"
+  implement-spec: "0.5.0"
+  maintain-project-docs: "0.3.4"
+  monitor-ci: "0.4.4"
+  plan-implementation: "0.5.0"
+  report-repository-status: "0.1.0"
+  review-changes: "0.5.0"
+  review-security: "0.5.0"
+  wk-adopt: "0.3.4"
+  wk-analyze: "0.4.0"
+  wk-deliver: "0.4.0"
+  wk-document: "0.3.4"
+  wk-plan: "0.4.0"
+  wk-review: "0.4.0"
+  wk-spec: "0.4.0"
+  write-spec: "0.5.0"
 bundles:
   all-workspace-skills:
     packages:
@@ -34,12 +36,14 @@ bundles:
       - adopt-workspace-structure
       - analyze-repository
       - coordinate-multi-agent-development
+      - design-domain-model
       - fix-bug
       - fix-ci
       - implement-spec
       - maintain-project-docs
       - monitor-ci
       - plan-implementation
+      - report-repository-status
       - review-changes
       - review-security
       - wk-adopt

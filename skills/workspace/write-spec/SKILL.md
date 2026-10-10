@@ -2,15 +2,16 @@
 name: write-spec
 description: Turn an accepted problem or feature request into a lifecycle-managed development specification. Use when work needs explicit scope, acceptance criteria, affected areas, validation gates, risks, migration considerations, and memory impact before implementation begins.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:7a7ee0003131620adc3aa3c072781de723d0aba86cc3172d1d0314c3a8afeaac"
-  workspace-toolkit-version: "0.8.0"
+  skm-source-integrity: "sha256:138df483b94ee72ba9652fa5428acea7513bf1a837ef4d0ee63140e484491246"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/design-domain-model@0.1.0"
 ---
 
 # Write Spec
@@ -107,6 +108,16 @@ by the pinned standard and register member specs in `workspace/releases.json`.
 Classify major, minor, patch, or justified none; declare a shared reservation
 with baseline, target, owner, timing, and rationale. Check occupied versions
 before proposing a target. Do not apply a development bump to a backlog idea.
+
+## Domain and Schema Design
+
+When requirements change business concepts, lifecycle/invariants, data ownership
+or database/API/event contracts, use $design-domain-model in design mode to
+produce or reuse proportionate modeling evidence. Carry scenario/invariant IDs,
+representation mappings, affected consumers and material questions into the spec.
+A clear field/CRUD change needs a model delta, not a mandatory DDD workshop.
+Keep unresolved material business rules explicit; planning does not authorize
+application/schema implementation.
 
 ## Pinned SDLC Contract
 

@@ -2,15 +2,16 @@
 name: implement-spec
 description: Implement an approved development specification through validated, reviewable changes. Use when a spec is active in development and the request authorizes code or documentation changes, including required tests, compatibility work, lifecycle reconciliation, and memory-impact completion.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/implement-spec"
-  skm-source-integrity: "sha256:9c090ab5d7b77ee865e0d566e5f42b77af25719091288bac650a0796181b6012"
-  workspace-toolkit-version: "0.8.0"
+  skm-source-integrity: "sha256:eb4dd724c7289e659fa9cddf77292e1c98e7d4b74e7e907f416310f339c3b89a"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/design-domain-model@0.1.0"
 ---
 
 # Implement Spec
@@ -113,6 +114,16 @@ merge timing, require the owner to apply it before integration artifacts are
 built. Reuse an already-applied shared reservation. Recheck occupancy and
 baseline at handoff, run `task versions:check`, and reconcile member paths and
 release evidence with lifecycle changes.
+
+## Implement Modeling Decisions
+
+For domain/schema scope, use $design-domain-model to inspect the approved model
+or its delta before changing representations. Preserve invariant ownership,
+trusted tenant context, conversions and supported consumer behavior. Update
+affected mappings and tests with implementation; missing/material design choices
+return to planning rather than being silently inferred. Storage, public schemas
+and internal objects may differ deliberately. Execute migrations only within the
+existing authorization and deployment boundaries.
 
 ## Pinned SDLC Contract
 

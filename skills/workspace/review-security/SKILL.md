@@ -2,15 +2,16 @@
 name: review-security
 description: Perform a threat-focused review of code, configuration, dependencies, or proposed changes. Use when a change affects authentication, authorization, secrets, untrusted input, file or network access, supply chain, execution boundaries, sensitive data, or when the user requests a security review.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/review-security"
-  skm-source-integrity: "sha256:9a54f33190ae164bba7ec594730d1ead17cdb9d21e24aa0f2eae743ddc3566a4"
-  workspace-toolkit-version: "0.8.0"
+  skm-source-integrity: "sha256:5a593603649255721abc89a4b723594ab6bd18d24f5699e3e1d49bf6b3c32ae1"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/design-domain-model@0.1.0"
 ---
 
 # Review Security
@@ -71,6 +72,15 @@ separate approval pause. Report findings through the repository's configured
 review surfaces; do not disclose them outside that workflow. Credential or
 access changes that are destructive in production require the scoped human
 approval defined by the SDLC policy.
+
+## Review Model Security Boundaries
+
+For model/schema changes, use $design-domain-model in read-only review mode to
+trace tenant/resource ownership, trusted versus client-derived context, sensitive
+field visibility and deletion/retention propagation. Verify actual client/server
+access paths and enforcement; authentication, valid IDs and a tenant field do
+not establish authorization. Assess counterexamples and affected consumers while
+preserving existing scope and instruction/deployment approvals.
 
 ## Pinned Review and Evidence
 
