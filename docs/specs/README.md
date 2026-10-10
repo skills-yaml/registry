@@ -27,11 +27,12 @@ release through `main`; record the integration and release events in the spec.
 
 ## Active Specs
 
-- [Publish Workspace Toolkit 0.9.0](development/workspace-toolkit-0-9-publication.md)
 
 - [Open A Docs Review For Each Upstream Release](development/notify-docs-on-upstream-release.md)
 
 ## Completed Specs
+
+- [Publish Workspace Toolkit 0.9.0](done/workspace-toolkit-0-9-publication.md)
 
 - [Publish Workspace Skill Bundles](done/publish-workspace-skill-bundles.md)
 - [Generate Namespace Manifests](done/generate-namespace-manifests.md)
