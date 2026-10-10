@@ -49,5 +49,9 @@ user acceptance decision are maintained in the companion Workspace records.
 
 ## Delivery Evidence
 
-Pending exact source main merge, publisher proposal, independent review,
-final native gates, actual develop/main integration and live verification.
+Workspace PR #91 confirmed source main
+76bbf51eeb27c663755d5494649b2a2b8b5dd0c5 with the reviewed/tested source tree.
+Publisher run 38091413165 succeeded and opened Registry PR #50; it is retargeted
+to develop before integration. Generated manifest pins the exact source main
+revision and 22 package versions. Independent review, final native gates,
+actual develop/main integration and live verification remain pending.
