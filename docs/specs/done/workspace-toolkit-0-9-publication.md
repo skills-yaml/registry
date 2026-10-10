@@ -1,6 +1,6 @@
 # Publish Workspace Toolkit 0.9.0
 
-State: `development`
+State: `done`
 
 ## Scope and Source
 
@@ -55,3 +55,45 @@ Publisher run 38091413165 succeeded and opened Registry PR #50; it is retargeted
 to develop before integration. Generated manifest pins the exact source main
 revision and 22 package versions. Independent review, final native gates,
 actual develop/main integration and live verification remain pending.
+
+## Confirmed Production and Acceptance
+
+Independent exact review approved candidate
+d2b050905d8135c915a527b72827a7b9a1c7dfd6 and renewed approval for production
+head da868a9cd4518570914fe6cce6d249dcef7f170f. All 22 packages and 140 canonical
+files match upstream source, metadata, dependencies, integrity and modes; all
+184 previously published exact trees are unchanged. Eighteen inherited EOF
+warnings are accepted only for historical reference bytes identical to canonical
+source and published adoption 0.7.0; new documentation has no such exception.
+The 110 unchanged support files were checked against published bytes rather
+than exhaustively re-audited; no payload was executed during safety review.
+
+Final native task check/test passed with 27 packages, 206 exact releases and
+41 tests. PR CI 38091571139 passed. PR #50 integrated develop at
+da868a9cd4518570914fe6cce6d249dcef7f170f with proposed/actual tree equal to
+approved 81f785dcbe1c46366960fb67324c5baa0e6adbab. Renewed exact review,
+develop CI 38091721068 and production PR CI 38091741086 passed. PR #51 released
+main ef215c1e80ee006a8034b74f2bd87fda641f7bd8 on 2026-10-10 with the same
+approved tree. Production CI 38091816374 passed.
+
+The live manifest selects toolkit 0.9.0 and exact canonical source main
+76bbf51eeb27c663755d5494649b2a2b8b5dd0c5. Released SKM 0.9.0 binary/source and
+asset checksum were verified; it installed all 22 exact pins, passed check,
+matched 140 installed payload files and created 44 Codex/Cursor links. Its
+repeat plan reports zero actions. An initial origin mismatch stopped safely
+before installation; a fresh project-local registry alias resolved the test
+setup without clearing or modifying the existing registry cache.
+
+Website deployment 38091817509 passed from unchanged website source. Live JSON,
+catalog, homepage and both metapackage pages show all 22 Workspace pins; all
+27 catalog, six preview and 24 member GitHub links resolve to released paths.
+Stable GitHub release workspace-toolkit-v0.9.0 points to the exact canonical
+Workspace main revision. Comparative modeling improvement remains unproven;
+installation/resource correctness does not establish native agent execution,
+deployed schemas or universal performance gains. All acceptance criteria pass
+within these stated bounds. Memory impact: none for Registry policy; companion
+Workspace records preserve verified release facts and the user's decision.
+
+These record-only completion changes follow the normal develop/main branch
+model with independent exact review and native gates/CI before delivery; they
+never change published package bytes or canonical provenance.
