@@ -2,16 +2,16 @@
 name: wk-deliver
 description: Run the wk.deliver lifecycle facade to implement, validate, review, remediate, and advance an approved development specification through the repository's authorized delivery workflow. Invoke explicitly for end-to-end delivery rather than read-only review.
 metadata:
-  skm-version: "0.3.3"
+  skm-version: "0.4.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
   skm-source-integrity: "sha256:7602b7dd38f47006a7b7ef25afcc73a6c3922fe8e73e6949069d6e247c9920ad"
-  workspace-toolkit-version: "0.8.0"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.4.3, workspace/plan-implementation@0.4.3, workspace/implement-spec@0.4.3, workspace/review-changes@0.4.3, workspace/review-security@0.4.3, workspace/monitor-ci@0.4.3, workspace/fix-ci@0.4.3, workspace/address-review-feedback@0.4.3, workspace/coordinate-multi-agent-development@0.2.3"
+  skm-dependencies: "workspace/write-spec@0.5.0, workspace/plan-implementation@0.5.0, workspace/implement-spec@0.5.0, workspace/review-changes@0.5.0, workspace/review-security@0.5.0, workspace/monitor-ci@0.4.4, workspace/fix-ci@0.4.4, workspace/address-review-feedback@0.4.4, workspace/coordinate-multi-agent-development@0.2.4"
 ---
 
 # wk.deliver

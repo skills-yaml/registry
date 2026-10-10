@@ -2,15 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "e205b8c9e4f092adb9b20aaa129e644d858a25ca"
+  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
   skm-source-path: "workspace/instructions/skills/review-changes"
-  skm-source-integrity: "sha256:df73506c74b0b0ebde8247475aa0610657b77379575dfdaf0f8dee728151ad1f"
-  workspace-toolkit-version: "0.8.0"
+  skm-source-integrity: "sha256:f735d057f83ddfeaaa2796ec548e9a28d644950bc6cb2a5651ece2002eb822ae"
+  workspace-toolkit-version: "0.9.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/design-domain-model@0.1.0"
 ---
 
 # Review Changes
@@ -74,6 +75,16 @@ from a merely ready candidate, and separate publication readiness from actual
 publication. Final full gates may still be pending during review; report them
 as pending rather than require premature broad runs. Relevant edits invalidate
 affected review; rejected findings require reviewer agreement.
+
+## Review Domain and Schema Changes
+
+When a change affects model behavior, persistence or API/event contracts, use
+$design-domain-model in read-only review mode or assess equivalent model evidence.
+Trace critical invariants through enforcement and converters to affected consumers.
+Check races/retries, missing/null/default semantics, visibility, supported old/new
+readers/writers and migration recovery limits. Require relevant behavioral and
+consumer evidence; valid schemas or attractive diagrams do not establish those
+claims. Avoid unrelated modeling requirements for a clear local CRUD delta.
 
 ## Pinned SDLC Contract
 

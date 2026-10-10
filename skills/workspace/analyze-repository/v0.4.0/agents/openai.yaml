@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Repository"
+  short_description: "Assess repository structure and lifecycle"
+  default_prompt: "Use $analyze-repository to produce a read-only, evidence-backed analysis of this repository."

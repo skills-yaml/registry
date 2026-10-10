@@ -7,7 +7,7 @@ nothing in skm or `skills.yaml` requires them.
 
 ## Packages
 
-The namespace holds 20 independently versioned packages. Focused packages can
+The namespace holds 22 independently versioned packages. Focused packages can
 be installed directly. The seven public lifecycle facades preserve the
 conceptual `wk.*` vocabulary while using portable kebab-case package and
 invocation names:
@@ -21,6 +21,12 @@ invocation names:
 | `wk.plan` | `workspace/wk-plan` | `$wk-plan` |
 | `wk.deliver` | `workspace/wk-deliver` | `$wk-deliver` |
 | `wk.review` | `workspace/wk-review` | `$wk-review` |
+
+The 0.9.0 release adds `workspace/design-domain-model` for domain, data-model
+and schema design, and `workspace/report-repository-status` for read-only local
+changes, worktrees, branches, linked specs and work-disposition reporting. Both
+new packages start at 0.1.0. Modeling correctness is verified on bounded synthetic
+cases; comparative improvement remains unproven.
 
 A facade declares exact dependencies on the focused skills it drives. For
 example, `workspace/wk-deliver` depends on its planning, implementation,
