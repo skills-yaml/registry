@@ -54,5 +54,9 @@ remain outside tracked records.
 
 ## Evidence
 
-Pending approved upstream source main, publisher, exact review/final gates,
-actual develop/main publication and live verification.
+Workspace PR #94 released canonical main
+671f367253976004e2fe4964b8d55e65aadbd310 with exact reviewed/tested tree. Publisher
+38877340916 passed and opened PR #55, retargeted to develop before integration.
+The generated release identifies that exact source and22 pins. Independent
+review/final native gates, actual develop/main publication and live verification
+remain pending.
