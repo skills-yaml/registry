@@ -2,16 +2,16 @@
 name: write-spec
 description: Turn an accepted problem or feature request into a lifecycle-managed development specification. Use when work needs explicit scope, acceptance criteria, affected areas, validation gates, risks, migration considerations, and memory impact before implementation begins.
 metadata:
-  skm-version: "0.5.0"
+  skm-version: "0.5.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
+  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
   skm-source-path: "workspace/instructions/skills/write-spec"
   skm-source-integrity: "sha256:138df483b94ee72ba9652fa5428acea7513bf1a837ef4d0ee63140e484491246"
-  workspace-toolkit-version: "0.9.0"
+  workspace-toolkit-version: "0.10.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.0"
+  skm-dependencies: "workspace/design-domain-model@0.1.1"
 ---
 
 # Write Spec

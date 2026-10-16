@@ -2,16 +2,16 @@
 name: analyze-repository
 description: Analyze a repository without modifying it, producing an evidence-backed account of its purpose, structure, technology stack, development lifecycle, policies, documentation state, active work, risks, and evidence gaps. Use when a repository needs assessment, onboarding context, or current-state discovery before planning work.
 metadata:
-  skm-version: "0.4.0"
+  skm-version: "0.4.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
+  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
   skm-source-path: "workspace/instructions/skills/analyze-repository"
   skm-source-integrity: "sha256:befc8cd24da5fffed829dd5ebda8dab3dd6fc15389e7e04819b062119c839036"
-  workspace-toolkit-version: "0.9.0"
+  workspace-toolkit-version: "0.10.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.0"
+  skm-dependencies: "workspace/design-domain-model@0.1.1"
 ---
 
 # Analyze Repository

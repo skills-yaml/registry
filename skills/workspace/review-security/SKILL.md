@@ -2,16 +2,16 @@
 name: review-security
 description: Perform a threat-focused review of code, configuration, dependencies, or proposed changes. Use when a change affects authentication, authorization, secrets, untrusted input, file or network access, supply chain, execution boundaries, sensitive data, or when the user requests a security review.
 metadata:
-  skm-version: "0.5.0"
+  skm-version: "0.5.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
+  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
   skm-source-path: "workspace/instructions/skills/review-security"
   skm-source-integrity: "sha256:5a593603649255721abc89a4b723594ab6bd18d24f5699e3e1d49bf6b3c32ae1"
-  workspace-toolkit-version: "0.9.0"
+  workspace-toolkit-version: "0.10.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.0"
+  skm-dependencies: "workspace/design-domain-model@0.1.1"
 ---
 
 # Review Security

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adopt Workspace Structure"
+  short_description: "Guide adoption and architecture decisions"
+  default_prompt: "Use $adopt-workspace-structure to guide this repository’s adoption choices, explain architecture and technology tradeoffs, and capture agreed deferred improvements in specs."
