@@ -67,3 +67,12 @@ The Workspace packager generates the manifest and every package in this
 namespace. Do not hand-edit generated root copies or exact version directories.
 `task manifest` leaves this namespace unchanged, and the registry validator
 checks its provenance fields.
+
+## Guided Adoption
+
+Toolkit 0.10.0 updates adoption to 0.8.0 and wk-adopt to 0.4.0. Adoption explains
+observed architecture/technology evidence and tradeoffs, asks only material
+unanswered choices, and records agreed deferred improvements as actionable,
+linked specs. Supplied answers are reused. Optional deferral never waives required
+adoption gates, changes assessment-only scope or authorizes runtime refactors.
+The complete 22-package bundle remains available; Workspace Docs stays 7.0.0.

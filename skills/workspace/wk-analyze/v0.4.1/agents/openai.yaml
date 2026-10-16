@@ -1,0 +1,6 @@
+interface:
+  display_name: "wk.analyze"
+  short_description: "Analyze repository structure and lifecycle"
+  default_prompt: "Use $wk-analyze to perform a read-only, evidence-backed analysis of this repository."
+policy:
+  allow_implicit_invocation: false
