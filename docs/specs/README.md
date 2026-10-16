@@ -27,12 +27,13 @@ release through `main`; record the integration and release events in the spec.
 
 ## Active Specs
 
-- [Publish Guided Adoption in Toolkit 0.10.0](development/workspace-toolkit-0-10-publication.md)
 
 
 - [Open A Docs Review For Each Upstream Release](development/notify-docs-on-upstream-release.md)
 
 ## Completed Specs
+
+- [Publish Guided Adoption in Toolkit 0.10.0](done/workspace-toolkit-0-10-publication.md)
 
 - [Publish Workspace Toolkit 0.9.0](done/workspace-toolkit-0-9-publication.md)
 
