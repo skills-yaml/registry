@@ -2,12 +2,12 @@
 name: report-repository-status
 description: Report repo status, project status or spec status, including local changes, worktrees, local/remote branches and linked specs. Recommend merge, discard candidate or keep/finish from evidence; reporting stays read-only.
 metadata:
-  skm-version: "0.1.0"
+  skm-version: "0.1.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
+  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
   skm-source-path: "workspace/instructions/skills/report-repository-status"
   skm-source-integrity: "sha256:2dba6f5340850ce9f6205ebf6d19e7fba4ed3eac227fb00a68a0a20e18fc75e9"
-  workspace-toolkit-version: "0.9.0"
+  workspace-toolkit-version: "0.10.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

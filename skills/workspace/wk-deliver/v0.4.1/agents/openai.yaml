@@ -1,0 +1,6 @@
+interface:
+  display_name: "wk.deliver"
+  short_description: "Deliver an approved spec end to end"
+  default_prompt: "Use $wk-deliver to implement, validate, review, remediate, and deliver the approved specification."
+policy:
+  allow_implicit_invocation: false

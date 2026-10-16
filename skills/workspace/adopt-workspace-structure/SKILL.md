@@ -1,13 +1,13 @@
 ---
 name: adopt-workspace-structure
-description: Adopt, upgrade, repair, or assess the workspace-docs repository structure and its agent governance. Use when an agent must initialize workspace documentation in a project, migrate workspace-docs 1.x or 2.0 layouts to a newer version, update an existing pinned version, repair a partial or mixed adoption, check conformance and implement requested fixes, or complete and validate an in-progress workspace migration.
+description: Adopt, upgrade, repair, or assess workspace documentation with guided architecture and technology decisions. Use for workspace initialization, version migration, conformance repair, or adoption planning; involve the user in material choices and turn agreed deferred improvements into actionable specs.
 metadata:
-  skm-version: "0.7.1"
+  skm-version: "0.8.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
+  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
-  skm-source-integrity: "sha256:ca20d6dfb1671f6f5372a3456d17eeb0e223e93457ed8ad9655d7334a5fe3c08"
-  workspace-toolkit-version: "0.9.0"
+  skm-source-integrity: "sha256:0d0eaf27fa2df6a6b61a7bae88ab6a3c2401f0fad7b1421111441644c4cdaa2a"
+  workspace-toolkit-version: "0.10.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -17,7 +17,10 @@ metadata:
 
 Manage workspace adoption as a project-local, spec-driven migration. Preserve
 existing policy and project behavior while bringing documentation, instructions,
-specs, and durable memory into the selected `workspace-docs` contract.
+specs, and durable memory into the selected `workspace-docs` contract. After
+bounded read-only discovery, involve the user in material architecture and
+technology decisions before writing project-specific guidance. An observed
+stack is evidence of the present, not consent to its future or to a replacement.
 
 For repository-controlled conflicts, use the applicable current source under
 `workspace/instructions/` as the source of truth. Historical packages apply
@@ -110,36 +113,37 @@ Choose one mode and record it:
 Treat mixed layouts as an update. Do not scaffold a second copy alongside
 existing content.
 
-## Discover and Confirm Project Choices
+## Discover and Discuss Project Choices
 
-Before a mutating adoption or an update to project-specific documentation,
-inspect only the current repository for its application layout, components,
-build and dependency manifests, database schemas or migration configuration,
-infrastructure and CI files, existing technical documentation, and decisions
-already stated by the user. Do not read secret values. Separate observed facts
-from inferences and unknowns; a backend language does not establish a database
-choice, and this standards repository's application examples are not a target
-project's architecture.
+Inspect only this repository's layout, components, manifests, schemas/migrations,
+CI/infrastructure configuration, technical docs and prior user decisions. Do not
+read secret values or infer a database from a backend language. Distinguish
+observed facts, inferred relationships and unknowns. Keep the target standard's
+required workspace structure separate from optional application components.
 
-Propose the project-specific structure and the exact technical guides to add,
-adapt, retain, or omit, with repository-relative evidence for each choice. Keep
-the target standard's required `workspace/` structure distinct from optional
-application directories. When repository evidence supports a proposal, ask the
-user to approve or correct it before changing project-specific files. When
-there is no evidence for an application layout or stack, ask the user which
-structure and technologies they want, including whether the project has no
-backend, database, frontend, or infrastructure component. For partial evidence,
-ask only about material gaps. A clear choice already supplied in the user's
-request is the answer; do not request duplicate approval.
+For adoption, update or repair of project-specific guidance, read
+[the project conversation and deferral guide](references/project-conversation.md).
+Explain the observed architecture in plain language and ask focused questions
+about unresolved goals, constraints and material structure/technology choices.
+Use a small relevant batch and wait for actual answers before dependent writes;
+continue independent read-only inspection while waiting. Silence is not a choice.
+Do not replace this conversation with silent scaffolding or generic approval of
+file edits. Reuse answers already provided; a fully specified choice needs no
+repeat question or additional routine delivery permission.
 
-Record the confirmed choices and evidence in the migration spec and explicit
-file map. Do not copy this repository's project-specific `project_structure.md`
-or conditional backend, frontend, CI, infrastructure, or database guidance as
-target-project facts. Adapt or create such guidance only when the confirmed
-project plan calls for it, preserving existing authoritative content. If the
-user chooses a layout that conflicts with the selected standard, explain the
-conflict and resolve the target or documented deviation before editing. In
-assessment mode, report the proposal and open choices without changing files.
+Where evidence indicates a problem, explain its concrete effect and compare
+proportionate alternatives with benefits, costs, migration risks and constraints.
+Keeping a suitable current approach is valid. Let the user choose to address an
+improvement now, retain the current approach, or defer with a follow-up spec.
+Recommendations are proposals until chosen; adoption authority does not authorize
+application refactors or new infrastructure/CI behavior. Resolve policy conflicts
+within the named approval scope rather than silently replacing manual policy.
+
+Record confirmed choices, evidence and dispositions in the migration spec/file
+map. Add or adapt only the technical guides appropriate to those choices; do not
+copy this standards repository's example stack or project structure as target
+facts. Missing optional applications need no invented frontend/backend/database.
+Assessment reports proposals, questions and possible follow-ups read-only.
 
 ## Create the Migration Contract
 
@@ -155,6 +159,8 @@ the same change, including its state and the reason work is active. Include:
 - an explicit source, destination, and merge decision for every moved area;
 - the repository evidence and confirmed project structure, technology choices,
   and conditional guides to add or omit;
+- each improvement’s required/optional classification, user disposition and
+  linked follow-up spec when deferred;
 - affected files and product/runtime boundaries;
 - validation gates;
 - collision, privacy, and rollback risks.
@@ -165,6 +171,25 @@ minimum directory chain, root specs README from the target template, feature
 directory, catalog row, and development spec first. Make no other migration
 change until the contract is complete. If existing project policy uses another
 spec system, follow it and document the target workspace spec transition.
+
+## Record Agreed Deferred Work
+
+After the user chooses deferral and writing is authorized, create or link one
+coherent actionable spec per improvement using the repository's lifecycle and
+catalog. Follow the deferral guide for evidence, proposed outcome/options,
+concrete actions, dependencies, acceptance, staged validation, risks, version and
+memory impact, and the condition for resuming. Keep undecided design choices
+explicitly open. Newly deferred work normally enters backlog; already-active
+work follows the pinned blocked/resume contract when applicable. Record the
+user's reason and cross-link the migration and follow-ups. Do not invent an
+owner, deadline, release reservation or implementation permission.
+
+Optional deferred improvements can coexist with completed adoption. Required
+manifest/policy/validation failures remain explicit deviations or blockers;
+creating a follow-up does not make a failed requirement pass. If the user defers
+required work, report partial adoption and retain the incomplete migration state.
+Assessment may draft a recommendation in chat but creates no spec, catalog or
+memory files without separate write authority.
 
 ## Apply the Selected Mode
 
@@ -275,7 +300,10 @@ an empty file or infer success from the source repository's own CLAUDE.md.
 
 ## Validate and Complete
 
-1. Compare the final structure with the target manifest and audit checklist;
+1. Verify material choices were answered before dependent writes, every agreed
+   deferral has its actionable spec/catalog link, and required gaps are not
+   presented as optional improvement. Compare the final structure with the
+   target manifest and audit checklist;
    separately verify the Claude pointer and preserved-content deviations.
 2. Confirm instructions, specs, docs, and memory have one active canonical location.
 3. Confirm one balanced generated context block pins the concrete target and
@@ -323,6 +351,8 @@ Lead with the outcome and include:
 - Claude pointer validation and preservation of existing Claude instructions;
 - validation commands and results;
 - memory-impact classification and rationale;
+- confirmed architecture/technology decisions and their rationale;
+- deferred improvement spec links, resume conditions and unresolved required gaps;
 - deviations, blockers, or follow-up work;
 - publication and lifecycle status.
 

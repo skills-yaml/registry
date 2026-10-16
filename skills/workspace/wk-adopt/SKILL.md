@@ -2,16 +2,16 @@
 name: wk-adopt
 description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgrade a repository's Workspace structure through the focused adoption workflow. Invoke explicitly when the user requests Workspace adoption or migration.
 metadata:
-  skm-version: "0.3.4"
+  skm-version: "0.4.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "76bbf51eeb27c663755d5494649b2a2b8b5dd0c5"
+  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
-  skm-source-integrity: "sha256:1b2c4eb0cffd9fdfb7d96893daad1a133ba26ba4cf09372c7a11c75337f5dcda"
-  workspace-toolkit-version: "0.9.0"
+  skm-source-integrity: "sha256:1d498f34a126bf3078f4d846bd52aea0dc050e662e7f22cf73a8c0e8199d4614"
+  workspace-toolkit-version: "0.10.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/adopt-workspace-structure@0.7.1"
+  skm-dependencies: "workspace/adopt-workspace-structure@0.8.0"
 ---
 
 # wk.adopt
@@ -22,9 +22,11 @@ Route the request through `adopt-workspace-structure`.
    compatibility error when it is unavailable.
 2. Preserve the user's requested mode: assessment, fresh adoption, upgrade, or
    repair. Skill invocation by itself grants no write authority.
-3. Let the focused workflow collect project-local evidence, resolve a complete
-   pinned standard, preserve manual policy, validate the migration, and
-   reconcile lifecycle and memory state.
+3. Let the focused workflow collect project-local evidence and involve the user
+   in material architecture/technology choices, including explained alternatives
+   and actionable specs for agreed deferred improvements. Delegate its complete
+   pinned-standard resolution, manual-policy preservation, required conformance,
+   validation, lifecycle and memory handling without skipping the conversation.
 4. Stop before governed instruction writes unless the human request explicitly
    authorizes the named adoption or migration scope.
 5. Report the adopted version, validation evidence, unresolved compatibility
