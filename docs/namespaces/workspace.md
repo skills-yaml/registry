@@ -7,8 +7,9 @@ nothing in skm or `skills.yaml` requires them.
 
 ## Packages
 
-The namespace holds 22 independently versioned packages. Focused packages can
-be installed directly. The seven public lifecycle facades preserve the
+The namespace holds 22 independently versioned packages (Toolkit `0.10.0`, Workspace Docs `7.x`, minimum SKM `0.7.0`). Focused packages can
+be installed directly.
+The public lifecycle facades preserve the
 conceptual `wk.*` vocabulary while using portable kebab-case package and
 invocation names:
 
@@ -16,21 +17,15 @@ invocation names:
 | --- | --- | --- |
 | `wk.adopt` | `workspace/wk-adopt` | `$wk-adopt` |
 | `wk.analyze` | `workspace/wk-analyze` | `$wk-analyze` |
-| `wk.document` | `workspace/wk-document` | `$wk-document` |
-| `wk.spec` | `workspace/wk-spec` | `$wk-spec` |
-| `wk.plan` | `workspace/wk-plan` | `$wk-plan` |
 | `wk.deliver` | `workspace/wk-deliver` | `$wk-deliver` |
+| `wk.document` | `workspace/wk-document` | `$wk-document` |
+| `wk.plan` | `workspace/wk-plan` | `$wk-plan` |
 | `wk.review` | `workspace/wk-review` | `$wk-review` |
-
-The 0.9.0 release adds `workspace/design-domain-model` for domain, data-model
-and schema design, and `workspace/report-repository-status` for read-only local
-changes, worktrees, branches, linked specs and work-disposition reporting. Both
-new packages start at 0.1.0. Modeling correctness is verified on bounded synthetic
-cases; comparative improvement remains unproven.
+| `wk.spec` | `workspace/wk-spec` | `$wk-spec` |
 
 A facade declares exact dependencies on the focused skills it drives. For
 example, `workspace/wk-deliver` depends on its planning, implementation,
-review, security, CI, and remediation skills. SKM 0.4.0 or later resolves that
+review, security, CI, and remediation skills. SKM resolves that
 dependency closure and installs Codex skills under `.agents/skills/`.
 
 Use exact versions for reproducible automation. The current version of each
@@ -39,8 +34,35 @@ package is listed in `skills/workspace/manifest.yaml`:
 ```yaml
 skills:
   - name: workspace/wk-spec
-    version: "0.2.1"
+    version: "0.4.1"
 ```
+
+### Current Package Versions
+
+| Package | Version | Dependencies |
+| --- | --- | --- |
+| `workspace/address-review-feedback` | `0.4.5` | none |
+| `workspace/adopt-workspace-structure` | `0.8.0` | none |
+| `workspace/analyze-repository` | `0.4.1` | `workspace/design-domain-model@0.1.1` |
+| `workspace/coordinate-multi-agent-development` | `0.2.5` | none |
+| `workspace/design-domain-model` | `0.1.1` | none |
+| `workspace/fix-bug` | `0.4.5` | none |
+| `workspace/fix-ci` | `0.4.5` | none |
+| `workspace/implement-spec` | `0.5.1` | `workspace/design-domain-model@0.1.1` |
+| `workspace/maintain-project-docs` | `0.3.5` | none |
+| `workspace/monitor-ci` | `0.4.5` | none |
+| `workspace/plan-implementation` | `0.5.1` | `workspace/design-domain-model@0.1.1` |
+| `workspace/report-repository-status` | `0.1.1` | none |
+| `workspace/review-changes` | `0.5.1` | `workspace/design-domain-model@0.1.1` |
+| `workspace/review-security` | `0.5.1` | `workspace/design-domain-model@0.1.1` |
+| `workspace/wk-adopt` | `0.4.0` | `workspace/adopt-workspace-structure@0.8.0` |
+| `workspace/wk-analyze` | `0.4.1` | `workspace/analyze-repository@0.4.1` |
+| `workspace/wk-deliver` | `0.4.1` | `workspace/write-spec@0.5.1`, `workspace/plan-implementation@0.5.1`, `workspace/implement-spec@0.5.1`, `workspace/review-changes@0.5.1`, `workspace/review-security@0.5.1`, `workspace/monitor-ci@0.4.5`, `workspace/fix-ci@0.4.5`, `workspace/address-review-feedback@0.4.5`, `workspace/coordinate-multi-agent-development@0.2.5` |
+| `workspace/wk-document` | `0.3.5` | `workspace/maintain-project-docs@0.3.5` |
+| `workspace/wk-plan` | `0.4.1` | `workspace/write-spec@0.5.1`, `workspace/plan-implementation@0.5.1` |
+| `workspace/wk-review` | `0.4.1` | `workspace/review-changes@0.5.1`, `workspace/review-security@0.5.1` |
+| `workspace/wk-spec` | `0.4.1` | `workspace/write-spec@0.5.1` |
+| `workspace/write-spec` | `0.5.1` | `workspace/design-domain-model@0.1.1` |
 
 To add every package at once, use the `workspace/all-workspace-skills` bundle:
 
@@ -51,7 +73,7 @@ skm add workspace/all-workspace-skills --source default --kind bundle --yes
 
 ## Adopting Workspace Docs
 
-SKM 0.7.0 has no `skm workspace` command. For Workspace Docs assessment,
+SKM has no `skm workspace` command. For Workspace Docs assessment,
 adoption, upgrade or repair, add the `workspace/wk-adopt` skill with
 `skm add workspace/wk-adopt --source default` and invoke it in your agent.
 
@@ -63,16 +85,15 @@ compatibility, and the minimum SKM version. Each package also carries its own
 canonical source revision, source path, source integrity, compatibility, and
 exact dependency metadata.
 
-The Workspace packager generates the manifest and every package in this
-namespace. Do not hand-edit generated root copies or exact version directories.
-`task manifest` leaves this namespace unchanged, and the registry validator
-checks its provenance fields.
+The Workspace packager generates the manifest, namespace documentation, and
+every package in this namespace. Do not hand-edit generated root copies or
+exact version directories. `task manifest` leaves this namespace unchanged,
+and the registry validator checks its provenance fields.
 
 ## Guided Adoption
 
-Toolkit 0.10.0 updates adoption to 0.8.0 and wk-adopt to 0.4.0. Adoption explains
-observed architecture/technology evidence and tradeoffs, asks only material
-unanswered choices, and records agreed deferred improvements as actionable,
-linked specs. Supplied answers are reused. Optional deferral never waives required
-adoption gates, changes assessment-only scope or authorizes runtime refactors.
-The complete 22-package bundle remains available; Workspace Docs stays 7.0.0.
+Guided adoption explains observed architecture/technology evidence and
+tradeoffs, asks only material unanswered choices, and records agreed deferred
+improvements as actionable, linked specs. Supplied answers are reused.
+Optional deferral never waives required adoption gates, changes
+assessment-only scope or authorizes runtime refactors.
