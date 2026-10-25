@@ -2,12 +2,12 @@
 name: coordinate-multi-agent-development
 description: Let peer agents coordinate on one machine through atomic task and version claims, self-created detached worktrees, shared file scopes, independent review, serialized integration, and lossless recovery. No coordinator agent is required.
 metadata:
-  skm-version: "0.2.5"
+  skm-version: "0.2.6"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/coordinate-multi-agent-development"
   skm-source-integrity: "sha256:b1419129ca376df35fa3aa47315443540fc42eb2d707a586486aae1f45692503"
-  workspace-toolkit-version: "0.10.0"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

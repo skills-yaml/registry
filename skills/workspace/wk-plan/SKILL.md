@@ -2,16 +2,16 @@
 name: wk-plan
 description: Run the wk.plan lifecycle facade to validate or create an active specification and produce an executable implementation plan. Invoke explicitly when approved work needs ordered steps, affected files, migration handling, validation, rollback, and completion gates.
 metadata:
-  skm-version: "0.4.1"
+  skm-version: "0.4.2"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/wk-plan"
   skm-source-integrity: "sha256:d2a912532564d7da3c6eca166c5ca3b97081b03c4cd679bf4474df09fb3a8b66"
-  workspace-toolkit-version: "0.10.0"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.5.1, workspace/plan-implementation@0.5.1"
+  skm-dependencies: "workspace/write-spec@0.6.0, workspace/plan-implementation@0.5.2"
 ---
 
 # wk.plan

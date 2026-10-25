@@ -2,12 +2,12 @@
 name: adopt-workspace-structure
 description: Adopt, upgrade, repair, or assess workspace documentation with guided architecture and technology decisions. Use for workspace initialization, version migration, conformance repair, or adoption planning; involve the user in material choices and turn agreed deferred improvements into actionable specs.
 metadata:
-  skm-version: "0.8.0"
+  skm-version: "0.9.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
-  skm-source-integrity: "sha256:0d0eaf27fa2df6a6b61a7bae88ab6a3c2401f0fad7b1421111441644c4cdaa2a"
-  workspace-toolkit-version: "0.10.0"
+  skm-source-integrity: "sha256:9388c8b6046ac883aff7895b9fba4fd9a93dd43a81295214cfae3aaf58e30170"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -130,6 +130,15 @@ continue independent read-only inspection while waiting. Silence is not a choice
 Do not replace this conversation with silent scaffolding or generic approval of
 file edits. Reuse answers already provided; a fully specified choice needs no
 repeat question or additional routine delivery permission.
+
+Ask the user whenever information needed for the adoption is missing, unclear,
+or conflicting and the repository does not settle it: the intended mode
+(assessment, adoption, update, or repair), target version when ambiguous, scope
+and file ownership of conflicting content, manual policy to keep, branch or
+delivery expectations, and project goals or technology intent. Do not assume or
+invent an answer; use the host's question tool when available, give the options
+and your default, and wait for the answer before dependent writes. Record any
+answer that stays unavailable as an open question or required gap.
 
 Where evidence indicates a problem, explain its concrete effect and compare
 proportionate alternatives with benefits, costs, migration risks and constraints.
