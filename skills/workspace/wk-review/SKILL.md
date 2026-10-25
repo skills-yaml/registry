@@ -2,16 +2,16 @@
 name: wk-review
 description: Run the wk.review lifecycle facade for a read-only correctness and applicable security review of a working tree, branch, commit range, or pull request. Invoke explicitly when findings and validation gaps are needed without remediation.
 metadata:
-  skm-version: "0.4.1"
+  skm-version: "0.4.2"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/wk-review"
   skm-source-integrity: "sha256:f6ef8d7745fc56fe60e8ea1073a79a0205ce3f98500ace40ce1b11768330a483"
-  workspace-toolkit-version: "0.10.0"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/review-changes@0.5.1, workspace/review-security@0.5.1"
+  skm-dependencies: "workspace/review-changes@0.5.2, workspace/review-security@0.5.2"
 ---
 
 # wk.review

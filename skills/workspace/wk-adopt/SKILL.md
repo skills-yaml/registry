@@ -2,16 +2,16 @@
 name: wk-adopt
 description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgrade a repository's Workspace structure through the focused adoption workflow. Invoke explicitly when the user requests Workspace adoption or migration.
 metadata:
-  skm-version: "0.4.0"
+  skm-version: "0.4.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
-  skm-source-integrity: "sha256:1d498f34a126bf3078f4d846bd52aea0dc050e662e7f22cf73a8c0e8199d4614"
-  workspace-toolkit-version: "0.10.0"
+  skm-source-integrity: "sha256:423899fe5255aa03ed456aa476dcdfc4beb97819af69dfc9fb0373143a87c600"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/adopt-workspace-structure@0.8.0"
+  skm-dependencies: "workspace/adopt-workspace-structure@0.9.0"
 ---
 
 # wk.adopt
@@ -22,7 +22,8 @@ Route the request through `adopt-workspace-structure`.
    compatibility error when it is unavailable.
 2. Preserve the user's requested mode: assessment, fresh adoption, upgrade, or
    repair. Skill invocation by itself grants no write authority.
-3. Let the focused workflow collect project-local evidence and involve the user
+3. Let the focused workflow collect project-local evidence, ask the user about
+   missing, unclear, or conflicting information, and involve the user
    in material architecture/technology choices, including explained alternatives
    and actionable specs for agreed deferred improvements. Delegate its complete
    pinned-standard resolution, manual-policy preservation, required conformance,
