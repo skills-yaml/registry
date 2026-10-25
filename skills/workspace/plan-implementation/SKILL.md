@@ -2,16 +2,16 @@
 name: plan-implementation
 description: Build an ordered, evidence-backed implementation plan from an approved development specification. Use when a feature, migration, or refactor has an active spec and needs dependency ordering, concrete file areas, validation strategy, compatibility handling, and completion gates before code changes begin.
 metadata:
-  skm-version: "0.5.1"
+  skm-version: "0.5.2"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/plan-implementation"
   skm-source-integrity: "sha256:845bdf920eb6040fd71da863b6241174bbf2400fba25f25bbbf227aa452ec7c2"
-  workspace-toolkit-version: "0.10.0"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.1"
+  skm-dependencies: "workspace/design-domain-model@0.1.2"
 ---
 
 # Plan Implementation

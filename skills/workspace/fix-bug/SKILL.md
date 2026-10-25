@@ -2,12 +2,12 @@
 name: fix-bug
 description: Reproduce, isolate, and fix a reported software defect with regression coverage. Use when observed behavior differs from a requirement or established contract and the user authorizes a focused implementation change.
 metadata:
-  skm-version: "0.4.5"
+  skm-version: "0.4.6"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/fix-bug"
   skm-source-integrity: "sha256:7cc9180adad34a2ad03f05c5f883d290479faf1a8d9ade24530c46cdc6d9208e"
-  workspace-toolkit-version: "0.10.0"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

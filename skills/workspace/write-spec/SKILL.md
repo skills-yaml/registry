@@ -2,16 +2,16 @@
 name: write-spec
 description: Turn an accepted problem or feature request into a lifecycle-managed development specification. Use when work needs explicit scope, acceptance criteria, affected areas, validation gates, risks, migration considerations, and memory impact before implementation begins.
 metadata:
-  skm-version: "0.5.1"
+  skm-version: "0.6.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "671f367253976004e2fe4964b8d55e65aadbd310"
+  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:138df483b94ee72ba9652fa5428acea7513bf1a837ef4d0ee63140e484491246"
-  workspace-toolkit-version: "0.10.0"
+  skm-source-integrity: "sha256:a48b3ef46a568b8b08300199323d266b139f605b8d8d5848480bb3fd769c11b7"
+  workspace-toolkit-version: "0.11.0"
   workspace-docs-compatibility: "7.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.1"
+  skm-dependencies: "workspace/design-domain-model@0.1.2"
 ---
 
 # Write Spec
@@ -27,7 +27,8 @@ policy but cannot override a current governed instruction.
 1. Read repository policy, the root spec catalog, the nearest related specs,
    and relevant architecture or product documentation.
 2. Confirm the problem, desired outcome, constraints, and explicit exclusions.
-   Ask only about choices that would materially change the contract.
+   Identify what is missing, ambiguous, or contradictory (see Resolve Missing
+   or Unclear Information) and ask the user before writing the spec.
 3. Select the lifecycle state and primary-feature category required by local
    policy. Reuse an existing category when it accurately describes the work.
    For Workspace Docs 7, use `backlog`, `development`, `test`, `done`, or
@@ -43,6 +44,24 @@ If two or more agents may mutate the repository concurrently, invoke
 mutating agent a dedicated detached worktree and repository WIP record; keep
 the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
 older pins retain their direct branch-request requirement. Always honor protections.
+
+## Resolve Missing or Unclear Information
+
+Before writing, check the request against the required spec contents below.
+When information needed for scope, goals and non-goals, users or consumers,
+behavior or interface contracts, affected areas, acceptance criteria, risks,
+version impact, or approval scope is missing, vague, or conflicting and
+repository evidence does not settle it, ask the user instead of guessing.
+
+- Ask a small focused batch of specific questions in plain language, each with
+  the options or default you would otherwise assume. Use the host's question
+  tool when one is available, and wait for the actual answers before dependent
+  writing; silence is not a choice.
+- Do not ask what the request, repository, catalog, memory, or prior answers
+  already establish, and do not ask for routine delivery permission.
+- Continue read-only discovery while waiting. If an answer cannot be obtained,
+  record it as a labeled open question or assumption in the spec and do not
+  present it as settled; never invent requirements, versions, or approvals.
 
 ## Write the Specification
 
