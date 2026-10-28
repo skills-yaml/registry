@@ -2,16 +2,16 @@
 name: wk-adopt
 description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgrade a repository's Workspace structure through the focused adoption workflow. Invoke explicitly when the user requests Workspace adoption or migration.
 metadata:
-  skm-version: "0.4.1"
+  skm-version: "0.4.2"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
-  skm-source-integrity: "sha256:423899fe5255aa03ed456aa476dcdfc4beb97819af69dfc9fb0373143a87c600"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:46c1302cd2dc392ffd47bd7ce2e749f4d2796144703823cda0d64b7960bfd4a3"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/adopt-workspace-structure@0.9.0"
+  skm-dependencies: "workspace/adopt-workspace-structure@0.10.0"
 ---
 
 # wk.adopt
@@ -41,3 +41,16 @@ Resolve the concrete target standard through the focused skill. For v7,
 include blocked metadata and main-based completion in the migration map;
 preserve historical done specs and older pinned contracts. Governed migration
 changes require independent review before full final verification.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.

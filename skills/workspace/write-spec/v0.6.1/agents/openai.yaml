@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Spec"
+  short_description: "Turn problems into validated specs"
+  default_prompt: "Use $write-spec to turn this accepted problem into a lifecycle-managed development specification."

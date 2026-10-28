@@ -2,16 +2,16 @@
 name: wk-deliver
 description: Run the wk.deliver lifecycle facade to implement, validate, review, remediate, and advance an approved development specification through the repository's authorized delivery workflow. Invoke explicitly for end-to-end delivery rather than read-only review.
 metadata:
-  skm-version: "0.4.2"
+  skm-version: "0.4.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
-  skm-source-integrity: "sha256:7602b7dd38f47006a7b7ef25afcc73a6c3922fe8e73e6949069d6e247c9920ad"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:951233cb2a7e47c42dde7e46e52ab2b24dd034d1d2b786fa60a0c6f75c6411a9"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.0, workspace/plan-implementation@0.5.2, workspace/implement-spec@0.5.2, workspace/review-changes@0.5.2, workspace/review-security@0.5.2, workspace/monitor-ci@0.4.6, workspace/fix-ci@0.4.6, workspace/address-review-feedback@0.4.6, workspace/coordinate-multi-agent-development@0.2.6"
+  skm-dependencies: "workspace/write-spec@0.6.1, workspace/plan-implementation@0.5.3, workspace/implement-spec@0.5.3, workspace/review-changes@0.5.3, workspace/review-security@0.5.3, workspace/monitor-ci@0.4.7, workspace/fix-ci@0.4.7, workspace/address-review-feedback@0.4.7, workspace/coordinate-multi-agent-development@0.2.7"
 ---
 
 # wk.deliver
@@ -62,3 +62,16 @@ Report completed, deferred, and skipped work with reasons, validation evidence,
 review disposition, lifecycle state, and rollback guidance. Later tracked
 result/integration records require affected review and verification reconciliation;
 reuse only proven-fresh evidence.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.

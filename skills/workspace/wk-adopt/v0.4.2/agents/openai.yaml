@@ -1,0 +1,6 @@
+interface:
+  display_name: "wk.adopt"
+  short_description: "Adopt or migrate a Workspace repository"
+  default_prompt: "Use $wk-adopt to assess, adopt, repair, or upgrade this repository's Workspace structure."
+policy:
+  allow_implicit_invocation: false

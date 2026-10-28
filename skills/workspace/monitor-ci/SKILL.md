@@ -2,13 +2,13 @@
 name: monitor-ci
 description: Monitor a continuous-integration run or pull-request checks through a terminal outcome and report meaningful transitions. Use when the user asks to watch, babysit, follow, or wait for CI without changing code or workflow configuration.
 metadata:
-  skm-version: "0.4.6"
+  skm-version: "0.4.7"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/monitor-ci"
-  skm-source-integrity: "sha256:6d09b67acf5cb3b328937b6ee069b7c4489234e71f3a0b1ced353dd5779c3152"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:2e66b9024edb56f9a8faf7e39af32fab6d72e61e0bbd8189d4133e211201cece"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -59,3 +59,16 @@ missing, failed, interrupted, or stale gate evidence against the exact revision;
 a contributor run cannot prove coverage of a changed combined revision. Report
 blocked metadata or resume needs without editing specs. Keep monitoring read-only;
 older pins retain their lifecycle contract.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.

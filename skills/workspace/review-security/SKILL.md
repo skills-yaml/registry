@@ -2,16 +2,16 @@
 name: review-security
 description: Perform a threat-focused review of code, configuration, dependencies, or proposed changes. Use when a change affects authentication, authorization, secrets, untrusted input, file or network access, supply chain, execution boundaries, sensitive data, or when the user requests a security review.
 metadata:
-  skm-version: "0.5.2"
+  skm-version: "0.5.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/review-security"
-  skm-source-integrity: "sha256:5a593603649255721abc89a4b723594ab6bd18d24f5699e3e1d49bf6b3c32ae1"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:43f3895c0a9e5b91d94484c3f447680b1ec5d45d33f0579a1812d7e5b6cb766d"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.2"
+  skm-dependencies: "workspace/design-domain-model@0.1.3"
 ---
 
 # Review Security
@@ -94,3 +94,16 @@ changed-component security checks followed by affected direct/transitive consume
 only after success. Include authorization, errors, data exposure, timing, and
 side effects even when a schema is unchanged; missing coverage is a gap. Remain
 read-only and hand fixes to the authorized mutable workflow.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.

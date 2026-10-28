@@ -2,16 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.5.2"
+  skm-version: "0.5.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/review-changes"
-  skm-source-integrity: "sha256:f735d057f83ddfeaaa2796ec548e9a28d644950bc6cb2a5651ece2002eb822ae"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:86c9fdd7f38c0260fa478361c87ab83a1a556b04a420eb409597aaf63dd05beb"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.2"
+  skm-dependencies: "workspace/design-domain-model@0.1.3"
 ---
 
 # Review Changes
@@ -121,3 +121,16 @@ affected review and verification; they do not automatically preserve evidence. R
 combined integration/main revisions. Each acceptance criterion needs supporting
 evidence; subjective product decisions go to the user. Read-only skills remain
 read-only and planning skills do not implement changes.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.
