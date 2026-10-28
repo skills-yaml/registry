@@ -16,11 +16,13 @@ The standard defines:
 
 ## Current Versions
 
-- `latest` points to `v7.0.0` (newest available version).
-- `default` points to `v7.0.0` (recommended stable version).
+- `latest` points to `v8.0.0` (newest available version).
+- `default` points to `v8.0.0` (recommended stable version).
+- `v8.0.0` requires one active task per agent, task-sized oversized specs,
+  affected local testing, and complete final CI verification.
 - `v7.0.0` is the SDLC redesign release: verified main merge defines done,
   blocked specs preserve resume state, and modular iteration precedes full final
-  verification. Deployment/publication is separate. Both default and latest select v7.
+  verification. Deployment/publication is separate; this released package is preserved.
 - `v6.0.0` source was released through main; its acceptance work remains open.
   Preserve its package unchanged. The release ledger records actual events.
 - `v4.0.0` / `v3.0.0` / `v2.1.0` / `v2.0.0` / `v1.2.0` /
@@ -30,7 +32,7 @@ The standard defines:
 Projects should pin to a concrete version when reproducibility matters:
 
 ```text
-workspace-docs@7.0.0
+workspace-docs@8.0.0
 ```
 
 Projects may use `workspace-docs@default` while adopting the shared process.
@@ -42,9 +44,10 @@ workspace-docs/
   AGENT_MIGRATION.md
   README.md
   VERSIONING.md
-  latest -> v7.0.0
-  default -> v7.0.0
-  v7.0.0/                    # SDLC redesign release
+  latest -> v8.0.0
+  default -> v8.0.0
+  v8.0.0/                    # focused local work and final CI verification
+  v7.0.0/                    # preserved SDLC redesign release
   v6.0.0/                    # preserved source release
     manifest.yaml
     agents-template.md
@@ -73,7 +76,7 @@ workspace-docs/
 Generated or synchronized agent context must live inside clear markers:
 
 ```md
-<!-- AGENT-CONTEXT:START workspace-docs@7.0.0 -->
+<!-- AGENT-CONTEXT:START workspace-docs@8.0.0 -->
 <!-- Generated content. Manual edits may be overwritten. -->
 <!-- AGENT-CONTEXT:END -->
 ```

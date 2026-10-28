@@ -2,16 +2,16 @@
 name: write-spec
 description: Turn an accepted problem or feature request into a lifecycle-managed development specification. Use when work needs explicit scope, acceptance criteria, affected areas, validation gates, risks, migration considerations, and memory impact before implementation begins.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:a48b3ef46a568b8b08300199323d266b139f605b8d8d5848480bb3fd769c11b7"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:1053138a84308f062f2a223cb5efc1ebbfe522dceb2df7a8f56ce566bed5f3d2"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.2"
+  skm-dependencies: "workspace/design-domain-model@0.1.3"
 ---
 
 # Write Spec
@@ -75,7 +75,8 @@ Include at least:
 - measurable acceptance criteria;
 - required validation gates, changed-component checks, and subsequent affected
   direct/transitive consumer stages, including selection reasons and gaps;
-- phased delivery when the scope cannot be completed safely in one change;
+- ordered, task-sized delivery steps when the scope cannot be completed safely
+  in one focused change (see Break Large Specs into Focused Steps);
 - a `Memory Impact` section using the repository's required initial status.
 
 When affected areas include governed instructions, add an Instruction Change
@@ -94,6 +95,40 @@ CI/CD workflow. CI/CD does not authorize provider CLI writes.
 
 Use normative language only for real requirements. Keep implementation details
 out unless they constrain compatibility, safety, or acceptance.
+
+## Break Large Specs into Focused Steps
+
+Before finalizing a new or revised spec, assess whether its scope can be
+implemented, reviewed, and validated as one focused change. Split it when it
+combines distinct deliverables, dependency stages, migrations, or risk areas
+that need separate acceptance evidence. Use those boundaries rather than page
+length, a fixed step count, or an arbitrary time estimate. Keep small specs
+concise; do not split tightly coupled invariants into unsafe intermediate states.
+
+For oversized scope, write ordered steps with stable IDs. Each step MUST define:
+
+- one concrete outcome and bounded affected areas, including exclusions;
+- prerequisites and dependencies on earlier steps or unresolved decisions;
+- measurable acceptance criteria mapped to the spec's overall criteria;
+- the smallest meaningful changed-component checks and affected-consumer checks,
+  with selection reasons and required evidence for completion.
+
+Split a step again if it still contains multiple independently reviewable tasks.
+Plan one ready step at a time per agent. Require passing acceptance evidence
+before dependent steps begin; unresolved decisions block dependent work without
+inventing answers or preventing established independent steps from being planned.
+Do not add unrelated edits or tests to a step. Preserve cross-step contracts,
+compatibility, migration/rollback safety, integration checks, and mandatory final
+repository gates; passing isolated steps does not prove the complete feature.
+
+Keep steps in one spec when they share one delivery and lifecycle. When parts
+need independent delivery or lifecycle tracking, create linked child specs:
+the parent records the overall outcome, dependencies, and acceptance mapping;
+each child links back and follows the repository's feature, catalog, lifecycle,
+version, approval, and memory requirements. Do not mark the parent complete
+until its overall acceptance and pinned completion requirements are met.
+Preserve completed specs and create linked follow-ups for later decomposition.
+This remains planning work and does not authorize implementation.
 
 ## Integrate and Review
 
@@ -173,3 +208,16 @@ affected review and verification; they do not automatically preserve evidence. R
 combined integration/main revisions. Each acceptance criterion needs supporting
 evidence; subjective product decisions go to the user. Read-only skills remain
 read-only and planning skills do not implement changes.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.

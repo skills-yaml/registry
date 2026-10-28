@@ -2,13 +2,13 @@
 name: design-domain-model
 description: Assess, design or review business-domain models, logical data models and database/API/event schemas with explicit invariants, ownership, representation mappings and compatibility evidence. Use for new domain concepts, lifecycle or consistency rules, and schema evolution; scale simple CRUD changes to a concise model delta.
 metadata:
-  skm-version: "0.1.2"
+  skm-version: "0.1.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/design-domain-model"
-  skm-source-integrity: "sha256:84020d95c4c32e358c10972a5aa52039abe03e404e9c7fa77a5e84e73a7268a7"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:7e6b889de5b05f327a589d619f037acfe75d6eb3170aa7509b2141b6f8de5de9"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -98,3 +98,16 @@ Respect existing instruction approvals, independent review and final delivery
 gates. Do not execute downloaded code, deploy schemas, migrate production data
 or mutate infrastructure from this skill. Infrastructure changes remain subject
 to the host's OpenTofu-only, CI/CD-only boundary where applicable.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.
