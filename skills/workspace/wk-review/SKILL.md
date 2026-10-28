@@ -2,16 +2,16 @@
 name: wk-review
 description: Run the wk.review lifecycle facade for a read-only correctness and applicable security review of a working tree, branch, commit range, or pull request. Invoke explicitly when findings and validation gaps are needed without remediation.
 metadata:
-  skm-version: "0.4.2"
+  skm-version: "0.4.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/wk-review"
-  skm-source-integrity: "sha256:f6ef8d7745fc56fe60e8ea1073a79a0205ce3f98500ace40ce1b11768330a483"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:2d41bb99ebbdca88199c806ecd42a46f0c18e2f2a018e8e2e58ff28466937efc"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/review-changes@0.5.2, workspace/review-security@0.5.2"
+  skm-dependencies: "workspace/review-changes@0.5.3, workspace/review-security@0.5.3"
 ---
 
 # wk.review
@@ -41,3 +41,16 @@ assess main-completion and blocked-state claims separately from publication.
 Assess changed-component checks preceding affected direct/transitive consumer
 checks, selection reasons, coverage gaps, and proven freshness; a flat selection
 is not passing evidence. Relevant edits renew review. Remain read-only.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.

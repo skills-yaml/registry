@@ -2,16 +2,16 @@
 name: analyze-repository
 description: Analyze a repository without modifying it, producing an evidence-backed account of its purpose, structure, technology stack, development lifecycle, policies, documentation state, active work, risks, and evidence gaps. Use when a repository needs assessment, onboarding context, or current-state discovery before planning work.
 metadata:
-  skm-version: "0.4.2"
+  skm-version: "0.4.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "5d12491288a6f28ebfcfc23b3b288bbcecd85732"
+  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
   skm-source-path: "workspace/instructions/skills/analyze-repository"
-  skm-source-integrity: "sha256:befc8cd24da5fffed829dd5ebda8dab3dd6fc15389e7e04819b062119c839036"
-  workspace-toolkit-version: "0.11.0"
-  workspace-docs-compatibility: "7.x"
+  skm-source-integrity: "sha256:06cbde68d0eb723b1c20fe42107c6ee5dffc22b797db637f9cae8ff439d51728"
+  workspace-toolkit-version: "0.12.0"
+  workspace-docs-compatibility: "8.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.2"
+  skm-dependencies: "workspace/design-domain-model@0.1.3"
 ---
 
 # Analyze Repository
@@ -78,3 +78,16 @@ old/new dependencies for renames/deletions, overlapping changes, cycles, and
 freshness. Do not claim a flat selected list establishes successful execution.
 Identify missing evidence without inventing completion or measured speedups.
 Older pins retain their contracts; analysis remains read-only.
+
+## Workspace Docs 8 Execution Boundary
+
+For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
+freshness rules while applying the v8 verification boundary: local checks cover
+changed behavior and all affected direct/transitive consumers; skip unrelated
+projects/suites. Complete required gates run in CI after the candidate stabilizes,
+without a duplicate complete local run before requesting CI. Unknown impact
+requires investigation and justified CI fallback; missing CI cannot prove final
+acceptance. Work on one active task per agent. When writing a spec, split oversized
+scope into bounded ordered steps with dependencies, acceptance mapping, and
+focused validation; use linked child specs for independently managed delivery.
+Preserve this skill's planning/read-only scope and explicit older-pin contracts.
