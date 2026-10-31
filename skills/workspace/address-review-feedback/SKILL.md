@@ -2,13 +2,13 @@
 name: address-review-feedback
 description: Triage and implement selected actionable feedback from a pull request, branch review, or review report. Use when the user asks to address review comments, requested changes, or unresolved threads and authorizes the corresponding code or documentation edits.
 metadata:
-  skm-version: "0.4.7"
+  skm-version: "0.4.8"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
+  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
   skm-source-path: "workspace/instructions/skills/address-review-feedback"
-  skm-source-integrity: "sha256:70009eb17b54db71297d84e9eec57d3083267e2eff92477d3482528d6eca4e03"
-  workspace-toolkit-version: "0.12.0"
-  workspace-docs-compatibility: "8.x"
+  skm-source-integrity: "sha256:562b6ea8047a1da4134b8b0a81d3fe66ac5b606b4f87035a09348122e6ddbf1d"
+  workspace-toolkit-version: "0.13.0"
+  workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -122,3 +122,14 @@ acceptance. Work on one active task per agent. When writing a spec, split oversi
 scope into bounded ordered steps with dependencies, acceptance mapping, and
 focused validation; use linked child specs for independently managed delivery.
 Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+
+## Workspace Docs 9 Affected CI
+
+For a v9 pin, complete final verification means every required affected CI job,
+not every project/job in the repository. Docs/spec-only changes run related jobs;
+backend-only and frontend-only changes run their own jobs. Shared inputs include
+all proven direct/transitive consumers. Use validated job selection and preserve
+required status/protections, dependency stages, and this skill's authority.
+Unknown scope needs investigation and a justified fallback. Do not restore a
+blanket full-repository CI run for known narrow scope. Older pins retain their
+contracts; publication checks remain separate from ordinary change validation.

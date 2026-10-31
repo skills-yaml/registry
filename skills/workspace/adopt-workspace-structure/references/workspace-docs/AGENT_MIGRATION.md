@@ -5,22 +5,22 @@ the workspace documentation structure in a repository. It covers process and
 safety; use the target version's migration notes for version-specific path
 changes.
 
-The current recommended target is `workspace-docs@8.0.0`, resolved from the
+The current recommended target is `workspace-docs@9.0.0`, resolved from the
 contained `default` pointer. Resolve that pointer to a complete version package
 and pin its concrete version before changing files. An explicit older pin uses
 its own manifest, migration notes, and lifecycle; never silently downgrade.
 
-- [Version-specific migration notes](./v8.0.0/migration.md)
-- [Required structure manifest](./v8.0.0/manifest.yaml)
-- [Generated `AGENTS.md` context template](./v8.0.0/agents-template.md)
-- [Specs README template](./v8.0.0/specs-readme-template.md)
-- [Adoption audit checklist](./v8.0.0/audit-checklist.md)
+- [Version-specific migration notes](./v9.0.0/migration.md)
+- [Required structure manifest](./v9.0.0/manifest.yaml)
+- [Generated `AGENTS.md` context template](./v9.0.0/agents-template.md)
+- [Specs README template](./v9.0.0/specs-readme-template.md)
+- [Adoption audit checklist](./v9.0.0/audit-checklist.md)
 
 ## Choose the Migration Mode
 
 Classify the current repository before changing files. The table below records
 the historical structural migration through v5. For the current default, also
-apply the v6, v7, and v8 migration notes in order; the target manifest is authoritative.
+apply the v6, v7, v8, and v9 migration notes in order; the target manifest is authoritative.
 
 | Current state | Mode | Required action |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ Agents must follow these rules throughout the migration:
    relative paths. Do not search outside the repository.
 4. Compare existing files and directories with the target
    manifest (for the current default,
-   [`v8.0.0/manifest.yaml`](./v8.0.0/manifest.yaml)).
+   [`v9.0.0/manifest.yaml`](./v9.0.0/manifest.yaml)).
 5. Identify which current-project documents are authoritative, duplicated,
    obsolete, or unclassified.
 6. Confirm the target version. Resolve `default` or `latest` for discovery, but
@@ -166,7 +166,7 @@ For a 1.x or 2.0 migration, apply the structural mapping in
 in [`v5.0.0/migration.md`](./v5.0.0/migration.md). Start at the first version
 newer than the repository's current pin and do not skip intermediate notes.
 Continue through [v6](./v6.0.0/migration.md) and
-[v7](./v7.0.0/migration.md), then [v8](./v8.0.0/migration.md) when targeting the default.
+[v7](./v7.0.0/migration.md), then [v8](./v8.0.0/migration.md), then [v9](./v9.0.0/migration.md) when targeting the default.
 
 ## Phase 4: Validate the Result
 
@@ -184,8 +184,9 @@ all of the following:
    and still safe.
 6. During coherent changes and review fixes, run affected Taskfile modules.
    After independent review, findings, documentation, and artifacts stabilize,
-   freeze the candidate and run `task check`, `task test`, and applicable project
-   gates in CI. Reuse only proven-fresh evidence; unknown scope uses aggregate gates.
+   freeze the candidate and run every required affected CI job for v9. Older
+   pins retain their own final-gate contract. Reuse only proven-fresh evidence;
+   unknown scope uses justified fallback.
 7. Run the local-information/privacy gate when the repository provides one.
 8. Confirm every development, test, and done spec required by the target
    contract has a valid memory-impact classification, and confirm the Taskfile
@@ -241,11 +242,11 @@ Deviations or follow-up: none | <project-local details>
 The handoff must not contain machine-local paths, identities, sibling-project
 details, credentials, or environment-specific values.
 
-## Workspace Docs 8 Default
+## Workspace Docs 9 Default
 
-The contained default selects v8. Read its [SDLC](./v8.0.0/sdlc.md),
-[process](./v8.0.0/process.md), [migration](./v8.0.0/migration.md), and
-[audit checklist](./v8.0.0/audit-checklist.md). They govern the v8 target;
+The contained default selects v9. Read its [SDLC](./v9.0.0/sdlc.md),
+[process](./v9.0.0/process.md), [migration](./v9.0.0/migration.md), and
+[audit checklist](./v9.0.0/audit-checklist.md). They govern the v9 target;
 historical mappings above do not replace the v8 verification boundary.
 Add blocked resume metadata; define done as verified main merge with reconciled
 acceptance and records; track publication separately. Run affected modular gates
@@ -255,6 +256,9 @@ historical evidence, and manual policy outside the approved repair scope.
 
 ## Workspace Docs 8 Verification Boundary
 
+This historical boundary applies to an explicit v8 pin; use the v9 section
+below when adopting the current default.
+
 For v8 adoption, run only affected Taskfile checks locally, including affected
 direct/transitive consumers. Skip unrelated projects/suites. Complete final
 verification runs in CI after review and fixes stabilize the candidate; no duplicate
@@ -262,3 +266,13 @@ complete local run is required before requesting CI. Missing required CI blocks
 acceptance. Require one active task per agent and task-sized oversized specs.
 Apply v7 migration before v8 when starting from an older pin; retain older pins'
 contracts and never rewrite released packages.
+
+## Workspace Docs 9 Affected CI Jobs
+
+For v9, final CI runs every applicable job for changed components and affected
+consumers, not every job in the repository. Pure docs/spec changes select their
+related jobs, backend-only changes select backend jobs, and frontend-only changes
+select frontend jobs. Shared inputs include all affected direct/transitive consumers.
+Validate selection and required-status failure handling before relying on it.
+Old v8 references above describe historical migration; apply v9's scoped-CI
+contract when adopting the new default.

@@ -2,13 +2,13 @@
 name: report-repository-status
 description: Report repo status, project status or spec status, including local changes, worktrees, local/remote branches and linked specs. Recommend merge, discard candidate or keep/finish from evidence; reporting stays read-only.
 metadata:
-  skm-version: "0.1.3"
+  skm-version: "0.1.4"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
+  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
   skm-source-path: "workspace/instructions/skills/report-repository-status"
-  skm-source-integrity: "sha256:c03b5c80e402ac46219d670435ecc3612a9310ae321c8ba014708740a92166d2"
-  workspace-toolkit-version: "0.12.0"
-  workspace-docs-compatibility: "8.x"
+  skm-source-integrity: "sha256:f8fc55ab2d726e91ff7210b229b392c35497ebaf1de9b1a11ee1b2a063f90cd7"
+  workspace-toolkit-version: "0.13.0"
+  workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -111,3 +111,14 @@ acceptance. Work on one active task per agent. When writing a spec, split oversi
 scope into bounded ordered steps with dependencies, acceptance mapping, and
 focused validation; use linked child specs for independently managed delivery.
 Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+
+## Workspace Docs 9 Affected CI
+
+For a v9 pin, complete final verification means every required affected CI job,
+not every project/job in the repository. Docs/spec-only changes run related jobs;
+backend-only and frontend-only changes run their own jobs. Shared inputs include
+all proven direct/transitive consumers. Use validated job selection and preserve
+required status/protections, dependency stages, and this skill's authority.
+Unknown scope needs investigation and a justified fallback. Do not restore a
+blanket full-repository CI run for known narrow scope. Older pins retain their
+contracts; publication checks remain separate from ordinary change validation.
