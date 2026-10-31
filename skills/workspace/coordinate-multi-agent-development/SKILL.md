@@ -2,13 +2,13 @@
 name: coordinate-multi-agent-development
 description: Let peer agents coordinate on one machine through atomic task and version claims, self-created detached worktrees, shared file scopes, independent review, serialized integration, and lossless recovery. No coordinator agent is required.
 metadata:
-  skm-version: "0.2.7"
+  skm-version: "0.2.8"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
+  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
   skm-source-path: "workspace/instructions/skills/coordinate-multi-agent-development"
-  skm-source-integrity: "sha256:dc4b218a036503e840b45cf5925c872798ca384136ec5986ee1f5464932506d4"
-  workspace-toolkit-version: "0.12.0"
-  workspace-docs-compatibility: "8.x"
+  skm-source-integrity: "sha256:21ef3f53381a007a1e3c560b0f114f970531fdae1021d5a68555155dc4c056fa"
+  workspace-toolkit-version: "0.13.0"
+  workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -277,3 +277,14 @@ acceptance. Work on one active task per agent. When writing a spec, split oversi
 scope into bounded ordered steps with dependencies, acceptance mapping, and
 focused validation; use linked child specs for independently managed delivery.
 Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+
+## Workspace Docs 9 Affected CI
+
+For a v9 pin, complete final verification means every required affected CI job,
+not every project/job in the repository. Docs/spec-only changes run related jobs;
+backend-only and frontend-only changes run their own jobs. Shared inputs include
+all proven direct/transitive consumers. Use validated job selection and preserve
+required status/protections, dependency stages, and this skill's authority.
+Unknown scope needs investigation and a justified fallback. Do not restore a
+blanket full-repository CI run for known narrow scope. Older pins retain their
+contracts; publication checks remain separate from ordinary change validation.

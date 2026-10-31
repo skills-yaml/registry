@@ -2,16 +2,16 @@
 name: wk-deliver
 description: Run the wk.deliver lifecycle facade to implement, validate, review, remediate, and advance an approved development specification through the repository's authorized delivery workflow. Invoke explicitly for end-to-end delivery rather than read-only review.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.4.4"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
+  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
-  skm-source-integrity: "sha256:951233cb2a7e47c42dde7e46e52ab2b24dd034d1d2b786fa60a0c6f75c6411a9"
-  workspace-toolkit-version: "0.12.0"
-  workspace-docs-compatibility: "8.x"
+  skm-source-integrity: "sha256:be493dd50ea7678525fe5948eda54283da62083837d8e14bbc4e2c25f4130341"
+  workspace-toolkit-version: "0.13.0"
+  workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.1, workspace/plan-implementation@0.5.3, workspace/implement-spec@0.5.3, workspace/review-changes@0.5.3, workspace/review-security@0.5.3, workspace/monitor-ci@0.4.7, workspace/fix-ci@0.4.7, workspace/address-review-feedback@0.4.7, workspace/coordinate-multi-agent-development@0.2.7"
+  skm-dependencies: "workspace/write-spec@0.6.2, workspace/plan-implementation@0.5.4, workspace/implement-spec@0.5.4, workspace/review-changes@0.5.4, workspace/review-security@0.5.4, workspace/monitor-ci@0.4.8, workspace/fix-ci@0.4.8, workspace/address-review-feedback@0.4.8, workspace/coordinate-multi-agent-development@0.2.8"
 ---
 
 # wk.deliver
@@ -75,3 +75,14 @@ acceptance. Work on one active task per agent. When writing a spec, split oversi
 scope into bounded ordered steps with dependencies, acceptance mapping, and
 focused validation; use linked child specs for independently managed delivery.
 Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+
+## Workspace Docs 9 Affected CI
+
+For a v9 pin, complete final verification means every required affected CI job,
+not every project/job in the repository. Docs/spec-only changes run related jobs;
+backend-only and frontend-only changes run their own jobs. Shared inputs include
+all proven direct/transitive consumers. Use validated job selection and preserve
+required status/protections, dependency stages, and this skill's authority.
+Unknown scope needs investigation and a justified fallback. Do not restore a
+blanket full-repository CI run for known narrow scope. Older pins retain their
+contracts; publication checks remain separate from ordinary change validation.
