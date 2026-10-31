@@ -2,16 +2,16 @@
 name: wk-document
 description: Run the wk.document lifecycle facade to create or maintain human-facing project documentation within repository ownership boundaries. Invoke explicitly when documentation must be reconciled with current behavior and validated.
 metadata:
-  skm-version: "0.3.7"
+  skm-version: "0.3.8"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
+  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
   skm-source-path: "workspace/instructions/skills/wk-document"
-  skm-source-integrity: "sha256:dc187d63152465ae3cf8d78b03cfd2f34c2e645b7c5a4bbba060e2e4d4a843d6"
-  workspace-toolkit-version: "0.12.0"
-  workspace-docs-compatibility: "8.x"
+  skm-source-integrity: "sha256:6417c51113e80a6375cb825c3eb4f4167e84ea16b474f47bc615b3d6ce3d5fce"
+  workspace-toolkit-version: "0.13.0"
+  workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/maintain-project-docs@0.3.7"
+  skm-dependencies: "workspace/maintain-project-docs@0.3.8"
 ---
 
 # wk.document
@@ -50,3 +50,14 @@ acceptance. Work on one active task per agent. When writing a spec, split oversi
 scope into bounded ordered steps with dependencies, acceptance mapping, and
 focused validation; use linked child specs for independently managed delivery.
 Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+
+## Workspace Docs 9 Affected CI
+
+For a v9 pin, complete final verification means every required affected CI job,
+not every project/job in the repository. Docs/spec-only changes run related jobs;
+backend-only and frontend-only changes run their own jobs. Shared inputs include
+all proven direct/transitive consumers. Use validated job selection and preserve
+required status/protections, dependency stages, and this skill's authority.
+Unknown scope needs investigation and a justified fallback. Do not restore a
+blanket full-repository CI run for known narrow scope. Older pins retain their
+contracts; publication checks remain separate from ordinary change validation.

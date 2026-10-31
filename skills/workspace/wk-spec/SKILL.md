@@ -2,16 +2,16 @@
 name: wk-spec
 description: Run the wk.spec lifecycle facade to turn an accepted request into a complete, categorized, lifecycle-managed development specification. Invoke explicitly when implementation needs scope, acceptance criteria, affected areas, validation, risks, and memory impact.
 metadata:
-  skm-version: "0.4.3"
+  skm-version: "0.4.4"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "ea074843f54a3197ae9adf8ada2e770c0caa862c"
+  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
   skm-source-path: "workspace/instructions/skills/wk-spec"
-  skm-source-integrity: "sha256:8b91bfbdf9b182086ac5d2c165eaab26b4681341a0b6684b8b3e8c6be5ec58b0"
-  workspace-toolkit-version: "0.12.0"
-  workspace-docs-compatibility: "8.x"
+  skm-source-integrity: "sha256:82c213c04ebaa639aa8459b1bdb32247106cbb9819a789be4f023181be098be3"
+  workspace-toolkit-version: "0.13.0"
+  workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.1"
+  skm-dependencies: "workspace/write-spec@0.6.2"
 ---
 
 # wk.spec
@@ -57,3 +57,14 @@ acceptance. Work on one active task per agent. When writing a spec, split oversi
 scope into bounded ordered steps with dependencies, acceptance mapping, and
 focused validation; use linked child specs for independently managed delivery.
 Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+
+## Workspace Docs 9 Affected CI
+
+For a v9 pin, complete final verification means every required affected CI job,
+not every project/job in the repository. Docs/spec-only changes run related jobs;
+backend-only and frontend-only changes run their own jobs. Shared inputs include
+all proven direct/transitive consumers. Use validated job selection and preserve
+required status/protections, dependency stages, and this skill's authority.
+Unknown scope needs investigation and a justified fallback. Do not restore a
+blanket full-repository CI run for known narrow scope. Older pins retain their
+contracts; publication checks remain separate from ordinary change validation.
