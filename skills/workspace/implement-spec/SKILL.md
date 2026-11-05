@@ -2,16 +2,16 @@
 name: implement-spec
 description: Implement an approved development specification through validated, reviewable changes. Use when a spec is active in development and the request authorizes code or documentation changes, including required tests, compatibility work, lifecycle reconciliation, and memory-impact completion.
 metadata:
-  skm-version: "0.5.4"
+  skm-version: "0.5.5"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
+  skm-source-revision: "6392e044b7d98e5735966ad106a4eedeaf41da5f"
   skm-source-path: "workspace/instructions/skills/implement-spec"
-  skm-source-integrity: "sha256:cdf2f1d5a6d3cfb1279ccf346943c01f2e888ee5fc58841b72aca39440263a3c"
-  workspace-toolkit-version: "0.13.0"
+  skm-source-integrity: "sha256:88c04103dae8baa74823d22a7868ed7b2bc54fa6285715660e5806d6a5e062ac"
+  workspace-toolkit-version: "0.13.1"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.4"
+  skm-dependencies: "workspace/design-domain-model@0.1.5"
 ---
 
 # Implement Spec
@@ -127,60 +127,48 @@ existing authorization and deployment boundaries.
 
 ## Pinned SDLC Contract
 
-Read the project's pinned SDLC before planning or delivery. For Workspace Docs
-7, done means verified merge into main with reconciled acceptance, documentation,
-catalog, version records, and memory; deployment/publication is separate.
-Blocked records previous stage, kind, reason, and resume condition; resume there
-and renew stale evidence. Preserve done history with linked follow-up specs.
-Shared test integration is the default; only an explicitly documented direct
-route may omit it, preserving all gates. Older pins keep their prior completion
-and branch-authority contracts.
+Read the repository's pinned SDLC; this skill does not override its authority
+or this skill's read-only/planning boundary. Deliver the requested scope using
+existing patterns. Report optional improvements separately and leave them
+unimplemented. Before substantial scope expansion, identify the concrete
+blocker, propose the smallest solution and obtain approval. Standing workflow
+authority never grants unrelated work or governed instruction changes.
 
-For v7, the task request authorizes ordinary task branches and safe delivery.
-Security, data integrity, public interfaces, governed instructions, and release
-controls always require independent exact-candidate review; other non-trivial
-changes require it except small low-risk changes with focused tests.
-Resolve every finding by implementation or reviewer-agreed documented rejection.
-For v7 development and review fixes, map changed behavior and direct/transitive
-consumers, including interfaces, errors, security, timing, side effects,
-configuration, dependencies, and generated outputs. Run the smallest meaningful
-changed-component tests/checks first; only after they pass, run affected consumer
-checks in dependency order through the transitive chain. Failure blocks dependent
-stages; missing coverage or tools is a gap, never a pass. Deduplicate overlapping
-checks, assess old/new relationships for deletions and renames, and group cycles.
-Avoid unrelated aggregate runs; unknown impact requires justified safe fallback.
-Keep required contract/integration/end-to-end coverage and native CI protections.
-Reuse only proven-fresh evidence after further edits; a flat selection is not
-execution order. Read-only skills assess evidence without mutating; planning
-skills specify stages without implementing. Reconcile
-knowable spec, catalog, and memory records before required review. Finish review,
-artifacts, documentation, records, and fixes before freezing the candidate and
-running full required checks/tests. Later tracked event/result records renew
-affected review and verification; they do not automatically preserve evidence. Reuse only proven-fresh evidence and verify actual
-combined integration/main revisions. Each acceptance criterion needs supporting
-evidence; subjective product decisions go to the user. Read-only skills remain
-read-only and planning skills do not implement changes.
+For v7 and later, ordinary task branches and safe delivery follow task authority.
+Done means verified main merge with acceptance, documentation, catalog, versions
+and memory reconciled; publication is separate. Preserve done history with
+linked follow-ups. Blocked work records previous stage, kind, reason and resume
+condition; resume that stage with renewed evidence. Shared test integration is
+the default; a documented direct route preserves the same gates.
 
-## Workspace Docs 8 Execution Boundary
+Security, data integrity, public interfaces, governed instructions and release
+controls require independent exact-candidate review. Other non-trivial changes
+require it except small low-risk changes with focused tests. Resolve findings
+by a fix or reviewer-agreed documented rejection; optional suggestions remain
+outside scope. Finish relevant review, fixes, artifacts and knowable records
+before final verification. Later edits renew affected evidence. Verify actual
+combined integration/main revisions, record acceptance evidence and preserve
+host protections; missing coverage/tools are gaps, never a pass.
 
-For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
-freshness rules while applying the v8 verification boundary: local checks cover
-changed behavior and all affected direct/transitive consumers; skip unrelated
-projects/suites. Complete required gates run in CI after the candidate stabilizes,
-without a duplicate complete local run before requesting CI. Unknown impact
-requires investigation and justified CI fallback; missing CI cannot prove final
-acceptance. Work on one active task per agent. When writing a spec, split oversized
-scope into bounded ordered steps with dependencies, acceptance mapping, and
-focused validation; use linked child specs for independently managed delivery.
-Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+Use the verification contract for the actual pin:
 
-## Workspace Docs 9 Affected CI
+- v9: changed behavior and all affected direct/transitive consumers locally;
+  every required affected CI job on the stable candidate. Docs/spec, backend
+  and frontend changes skip unrelated jobs. Preserve required status names,
+  validated selection and dependency stages. No blanket full-repository run.
+- v8: the same affected local boundary, then complete required gates in CI.
+  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  cannot establish final acceptance; unknown impact needs investigation and
+  justified CI fallback.
+- v7: affected modules during iteration, then full required final-candidate
+  checks/tests after review and fixes. Earlier pins retain their own contract.
 
-For a v9 pin, complete final verification means every required affected CI job,
-not every project/job in the repository. Docs/spec-only changes run related jobs;
-backend-only and frontend-only changes run their own jobs. Shared inputs include
-all proven direct/transitive consumers. Use validated job selection and preserve
-required status/protections, dependency stages, and this skill's authority.
-Unknown scope needs investigation and a justified fallback. Do not restore a
-blanket full-repository CI run for known narrow scope. Older pins retain their
-contracts; publication checks remain separate from ordinary change validation.
+During development and review fixes, pass changed-component checks before
+consumer checks in dependency order. Include interfaces, errors, security,
+timing, side effects, configuration, dependencies and generated outputs in
+impact analysis. Failures block dependent stages; deduplicate checks, assess
+old/new relationships for moves/deletions and group cycles. Reuse only proven-
+fresh evidence. Read-only work assesses this evidence; planning specifies it.
+Work on one active task per agent. Split oversized specs into bounded ordered
+steps with prerequisites, acceptance mapping and focused validation; use linked
+child specs for independently deliverable work and preserve overall acceptance.

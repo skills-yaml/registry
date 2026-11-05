@@ -28,10 +28,11 @@ workspace-docs/
   v5.0.0/
   v6.0.0/        # preserved source release
   v7.0.0/        # preserved SDLC release
-  v9.0.0/        # affected CI jobs
+  v9.0.1/        # bounded scope correction
+  v9.0.0/        # preserved affected CI release
   v8.0.0/        # local scope and final CI release
-  latest -> v9.0.0
-  default -> v9.0.0
+  latest -> v9.0.1
+  default -> v9.0.1
 ```
 
 The `latest` pointer identifies the highest available version, including an
@@ -46,7 +47,7 @@ release date. Explicit older project pins remain supported.
 Projects should record their adopted version in `AGENTS.md` or a generated agent context block:
 
 ```md
-Workspace docs standard: workspace-docs@9.0.0
+Workspace docs standard: workspace-docs@9.0.1
 ```
 
 If a project cannot fully adopt the version, it should document deviations in
@@ -82,7 +83,7 @@ Requires a new version:
 ## Per-Spec Release Planning
 
 Version 6 introduced required spec impact and release reservations. The
-current [v9 versioning contract](./v9.0.0/versioning.md) retains those obligations
+current [v9 versioning contract](./v9.0.1/versioning.md) retains those obligations
 and separates applied versions for main completion from publication. Each spec
 classifies its SemVer effect, and one owner applies each reserved bump at
 development start or integration. Shared specs reuse the same unreleased
