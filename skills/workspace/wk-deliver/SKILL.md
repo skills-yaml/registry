@@ -1,17 +1,17 @@
 ---
 name: wk-deliver
-description: Run the wk.deliver lifecycle facade to implement, validate, review, remediate, and advance an approved development specification through the repository's authorized delivery workflow. Invoke explicitly for end-to-end delivery rather than read-only review.
+description: Deliver an approved specification or release already tested work through the repository's established workflow. Use for end-to-end delivery, release, promotion or resumption; preserve the requested scope and existing pipeline.
 metadata:
-  skm-version: "0.4.4"
+  skm-version: "0.4.5"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "3fae5b83a7a8324e871d7e707f1c73498b02bb1f"
+  skm-source-revision: "6392e044b7d98e5735966ad106a4eedeaf41da5f"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
-  skm-source-integrity: "sha256:be493dd50ea7678525fe5948eda54283da62083837d8e14bbc4e2c25f4130341"
-  workspace-toolkit-version: "0.13.0"
+  skm-source-integrity: "sha256:9f486a92027405ed29e7d2e6f90ae6f0185505c9b215dbbc6777de6b55d14645"
+  workspace-toolkit-version: "0.13.1"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.2, workspace/plan-implementation@0.5.4, workspace/implement-spec@0.5.4, workspace/review-changes@0.5.4, workspace/review-security@0.5.4, workspace/monitor-ci@0.4.8, workspace/fix-ci@0.4.8, workspace/address-review-feedback@0.4.8, workspace/coordinate-multi-agent-development@0.2.8"
+  skm-dependencies: "workspace/write-spec@0.6.3, workspace/plan-implementation@0.5.5, workspace/implement-spec@0.5.5, workspace/review-changes@0.5.5, workspace/review-security@0.5.5, workspace/monitor-ci@0.4.9, workspace/fix-ci@0.4.9, workspace/address-review-feedback@0.4.9, workspace/coordinate-multi-agent-development@0.2.9"
 ---
 
 # wk.deliver
@@ -20,7 +20,42 @@ Coordinate the declared specification, planning, implementation, review,
 security, CI, and remediation dependencies. Invocation alone grants no write,
 publication, instruction-change, production, or scope authority.
 
-## Deliver
+## Release or Resume Tested Work
+
+Choose this route when the requested outcome is release/promotion and the work
+is already integrated in test or merged in main. Do not restart implementation
+or reopen a done spec. Use existing release records, or a bounded follow-up only
+when required for remaining release work.
+
+1. Identify the requested outcome, exact tested revision/artifact, target
+   environment, remaining operation and existing Taskfile/workflow. Read the
+   repository instructions and handoff; confirm actual state, not branch names.
+2. Check required acceptance, artifact provenance, review, CI and environment
+   protections. Reuse only proven-fresh evidence; run only affected or required
+   release checks. Missing evidence remains a gap to resolve through that path.
+3. Execute the established release operation within standing workflow authority.
+   Verify the deployed artifact/application and the requested observable behavior
+   using existing health/smoke checks. Configuration written, applied changes,
+   application running and behavior verified are distinct milestones.
+4. If an operation fails, capture the failing command/run and relevant error.
+   Use `fix-ci` only for a demonstrated blocker whose smallest repair fits the
+   existing patterns and requested outcome. Validate affected behavior and
+   consumers, then resume the same release. Never weaken a gate or protection.
+5. A missing production pipeline, new workflow/infrastructure or architectural
+   redesign is a substantial scope expansion: describe the concrete blocker
+   and smallest proposal and obtain approval before implementing it. Report
+   optional improvements separately and leave them unimplemented.
+
+After interruption, restore the same artifact, environment, approved scope and
+remaining operation from the handoff. Renew stale evidence without inventing
+new delivery work. Preserve governed-instruction, OpenTofu, protected-credential
+and destructive-production boundaries. Report the actual release status and
+unverified behavior explicitly; a merge or workflow dispatch is not deployment.
+Run OpenTofu mutations only through CI/CD and existing Taskfile entrypoints;
+local infrastructure work is source-only and non-mutating. Provider CLI writes
+remain forbidden in every environment.
+
+## Implement Remaining Development Scope
 
 1. Verify the active spec, catalog, human authority, repository state, and
    implementation plan. A blocked spec must resume at its recorded previous
@@ -45,8 +80,8 @@ publication, instruction-change, production, or scope authority.
 5. Use remediation skills for in-scope findings, rerun affected modules, and
    renew affected review. Resolve every finding by a fix or reviewer-agreed
    documented rejection. Once review, fixes, artifacts, and documentation
-   stabilize, freeze the candidate and run `task check`, `task test`, and every
-   applicable project gate. Reuse only proven-fresh evidence and verify actual
+   stabilize, freeze the candidate and run the final gates required by the
+   actual pin below. Reuse only proven-fresh evidence and verify actual
    combined integration/main revisions. Record evidence for each acceptance
    criterion; missing decisions or required failures block completion.
 6. Use CI monitoring and bounded repair only within the repository's standing
@@ -56,33 +91,57 @@ publication, instruction-change, production, or scope authority.
    name alone. Under v7, verified main merge completes work after all records
    and memory are reconciled; publication remains separate. Older pins retain
    their completion contract. Run affected modules during iteration, resolve
-   review findings, then run full final-candidate gates.
+   review findings, then run the pinned final-candidate gates.
 
 Report completed, deferred, and skipped work with reasons, validation evidence,
 review disposition, lifecycle state, and rollback guidance. Later tracked
 result/integration records require affected review and verification reconciliation;
 reuse only proven-fresh evidence.
 
-## Workspace Docs 8 Execution Boundary
+## Pinned SDLC Contract
 
-For a repository pinned to v8, retain the v7 lifecycle, review, approval, and
-freshness rules while applying the v8 verification boundary: local checks cover
-changed behavior and all affected direct/transitive consumers; skip unrelated
-projects/suites. Complete required gates run in CI after the candidate stabilizes,
-without a duplicate complete local run before requesting CI. Unknown impact
-requires investigation and justified CI fallback; missing CI cannot prove final
-acceptance. Work on one active task per agent. When writing a spec, split oversized
-scope into bounded ordered steps with dependencies, acceptance mapping, and
-focused validation; use linked child specs for independently managed delivery.
-Preserve this skill's planning/read-only scope and explicit older-pin contracts.
+Read the repository's pinned SDLC; this skill does not override its authority
+or this skill's read-only/planning boundary. Deliver the requested scope using
+existing patterns. Report optional improvements separately and leave them
+unimplemented. Before substantial scope expansion, identify the concrete
+blocker, propose the smallest solution and obtain approval. Standing workflow
+authority never grants unrelated work or governed instruction changes.
 
-## Workspace Docs 9 Affected CI
+For v7 and later, ordinary task branches and safe delivery follow task authority.
+Done means verified main merge with acceptance, documentation, catalog, versions
+and memory reconciled; publication is separate. Preserve done history with
+linked follow-ups. Blocked work records previous stage, kind, reason and resume
+condition; resume that stage with renewed evidence. Shared test integration is
+the default; a documented direct route preserves the same gates.
 
-For a v9 pin, complete final verification means every required affected CI job,
-not every project/job in the repository. Docs/spec-only changes run related jobs;
-backend-only and frontend-only changes run their own jobs. Shared inputs include
-all proven direct/transitive consumers. Use validated job selection and preserve
-required status/protections, dependency stages, and this skill's authority.
-Unknown scope needs investigation and a justified fallback. Do not restore a
-blanket full-repository CI run for known narrow scope. Older pins retain their
-contracts; publication checks remain separate from ordinary change validation.
+Security, data integrity, public interfaces, governed instructions and release
+controls require independent exact-candidate review. Other non-trivial changes
+require it except small low-risk changes with focused tests. Resolve findings
+by a fix or reviewer-agreed documented rejection; optional suggestions remain
+outside scope. Finish relevant review, fixes, artifacts and knowable records
+before final verification. Later edits renew affected evidence. Verify actual
+combined integration/main revisions, record acceptance evidence and preserve
+host protections; missing coverage/tools are gaps, never a pass.
+
+Use the verification contract for the actual pin:
+
+- v9: changed behavior and all affected direct/transitive consumers locally;
+  every required affected CI job on the stable candidate. Docs/spec, backend
+  and frontend changes skip unrelated jobs. Preserve required status names,
+  validated selection and dependency stages. No blanket full-repository run.
+- v8: the same affected local boundary, then complete required gates in CI.
+  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  cannot establish final acceptance; unknown impact needs investigation and
+  justified CI fallback.
+- v7: affected modules during iteration, then full required final-candidate
+  checks/tests after review and fixes. Earlier pins retain their own contract.
+
+During development and review fixes, pass changed-component checks before
+consumer checks in dependency order. Include interfaces, errors, security,
+timing, side effects, configuration, dependencies and generated outputs in
+impact analysis. Failures block dependent stages; deduplicate checks, assess
+old/new relationships for moves/deletions and group cycles. Reuse only proven-
+fresh evidence. Read-only work assesses this evidence; planning specifies it.
+Work on one active task per agent. Split oversized specs into bounded ordered
+steps with prerequisites, acceptance mapping and focused validation; use linked
+child specs for independently deliverable work and preserve overall acceptance.

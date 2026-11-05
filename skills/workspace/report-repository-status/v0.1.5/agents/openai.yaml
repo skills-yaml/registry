@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repository Status"
+  short_description: "Report changes, branches, worktrees and linked specs"
+  default_prompt: "Use $report-repository-status to report this repository's local and remote status, linked specs and merge/discard/keep recommendations."

@@ -16,8 +16,9 @@ The standard defines:
 
 ## Current Versions
 
-- `latest` points to `v9.0.0` (newest available version).
-- `default` points to `v9.0.0` (recommended stable version).
+- `latest` points to `v9.0.1` (newest available version).
+- `default` points to `v9.0.1` (recommended stable version).
+- `v9.0.1` corrects bounded delivery authority and release routing.
 - `v9.0.0` scopes CI to related docs/spec/backend/frontend jobs and affected
   consumers; unknown/shared control-plane inputs use justified fallback.
 - `v8.0.0` requires one active task per agent, task-sized oversized specs,
@@ -34,7 +35,7 @@ The standard defines:
 Projects should pin to a concrete version when reproducibility matters:
 
 ```text
-workspace-docs@9.0.0
+workspace-docs@9.0.1
 ```
 
 Projects may use `workspace-docs@default` while adopting the shared process.
@@ -46,9 +47,10 @@ workspace-docs/
   AGENT_MIGRATION.md
   README.md
   VERSIONING.md
-  latest -> v9.0.0
-  default -> v9.0.0
-  v9.0.0/                    # affected CI jobs
+  latest -> v9.0.1
+  default -> v9.0.1
+  v9.0.1/                    # bounded scope and release correction
+  v9.0.0/                    # preserved affected CI release
   v8.0.0/                    # focused local work and final CI verification
   v7.0.0/                    # preserved SDLC redesign release
   v6.0.0/                    # preserved source release
@@ -79,7 +81,7 @@ workspace-docs/
 Generated or synchronized agent context must live inside clear markers:
 
 ```md
-<!-- AGENT-CONTEXT:START workspace-docs@9.0.0 -->
+<!-- AGENT-CONTEXT:START workspace-docs@9.0.1 -->
 <!-- Generated content. Manual edits may be overwritten. -->
 <!-- AGENT-CONTEXT:END -->
 ```
