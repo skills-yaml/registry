@@ -2,16 +2,16 @@
 name: wk-document
 description: Run the wk.document lifecycle facade to create or maintain human-facing project documentation within repository ownership boundaries. Invoke explicitly when documentation must be reconciled with current behavior and validated.
 metadata:
-  skm-version: "0.3.9"
+  skm-version: "0.3.10"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6392e044b7d98e5735966ad106a4eedeaf41da5f"
+  skm-source-revision: "b3d3173635d9a8c2896f4d45a17bcdd41e6155a5"
   skm-source-path: "workspace/instructions/skills/wk-document"
   skm-source-integrity: "sha256:1fe205e154f9b7ee579ff7d1ae0c1325ab9e7033051916d981bcb0e29d6830cc"
-  workspace-toolkit-version: "0.13.1"
+  workspace-toolkit-version: "0.14.0"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/maintain-project-docs@0.3.9"
+  skm-dependencies: "workspace/maintain-project-docs@0.3.10"
 ---
 
 # wk.document
