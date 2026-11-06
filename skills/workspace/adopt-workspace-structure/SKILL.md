@@ -2,12 +2,12 @@
 name: adopt-workspace-structure
 description: Adopt, upgrade, repair, or assess workspace documentation with guided architecture and technology decisions. Use for workspace initialization, version migration, conformance repair, or adoption planning; involve the user in material choices and turn agreed deferred improvements into actionable specs.
 metadata:
-  skm-version: "0.11.2"
+  skm-version: "0.11.3"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "b3d3173635d9a8c2896f4d45a17bcdd41e6155a5"
+  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
   skm-source-integrity: "sha256:663ef7e1d4c4ecb7cccef7efe1a166ef31567686be7add3bc4fd0aff81264841"
-  workspace-toolkit-version: "0.14.0"
+  workspace-toolkit-version: "0.14.1"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

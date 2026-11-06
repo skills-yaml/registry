@@ -1,221 +1,134 @@
 ---
 name: write-spec
-description: Turn an accepted problem or feature request into a lifecycle-managed development specification. Use when work needs explicit scope, acceptance criteria, affected areas, validation gates, risks, migration considerations, and memory impact before implementation begins.
+description: Write a development specification from an accepted request before implementation. Use when scope, behavior, acceptance criteria, affected areas, validation, risks, versions or unresolved decisions need an explicit contract.
 metadata:
-  skm-version: "0.6.4"
+  skm-version: "0.6.5"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "b3d3173635d9a8c2896f4d45a17bcdd41e6155a5"
+  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:e72579d56e814cd0cbae6900d5be85f2011c3d48127ac041dea595cac08954fe"
-  workspace-toolkit-version: "0.14.0"
+  skm-source-integrity: "sha256:01f3c988fb5dafe358413d35cce72f9bd3caf2c5b6f9f2e2f604c76479e6ad3b"
+  workspace-toolkit-version: "0.14.1"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.6"
+  skm-dependencies: "workspace/design-domain-model@0.1.7"
 ---
 
 # Write Spec
 
-Create a decision-ready specification without starting implementation.
+Create a decision-ready specification. This role writes and delivers planning
+artifacts; feature implementation belongs to the implementation workflow.
 
-For repository-controlled conflicts, use the applicable current source under
-`workspace/instructions/` as the source of truth. A spec records or proposes
-policy but cannot override a current governed instruction.
+## 1. Load the Project Contract
 
-## Establish the Contract
+Read the consuming repository's policy, `workspace/instructions/tech/sdlc.md`,
+Taskfile guidance, spec catalog, nearest related specs, relevant architecture
+and product documents, and project memory. These paths resolve from that
+repository's root, not this installed package. Missing required instructions
+or catalog are prerequisite gaps: report them before dependent writing.
 
-1. Read repository policy, the root spec catalog, the nearest related specs,
-   and relevant architecture or product documentation.
-2. Confirm the problem, desired outcome, constraints, and explicit exclusions.
-   Identify what is missing, ambiguous, or contradictory (see Resolve Missing
-   or Unclear Information) and ask the user before writing the spec.
-3. Select the lifecycle state and primary-feature category required by local
-   policy. Reuse an existing category when it accurately describes the work.
-   For Workspace Docs 7, use `backlog`, `development`, `test`, `done`, or
-   `blocked`. Default to shared-test integration; a documented direct-to-main
-   route preserves every gate. Blocked specs record Previous State, Block Kind,
-   Block Reason, and Resume Condition. Older pins retain their original states
-   and transition requirements.
-4. Preserve unrelated work and existing decisions. Mark assumptions and open
-   questions instead of presenting them as settled facts.
+Applicable current sources under `workspace/instructions/` are the source of
+truth for repository-controlled conflicts; a spec cannot override governed
+instructions. Use the project's actual pin for lifecycle, branch authority,
+review, verification and completion. Read its referenced standard when those
+rules are not established; never substitute a newer pin's contract.
 
-If two or more agents may mutate the repository concurrently, invoke
-`coordinate-multi-agent-development` before delegated edits. Give each
-mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+Identify the accepted outcome, constraints, exclusions, users/consumers,
+affected contracts, primary feature and allowed lifecycle state. Preserve
+unrelated work and existing decisions. Work on one active task at a time.
 
-## Resolve Missing or Unclear Information
+## 2. Resolve Inputs
 
-Before writing, check the request against the required spec contents below.
-When information needed for scope, goals and non-goals, users or consumers,
-behavior or interface contracts, affected areas, acceptance criteria, risks,
-version impact, or approval scope is missing, vague, or conflicting and
-repository evidence does not settle it, ask the user instead of guessing.
+Check the request against every required spec item in step 4. Resolve facts
+from the request, repository, catalog, memory and prior answers first. When
+required information remains missing, unclear or conflicting, ask a small
+focused batch of plain-language questions with options or the default you
+would otherwise assume. Use the host question tool when available.
 
-- Ask a small focused batch of specific questions in plain language, each with
-  the options or default you would otherwise assume. Use the host's question
-  tool when one is available, and wait for the actual answers before dependent
-  writing; silence is not a choice.
-- Do not ask what the request, repository, catalog, memory, or prior answers
-  already establish, and do not ask for routine delivery permission.
-- Continue read-only discovery while waiting. If an answer cannot be obtained,
-  record it as a labeled open question or assumption in the spec and do not
-  present it as settled; never invent requirements, versions, or approvals.
+Wait for actual answers before dependent writing; silence is not a choice.
+Continue independent read-only discovery while waiting. If an answer cannot
+be obtained, label it as an open question or assumption, identify the work it
+blocks, and leave that work unready. Never present it as a settled requirement,
+version or approval. Established facts and ordinary delivery permission do
+not need another question.
 
-## Write the Specification
+## 3. Establish Impact Before Drafting
 
-Include at least:
+Read the pinned versioning contract and latest shared release ledger before
+choosing a target. Include its per-component Version Impact table: Component,
+Impact (major/minor/patch or justified none), Release and Rationale. Register
+member specs in `workspace/releases.json`; declare baseline, target, owner,
+timing and rationale through the required shared reservation transaction.
+Reuse an already-applied shared release. A backlog idea does not apply a
+development bump. Recheck occupancy at handoff.
 
-- lifecycle state and a concise status rationale;
-- problem, goals, non-goals, and users or consumers;
-- proposed behavior and important interface or data contracts;
-- affected areas and compatibility or migration effects;
-- security, privacy, reliability, and rollback risks where applicable;
-- measurable acceptance criteria;
-- required validation gates, changed-component checks, and subsequent affected
-  direct/transitive consumer stages, including selection reasons and gaps;
-- ordered, task-sized delivery steps when the scope cannot be completed safely
-  in one focused change (see Break Large Specs into Focused Steps);
-- a `Memory Impact` section using the repository's required initial status.
+Load only the conditional material triggered by the affected areas:
 
-When affected areas include governed instructions, add an Instruction Change
-Approval section that records whether prospective human approval is pending or
-was directly supplied and its exact scope. The record supports auditability but
-is not itself approval: an agent-authored spec cannot grant instruction-change
-approval. Do not modify governed instructions while approval is pending.
+- **Domain or schema changes:** read [specialized scope](references/specialized-scope.md#domain-and-schema)
+  before defining business concepts, invariants, ownership or database/API/event
+  contracts; use its proportionate design-mode modeling handoff.
+- **Infrastructure:** read [specialized scope](references/specialized-scope.md#infrastructure)
+  and the project's infrastructure policy before defining mutation or acceptance paths.
+- **Concurrent mutating agents:** invoke `coordinate-multi-agent-development`
+  before delegated edits; follow its worktree, claim and WIP requirements.
+- **Governed instructions:** record prospective instruction-change approval
+  as pending or directly supplied, with its exact human-approved scope. An
+  agent-authored approval record grants no authority to edit those instructions.
 
-For infrastructure scope, make OpenTofu the only implementation and state
-management mechanism. Reject acceptance paths that depend on consoles,
-provider mutation CLIs, alternative IaC engines, or ad hoc provisioning scripts.
-Require local development to remain non-mutating: contributors may change
-OpenTofu configuration and run validation or review locally, but applies,
-destroys, imports, and state mutations must run only through the repository's
-CI/CD workflow. CI/CD does not authorize provider CLI writes.
+## 4. Draft the Specification
 
-Use normative language only for real requirements. Keep implementation details
-out unless they constrain compatibility, safety, or acceptance.
+Include:
 
-## Break Large Specs into Focused Steps
+- lifecycle state, concise status rationale and primary feature;
+- problem, goals, non-goals, users/consumers and proposed behavior;
+- important interface/data contracts, bounded affected areas and exclusions;
+- compatibility/migration effects and applicable security, privacy,
+  reliability and rollback risks;
+- measurable acceptance criteria, each mapped to validation evidence;
+- validation gates grounded in native Taskfile commands: changed-component
+  checks, then affected direct/transitive consumer stages gated on success,
+  with selection reasons, dependencies and coverage gaps; use the actual pin's
+  final verification contract from step 1;
+- ordered delivery steps proportionate to the scope;
+- Version Impact and applicable approval/modeling records from step 3;
+- Memory Impact with the repository's required initial status;
+- unresolved questions/assumptions and the dependent work they block.
 
-Before finalizing a new or revised spec, assess whether its scope can be
-implemented, reviewed, and validated as one focused change. Split it when it
-combines distinct deliverables, dependency stages, migrations, or risk areas
-that need separate acceptance evidence. Use those boundaries rather than page
-length, a fixed step count, or an arbitrary time estimate. Keep small specs
-concise; do not split tightly coupled invariants into unsafe intermediate states.
+Assess whether implementation, review and validation fit one focused change.
+When distinct deliverables, dependency stages, migrations or risks need separate
+evidence, read [large specifications](references/large-specs.md) and split at
+those boundaries. Keep small specs concise and tightly coupled invariants safe.
 
-For oversized scope, write ordered steps with stable IDs. Each step MUST define:
+Use normative language for real requirements. Include implementation detail
+only when compatibility, safety or acceptance depends on it. Link authoritative
+policy instead of copying it into the spec.
 
-- one concrete outcome and bounded affected areas, including exclusions;
-- prerequisites and dependencies on earlier steps or unresolved decisions;
-- measurable acceptance criteria mapped to the spec's overall criteria;
-- the smallest meaningful changed-component checks and affected-consumer checks,
-  with selection reasons and required evidence for completion.
+## 5. Check Readiness and Hand Off
 
-Split a step again if it still contains multiple independently reviewable tasks.
-Plan one ready step at a time per agent. Require passing acceptance evidence
-before dependent steps begin; unresolved decisions block dependent work without
-inventing answers or preventing established independent steps from being planned.
-Do not add unrelated edits or tests to a step. Preserve cross-step contracts,
-compatibility, migration/rollback safety, integration checks, and mandatory final
-repository gates; passing isolated steps does not prove the complete feature.
+Save the spec in its required state/primary-feature path and update the root
+catalog with the same state and rationale. Synchronize release member paths.
+Preserve done history through linked follow-ups. Lifecycle transitions need
+the actual pinned integration/completion evidence, never a branch name.
 
-Keep steps in one spec when they share one delivery and lifecycle. When parts
-need independent delivery or lifecycle tracking, create linked child specs:
-the parent records the overall outcome, dependencies, and acceptance mapping;
-each child links back and follows the repository's feature, catalog, lifecycle,
-version, approval, and memory requirements. Do not mark the parent complete
-until its overall acceptance and pinned completion requirements are met.
-Preserve completed specs and create linked follow-ups for later decomposition.
-This remains planning work and does not authorize implementation.
+Self-review links, terminology, required contents, acceptance testability and
+policy consistency. Each requirement must have supporting repository evidence,
+a user decision, or a labeled unresolved input. Every acceptance criterion
+needs a planned check, inspection, demonstration or user decision. Report
+uncovered criteria as gaps; dependent work stays unready until resolved.
 
-## Integrate and Review
+For this planning artifact's delivery, obtain the independent exact-candidate
+review required by project risk rules and resolve every finding. After fixes
+and records stabilize, freeze the candidate and run the required affected
+documentation/spec/package gates through Taskfile using the pinned local/CI
+contract. Renew evidence after relevant edits; missing coverage/tools are gaps.
 
-1. Put the spec in the required lifecycle and primary-feature path.
-2. Update the root spec catalog in the same change, including current state and
-   why the spec is in that state.
-   For `test` and `done`, cite confirmed integration and the pinned completion event; do
-   not infer delivery from the checked-out branch name alone.
-3. Check links, terminology, category placement, acceptance testability, and
-   consistency with existing policy.
-4. Self-review and obtain independent exact-candidate review where the pinned
-   risk rules require it. Resolve every finding before freezing the candidate
-   and running the required final documentation, spec, and aggregate gates.
-5. Hand off the unresolved decisions and the next allowed lifecycle transition.
-   Use the documented test target, conventionally `develop`. Under v7, verified
-   main merge completes work after acceptance and records are reconciled;
-   deployment and publication are separate. Preserve done history with linked
-   follow-up specs. Do not infer completion from a branch name.
+Standing workflow authority covers safe delivery of the requested planning
+artifacts, including commits, branch pushes and pull requests as the pin allows.
+Substantial scope expansion, unapproved governed instruction changes and
+destructive production actions retain prospective scoped human approval.
 
-Do not implement the feature while operating in this planning role. A requested
-specification workflow may use standing authority to commit, push its delivery
-branch, and create or update a pull request. Advance lifecycle only when the
-required delivery evidence exists. Require scoped human approval for substantial scope expansion, governed
-instruction changes and destructive production actions.
-
-## Version Impact
-
-Before implementation, include the per-component Version Impact table required
-by the pinned standard and register member specs in `workspace/releases.json`.
-Classify major, minor, patch, or justified none; declare a shared reservation
-with baseline, target, owner, timing, and rationale. Check occupied versions
-before proposing a target. Do not apply a development bump to a backlog idea.
-
-## Domain and Schema Design
-
-When requirements change business concepts, lifecycle/invariants, data ownership
-or database/API/event contracts, use $design-domain-model in design mode to
-produce or reuse proportionate modeling evidence. Carry scenario/invariant IDs,
-representation mappings, affected consumers and material questions into the spec.
-A clear field/CRUD change needs a model delta, not a mandatory DDD workshop.
-Keep unresolved material business rules explicit; planning does not authorize
-application/schema implementation.
-
-## Pinned SDLC Contract
-
-Read the repository's pinned SDLC; this skill does not override its authority
-or this skill's read-only/planning boundary. Deliver the requested scope using
-existing patterns. Report optional improvements separately and leave them
-unimplemented. Before substantial scope expansion, identify the concrete
-blocker, propose the smallest solution and obtain approval. Standing workflow
-authority never grants unrelated work or governed instruction changes.
-
-For v7 and later, ordinary task branches and safe delivery follow task authority.
-Done means verified main merge with acceptance, documentation, catalog, versions
-and memory reconciled; publication is separate. Preserve done history with
-linked follow-ups. Blocked work records previous stage, kind, reason and resume
-condition; resume that stage with renewed evidence. Shared test integration is
-the default; a documented direct route preserves the same gates.
-
-Security, data integrity, public interfaces, governed instructions and release
-controls require independent exact-candidate review. Other non-trivial changes
-require it except small low-risk changes with focused tests. Resolve findings
-by a fix or reviewer-agreed documented rejection; optional suggestions remain
-outside scope. Finish relevant review, fixes, artifacts and knowable records
-before final verification. Later edits renew affected evidence. Verify actual
-combined integration/main revisions, record acceptance evidence and preserve
-host protections; missing coverage/tools are gaps, never a pass.
-
-Use the verification contract for the actual pin:
-
-- v9: changed behavior and all affected direct/transitive consumers locally;
-  every required affected CI job on the stable candidate. Docs/spec, backend
-  and frontend changes skip unrelated jobs. Preserve required status names,
-  validated selection and dependency stages. No blanket full-repository run.
-- v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
-  cannot establish final acceptance; unknown impact needs investigation and
-  justified CI fallback.
-- v7: affected modules during iteration, then full required final-candidate
-  checks/tests after review and fixes. Earlier pins retain their own contract.
-
-During development and review fixes, pass changed-component checks before
-consumer checks in dependency order. Include interfaces, errors, security,
-timing, side effects, configuration, dependencies and generated outputs in
-impact analysis. Failures block dependent stages; deduplicate checks, assess
-old/new relationships for moves/deletions and group cycles. Reuse only proven-
-fresh evidence. Read-only work assesses this evidence; planning specifies it.
-Work on one active task per agent. Split oversized specs into bounded ordered
-steps with prerequisites, acceptance mapping and focused validation; use linked
-child specs for independently deliverable work and preserve overall acceptance.
+Hand off the spec path, ready and blocked work, unresolved decisions, review
+and validation results, next allowed lifecycle transition, version reservation
+and memory classification with rationale. Distinguish planned feature validation
+from checks actually run on the planning artifact, and main completion from
+separate deployment/publication.
