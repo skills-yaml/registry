@@ -2,16 +2,16 @@
 name: wk-spec
 description: Run the wk.spec lifecycle facade to turn an accepted request into a complete, categorized, lifecycle-managed development specification. Invoke explicitly when implementation needs scope, acceptance criteria, affected areas, validation, risks, and memory impact.
 metadata:
-  skm-version: "0.4.5"
+  skm-version: "0.4.6"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6392e044b7d98e5735966ad106a4eedeaf41da5f"
+  skm-source-revision: "b3d3173635d9a8c2896f4d45a17bcdd41e6155a5"
   skm-source-path: "workspace/instructions/skills/wk-spec"
   skm-source-integrity: "sha256:83d93aeaa30ec987b3c1a939b7fec63600eaac1c4fca7c9fea1077c9c8a60cad"
-  workspace-toolkit-version: "0.13.1"
+  workspace-toolkit-version: "0.14.0"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.3"
+  skm-dependencies: "workspace/write-spec@0.6.4"
 ---
 
 # wk.spec
