@@ -7,7 +7,7 @@ nothing in skm or `skills.yaml` requires them.
 
 ## Packages
 
-The namespace holds 22 independently versioned packages (Toolkit `0.14.0`, Workspace Docs `9.x`, minimum SKM `0.7.0`). Focused packages can
+The namespace holds 22 independently versioned packages (Toolkit `0.14.1`, Workspace Docs `9.x`, minimum SKM `0.7.0`). Focused packages can
 be installed directly.
 The public lifecycle facades preserve the
 conceptual `wk.*` vocabulary while using portable kebab-case package and
@@ -34,35 +34,35 @@ package is listed in `skills/workspace/manifest.yaml`:
 ```yaml
 skills:
   - name: workspace/wk-spec
-    version: "0.4.6"
+    version: "0.4.7"
 ```
 
 ### Current Package Versions
 
 | Package | Version | Dependencies |
 | --- | --- | --- |
-| `workspace/address-review-feedback` | `0.4.10` | none |
-| `workspace/adopt-workspace-structure` | `0.11.2` | none |
-| `workspace/analyze-repository` | `0.4.6` | `workspace/design-domain-model@0.1.6` |
-| `workspace/coordinate-multi-agent-development` | `0.2.10` | none |
-| `workspace/design-domain-model` | `0.1.6` | none |
-| `workspace/fix-bug` | `0.4.10` | none |
-| `workspace/fix-ci` | `0.4.10` | none |
-| `workspace/implement-spec` | `0.5.6` | `workspace/design-domain-model@0.1.6` |
-| `workspace/maintain-project-docs` | `0.3.10` | none |
-| `workspace/monitor-ci` | `0.4.10` | none |
-| `workspace/plan-implementation` | `0.5.6` | `workspace/design-domain-model@0.1.6` |
-| `workspace/report-repository-status` | `0.1.6` | none |
-| `workspace/review-changes` | `0.5.6` | `workspace/design-domain-model@0.1.6` |
-| `workspace/review-security` | `0.6.0` | `workspace/design-domain-model@0.1.6` |
-| `workspace/wk-adopt` | `0.4.5` | `workspace/adopt-workspace-structure@0.11.2` |
-| `workspace/wk-analyze` | `0.4.6` | `workspace/analyze-repository@0.4.6` |
-| `workspace/wk-deliver` | `0.4.6` | `workspace/write-spec@0.6.4`, `workspace/plan-implementation@0.5.6`, `workspace/implement-spec@0.5.6`, `workspace/review-changes@0.5.6`, `workspace/review-security@0.6.0`, `workspace/monitor-ci@0.4.10`, `workspace/fix-ci@0.4.10`, `workspace/address-review-feedback@0.4.10`, `workspace/coordinate-multi-agent-development@0.2.10` |
-| `workspace/wk-document` | `0.3.10` | `workspace/maintain-project-docs@0.3.10` |
-| `workspace/wk-plan` | `0.4.6` | `workspace/write-spec@0.6.4`, `workspace/plan-implementation@0.5.6` |
-| `workspace/wk-review` | `0.4.6` | `workspace/review-changes@0.5.6`, `workspace/review-security@0.6.0` |
-| `workspace/wk-spec` | `0.4.6` | `workspace/write-spec@0.6.4` |
-| `workspace/write-spec` | `0.6.4` | `workspace/design-domain-model@0.1.6` |
+| `workspace/address-review-feedback` | `0.4.11` | none |
+| `workspace/adopt-workspace-structure` | `0.11.3` | none |
+| `workspace/analyze-repository` | `0.4.7` | `workspace/design-domain-model@0.1.7` |
+| `workspace/coordinate-multi-agent-development` | `0.2.11` | none |
+| `workspace/design-domain-model` | `0.1.7` | none |
+| `workspace/fix-bug` | `0.4.11` | none |
+| `workspace/fix-ci` | `0.4.11` | none |
+| `workspace/implement-spec` | `0.5.7` | `workspace/design-domain-model@0.1.7` |
+| `workspace/maintain-project-docs` | `0.3.11` | none |
+| `workspace/monitor-ci` | `0.4.11` | none |
+| `workspace/plan-implementation` | `0.5.7` | `workspace/design-domain-model@0.1.7` |
+| `workspace/report-repository-status` | `0.1.7` | none |
+| `workspace/review-changes` | `0.5.7` | `workspace/design-domain-model@0.1.7` |
+| `workspace/review-security` | `0.6.1` | `workspace/design-domain-model@0.1.7` |
+| `workspace/wk-adopt` | `0.4.6` | `workspace/adopt-workspace-structure@0.11.3` |
+| `workspace/wk-analyze` | `0.4.7` | `workspace/analyze-repository@0.4.7` |
+| `workspace/wk-deliver` | `0.4.7` | `workspace/write-spec@0.6.5`, `workspace/plan-implementation@0.5.7`, `workspace/implement-spec@0.5.7`, `workspace/review-changes@0.5.7`, `workspace/review-security@0.6.1`, `workspace/monitor-ci@0.4.11`, `workspace/fix-ci@0.4.11`, `workspace/address-review-feedback@0.4.11`, `workspace/coordinate-multi-agent-development@0.2.11` |
+| `workspace/wk-document` | `0.3.11` | `workspace/maintain-project-docs@0.3.11` |
+| `workspace/wk-plan` | `0.4.7` | `workspace/write-spec@0.6.5`, `workspace/plan-implementation@0.5.7` |
+| `workspace/wk-review` | `0.4.7` | `workspace/review-changes@0.5.7`, `workspace/review-security@0.6.1` |
+| `workspace/wk-spec` | `0.4.7` | `workspace/write-spec@0.6.5` |
+| `workspace/write-spec` | `0.6.5` | `workspace/design-domain-model@0.1.7` |
 
 To add every package at once, use the `workspace/all-workspace-skills` bundle:
 
