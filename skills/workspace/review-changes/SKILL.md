@@ -2,16 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.5.6"
+  skm-version: "0.5.7"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "b3d3173635d9a8c2896f4d45a17bcdd41e6155a5"
+  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
   skm-source-path: "workspace/instructions/skills/review-changes"
   skm-source-integrity: "sha256:a426321d2b498e17c26f2b0b5455c719f6c5404fada28787964fff44661daf9d"
-  workspace-toolkit-version: "0.14.0"
+  workspace-toolkit-version: "0.14.1"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.6"
+  skm-dependencies: "workspace/design-domain-model@0.1.7"
 ---
 
 # Review Changes

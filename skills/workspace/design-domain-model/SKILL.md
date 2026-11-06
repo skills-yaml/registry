@@ -2,12 +2,12 @@
 name: design-domain-model
 description: Assess, design or review business-domain models, logical data models and database/API/event schemas with explicit invariants, ownership, representation mappings and compatibility evidence. Use for new domain concepts, lifecycle or consistency rules, and schema evolution; scale simple CRUD changes to a concise model delta.
 metadata:
-  skm-version: "0.1.6"
+  skm-version: "0.1.7"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "b3d3173635d9a8c2896f4d45a17bcdd41e6155a5"
+  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
   skm-source-path: "workspace/instructions/skills/design-domain-model"
   skm-source-integrity: "sha256:b1a2184087744623023e786a652c974a03775287826da20c32d1dc00a70cd1d8"
-  workspace-toolkit-version: "0.14.0"
+  workspace-toolkit-version: "0.14.1"
   workspace-docs-compatibility: "9.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
