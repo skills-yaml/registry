@@ -5,22 +5,22 @@ the workspace documentation structure in a repository. It covers process and
 safety; use the target version's migration notes for version-specific path
 changes.
 
-The current recommended target is `workspace-docs@9.0.1`, resolved from the
+The current recommended target is `workspace-docs@10.0.0`, resolved from the
 contained `default` pointer. Resolve that pointer to a complete version package
 and pin its concrete version before changing files. An explicit older pin uses
 its own manifest, migration notes, and lifecycle; never silently downgrade.
 
-- [Version-specific migration notes](./v9.0.1/migration.md)
-- [Required structure manifest](./v9.0.1/manifest.yaml)
-- [Generated `AGENTS.md` context template](./v9.0.1/agents-template.md)
-- [Specs README template](./v9.0.1/specs-readme-template.md)
-- [Adoption audit checklist](./v9.0.1/audit-checklist.md)
+- [Version-specific migration notes](./v10.0.0/migration.md)
+- [Required structure manifest](./v10.0.0/manifest.yaml)
+- [Generated `AGENTS.md` context template](./v10.0.0/agents-template.md)
+- [Specs README template](./v10.0.0/specs-readme-template.md)
+- [Adoption audit checklist](./v10.0.0/audit-checklist.md)
 
 ## Choose the Migration Mode
 
 Classify the current repository before changing files. The table below records
 the historical structural migration through v5. For the current default, also
-apply the v6, v7, v8, and v9 migration notes in order; the target manifest is authoritative.
+apply the v6, v7, v8, v9 and v10 migration notes in order; the target manifest is authoritative.
 
 | Current state | Mode | Required action |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ Agents must follow these rules throughout the migration:
    relative paths. Do not search outside the repository.
 4. Compare existing files and directories with the target
    manifest (for the current default,
-   [`v9.0.1/manifest.yaml`](./v9.0.1/manifest.yaml)).
+   [`v10.0.0/manifest.yaml`](./v10.0.0/manifest.yaml)).
 5. Identify which current-project documents are authoritative, duplicated,
    obsolete, or unclassified.
 6. Confirm the target version. Resolve `default` or `latest` for discovery, but
@@ -167,7 +167,8 @@ in [`v5.0.0/migration.md`](./v5.0.0/migration.md). Start at the first version
 newer than the repository's current pin and do not skip intermediate notes.
 Continue through [v6](./v6.0.0/migration.md) and
 [v7](./v7.0.0/migration.md), then [v8](./v8.0.0/migration.md), then [v9](./v9.0.0/migration.md) and the
-[9.0.1 correction](./v9.0.1/migration.md) when targeting the default.
+[9.0.1 correction](./v9.0.1/migration.md), followed by [v10](./v10.0.0/migration.md)
+when targeting the current default.
 
 ## Phase 4: Validate the Result
 
@@ -243,9 +244,9 @@ Deviations or follow-up: none | <project-local details>
 The handoff must not contain machine-local paths, identities, sibling-project
 details, credentials, or environment-specific values.
 
-## Workspace Docs 9 Default
+## Workspace Docs 9 Verification Boundary
 
-The contained default selects v9. Read its [SDLC](./v9.0.1/sdlc.md),
+For an explicit v9 pin, read its [SDLC](./v9.0.1/sdlc.md),
 [process](./v9.0.1/process.md), [migration](./v9.0.1/migration.md), and
 [audit checklist](./v9.0.1/audit-checklist.md). They govern the v9 target;
 historical mappings above do not replace the v9 affected-CI boundary.
@@ -257,8 +258,8 @@ historical evidence, and manual policy outside the approved repair scope.
 
 ## Workspace Docs 8 Verification Boundary
 
-This historical boundary applies to an explicit v8 pin; use the v9 section
-below when adopting the current default.
+This historical boundary applies to an explicit v8 pin. The current v10
+default retains affected CI and adds the separately described operations exception.
 
 For v8 adoption, run only affected Taskfile checks locally, including affected
 direct/transitive consumers. Skip unrelated projects/suites. Complete final
@@ -275,5 +276,15 @@ consumers, not every job in the repository. Pure docs/spec changes select their
 related jobs, backend-only changes select backend jobs, and frontend-only changes
 select frontend jobs. Shared inputs include all affected direct/transitive consumers.
 Validate selection and required-status failure handling before relying on it.
-Old v8 references above describe historical migration; apply v9's scoped-CI
-contract when adopting the new default.
+Old v8 references above describe historical migration; v10 retains v9's
+scoped-CI contract and adds the explicit human-run operations boundary.
+
+## Workspace Docs 10 Default and Operations Boundary
+
+The contained default selects v10. Its [SDLC](./v10.0.0/sdlc.md),
+[process](./v10.0.0/process.md) and [audit checklist](./v10.0.0/audit-checklist.md)
+govern the current target. Read the [v10 migration](./v10.0.0/migration.md) before replacing older blanket
+local-operation rules. Keep agents non-mutating locally; the new exception
+prepares reviewed tools/, verifies affected CI, obtains exact human approval,
+asks the user to execute and requires outcome/OpenTofu reconciliation evidence.
+The policy migration itself does not approve any actual maintenance action.

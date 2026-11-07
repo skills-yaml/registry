@@ -2,16 +2,16 @@
 name: wk-deliver
 description: Deliver an approved specification or release already tested work through the repository's established workflow. Use for end-to-end delivery, release, promotion or resumption; preserve the requested scope and existing pipeline.
 metadata:
-  skm-version: "0.4.7"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
-  skm-source-integrity: "sha256:9f486a92027405ed29e7d2e6f90ae6f0185505c9b215dbbc6777de6b55d14645"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:da86b9ba75f2e219bdfbc1716a8d4d230d4bfae4711368ba241d15cc8c3a2036"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.5, workspace/plan-implementation@0.5.7, workspace/implement-spec@0.5.7, workspace/review-changes@0.5.7, workspace/review-security@0.6.1, workspace/monitor-ci@0.4.11, workspace/fix-ci@0.4.11, workspace/address-review-feedback@0.4.11, workspace/coordinate-multi-agent-development@0.2.11"
+  skm-dependencies: "workspace/write-spec@0.7.0, workspace/plan-implementation@0.6.0, workspace/implement-spec@0.6.0, workspace/review-changes@0.6.0, workspace/review-security@0.7.0, workspace/monitor-ci@0.5.0, workspace/fix-ci@0.5.0, workspace/address-review-feedback@0.5.0, workspace/coordinate-multi-agent-development@0.2.12"
 ---
 
 # wk.deliver
@@ -51,9 +51,14 @@ remaining operation from the handoff. Renew stale evidence without inventing
 new delivery work. Preserve governed-instruction, OpenTofu, protected-credential
 and destructive-production boundaries. Report the actual release status and
 unverified behavior explicitly; a merge or workflow dispatch is not deployment.
-Run OpenTofu mutations only through CI/CD and existing Taskfile entrypoints;
-local infrastructure work is source-only and non-mutating. Provider CLI writes
-remain forbidden in every environment.
+Normal infrastructure mutation uses OpenTofu through Taskfile in CI/CD.
+When the actual pinned SDLC permits a one-time user-run operation, route its
+tools/ preparation and verification through the focused workflows, explain the
+exact command/target/effects/result/recovery, obtain scoped human approval and
+ask the user to execute. Agents never run these operational mutations locally. Require
+OpenTofu configuration/import/state reconciliation and a matching plan before
+resuming dependent management. Older pins retain their restrictions. A missing
+normal production pipeline alone does not justify relabeling a release as maintenance.
 
 ## Implement Remaining Development Scope
 
@@ -125,12 +130,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

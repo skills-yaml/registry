@@ -2,16 +2,16 @@
 name: plan-implementation
 description: Build an ordered, evidence-backed implementation plan from an approved development specification. Use when a feature, migration, or refactor has an active spec and needs dependency ordering, concrete file areas, validation strategy, compatibility handling, and completion gates before code changes begin.
 metadata:
-  skm-version: "0.5.7"
+  skm-version: "0.6.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/plan-implementation"
-  skm-source-integrity: "sha256:a37a3cd4cb86ed7f4dfbc1a7fa89fe418beff0d342b41dcc7a1eaea2d9cb2fc0"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:5f5664fa28895ec8ac2e482ebd2295b2979cd53ee8c580634f27e73211220831"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.7"
+  skm-dependencies: "workspace/design-domain-model@0.1.8"
 ---
 
 # Plan Implementation
@@ -67,13 +67,14 @@ spec to test, and the confirmed pinned completion event moves it to done
 (verified main merge plus reconciled acceptance and records in v7). Use `develop`
 and `main` only as defaults when local policy does not name equivalent targets.
 
-If infrastructure is affected, plan every resource mutation through OpenTofu
-and repository Taskfile entrypoints in CI/CD. Keep local steps limited to
-OpenTofu source changes and non-mutating validation or review. Never plan a
-local apply, destroy, import, or state mutation. Treat any other execution
-environment or mutation mechanism as a blocker, including cloud consoles,
-provider CLIs, and alternative IaC engines. CI/CD does not authorize those
-alternative mechanisms.
+Normal infrastructure management uses OpenTofu through Taskfile in CI/CD.
+For a one-time user-run operation permitted by the actual pinned SDLC, plan the
+spec, tools/ source, bounded targets, preview/failure/recovery checks, review and
+affected CI before an exact approval/user-execution handoff. Agents never run
+workstation mutations. Establish import support, configuration/resource address
+and remote state ownership before manual infrastructure creation; require
+OpenTofu import and a matching plan afterward. Include any approved human-run
+state step in the exact sequence. Older pins retain their restrictions.
 
 ## Hand Off
 
@@ -119,12 +120,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

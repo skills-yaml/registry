@@ -1,0 +1,4 @@
+interface:
+  display_name: "Address Review Feedback"
+  short_description: "Address selected review feedback"
+  default_prompt: "Use $address-review-feedback to classify review comments and implement the selected actionable feedback."

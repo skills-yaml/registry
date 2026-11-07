@@ -2,16 +2,16 @@
 name: write-spec
 description: Write a development specification from an accepted request before implementation. Use when scope, behavior, acceptance criteria, affected areas, validation, risks, versions or unresolved decisions need an explicit contract.
 metadata:
-  skm-version: "0.6.5"
+  skm-version: "0.7.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:01f3c988fb5dafe358413d35cce72f9bd3caf2c5b6f9f2e2f604c76479e6ad3b"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:dad056bf0da81cd91724544a919c71a915d3985bc4dc4aae2054bd57fee63944"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.7"
+  skm-dependencies: "workspace/design-domain-model@0.1.8"
 ---
 
 # Write Spec
@@ -71,6 +71,10 @@ Load only the conditional material triggered by the affected areas:
   and the project's infrastructure policy before defining mutation or acceptance paths.
 - **Concurrent mutating agents:** invoke `coordinate-multi-agent-development`
   before delegated edits; follow its worktree, claim and WIP requirements.
+- **One-time cleanup/maintenance:** read the actual pinned SDLC's user-run
+  exception before planning tools/, execution ownership, exact informed approval,
+  expected results and recovery; CI verification remains mandatory. For manual
+  infrastructure creation, include OpenTofu import/reconciliation feasibility and the normal CI/CD path.
 - **Governed instructions:** record prospective instruction-change approval
   as pending or directly supplied, with its exact human-approved scope. An
   agent-authored approval record grants no authority to edit those instructions.

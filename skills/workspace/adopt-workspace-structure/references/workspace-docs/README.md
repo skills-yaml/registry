@@ -16,8 +16,10 @@ The standard defines:
 
 ## Current Versions
 
-- `latest` points to `v9.0.1` (newest available version).
-- `default` points to `v9.0.1` (recommended stable version).
+- `latest` points to `v10.0.0` (newest available version).
+- `default` points to `v10.0.0` (recommended stable version).
+- `v10.0.0` adds reviewed, CI-verified, explicitly approved one-time human-run
+  operations with mandatory OpenTofu reconciliation; normal infrastructure stays in CI.
 - `v9.0.1` corrects bounded delivery authority and release routing.
 - `v9.0.0` scopes CI to related docs/spec/backend/frontend jobs and affected
   consumers; unknown/shared control-plane inputs use justified fallback.
@@ -35,7 +37,7 @@ The standard defines:
 Projects should pin to a concrete version when reproducibility matters:
 
 ```text
-workspace-docs@9.0.1
+workspace-docs@10.0.0
 ```
 
 Projects may use `workspace-docs@default` while adopting the shared process.
@@ -47,8 +49,9 @@ workspace-docs/
   AGENT_MIGRATION.md
   README.md
   VERSIONING.md
-  latest -> v9.0.1
-  default -> v9.0.1
+  latest -> v10.0.0
+  default -> v10.0.0
+  v10.0.0/                   # approved one-time user-run operations
   v9.0.1/                    # bounded scope and release correction
   v9.0.0/                    # preserved affected CI release
   v8.0.0/                    # focused local work and final CI verification
@@ -81,7 +84,7 @@ workspace-docs/
 Generated or synchronized agent context must live inside clear markers:
 
 ```md
-<!-- AGENT-CONTEXT:START workspace-docs@9.0.1 -->
+<!-- AGENT-CONTEXT:START workspace-docs@10.0.0 -->
 <!-- Generated content. Manual edits may be overwritten. -->
 <!-- AGENT-CONTEXT:END -->
 ```

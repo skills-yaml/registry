@@ -2,16 +2,16 @@
 name: wk-spec
 description: Explicitly invoke wk.spec to turn an accepted request into a development specification through write-spec.
 metadata:
-  skm-version: "0.4.7"
+  skm-version: "0.4.8"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/wk-spec"
   skm-source-integrity: "sha256:075a453b8d92bdbe8a08b692f6bbcca44c031a207ca2ff171e1221533f3305f8"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.6.5"
+  skm-dependencies: "workspace/write-spec@0.7.0"
 ---
 
 # wk.spec
