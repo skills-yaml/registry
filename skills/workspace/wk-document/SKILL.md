@@ -2,16 +2,16 @@
 name: wk-document
 description: Run the wk.document lifecycle facade to create or maintain human-facing project documentation within repository ownership boundaries. Invoke explicitly when documentation must be reconciled with current behavior and validated.
 metadata:
-  skm-version: "0.3.11"
+  skm-version: "0.3.12"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/wk-document"
-  skm-source-integrity: "sha256:1fe205e154f9b7ee579ff7d1ae0c1325ab9e7033051916d981bcb0e29d6830cc"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:fad40acb2f3ce79c8985226f9b26a538a7cc8ffcb2debf0ddf68e53232f3094a"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/maintain-project-docs@0.3.11"
+  skm-dependencies: "workspace/maintain-project-docs@0.3.12"
 ---
 
 # wk.document
@@ -65,12 +65,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

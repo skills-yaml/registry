@@ -2,16 +2,16 @@
 name: wk-analyze
 description: Run the wk.analyze lifecycle facade to produce a read-only, evidence-backed repository assessment. Invoke explicitly when the user wants repository structure, stack, SDLC, policy, documentation, active-work, risk, and gap analysis.
 metadata:
-  skm-version: "0.4.7"
+  skm-version: "0.4.8"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/wk-analyze"
-  skm-source-integrity: "sha256:9dfb6a9092cbd867a994e8b7eeb4a986ac4b1071bce0e10dc90f8a8a4d3be986"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:880a7a5067a1223ab89326a9b4e709a41bffc34e65a2aecf4311cda706a4b7bd"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/analyze-repository@0.4.7"
+  skm-dependencies: "workspace/analyze-repository@0.4.8"
 ---
 
 # wk.analyze
@@ -65,12 +65,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

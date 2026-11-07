@@ -2,13 +2,13 @@
 name: adopt-workspace-structure
 description: Adopt, upgrade, repair, or assess workspace documentation with guided architecture and technology decisions. Use for workspace initialization, version migration, conformance repair, or adoption planning; involve the user in material choices and turn agreed deferred improvements into actionable specs.
 metadata:
-  skm-version: "0.11.3"
+  skm-version: "0.12.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
-  skm-source-integrity: "sha256:663ef7e1d4c4ecb7cccef7efe1a166ef31567686be7add3bc4fd0aff81264841"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:12a77ca8938ee3836833dd95d50e114dfa3b9bee90478cb2ed9b2d1db9a925bf"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -395,12 +395,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

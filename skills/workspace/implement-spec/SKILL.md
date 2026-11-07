@@ -2,16 +2,16 @@
 name: implement-spec
 description: Implement an approved development specification through validated, reviewable changes. Use when a spec is active in development and the request authorizes code or documentation changes, including required tests, compatibility work, lifecycle reconciliation, and memory-impact completion.
 metadata:
-  skm-version: "0.5.7"
+  skm-version: "0.6.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/implement-spec"
-  skm-source-integrity: "sha256:88c04103dae8baa74823d22a7868ed7b2bc54fa6285715660e5806d6a5e062ac"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:926e6c0507686043527cb9bd142a112c61d6aadf406332ae3f6f3ff58f2afdcc"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.7"
+  skm-dependencies: "workspace/design-domain-model@0.1.8"
 ---
 
 # Implement Spec
@@ -59,15 +59,15 @@ has directly approved the scope, do not ask again for the same change.
 5. Review intermediate diffs for accidental scope growth and generated or
    machine-local information.
 
-Never mutate cloud infrastructure from local development. Locally, change only
-OpenTofu configuration and run non-mutating validation or review. OpenTofu
-applies, destroys, imports, and state mutations must run only through the
-repository's CI/CD Taskfile workflow. Non-destructive operations proceed after
-required gates; destructive production operations require scoped human
-approval.
-Never substitute Terraform, another IaC engine, a provider mutation CLI, a
-cloud console, or an ad hoc provisioning script; CI/CD does not authorize those
-alternatives. Stop as blocked if the requested change cannot comply.
+Normal infrastructure mutation uses OpenTofu through Taskfile in CI/CD;
+local agent work remains source changes and non-mutating checks. For a one-time
+user-run operation explicitly permitted by the actual pinned SDLC, prepare
+`tools/<operation>/`, verify the applicable specs and affected CI, then explain
+the exact reviewed command/target/effects/result/recovery and obtain scoped
+approval. Ask the user to execute and verify/reconcile the result. Agents never
+run workstation mutations or provider writes, even after approval. Older pins
+retain their restrictions. Follow the infrastructure policy for OpenTofu import,
+state ownership and matching-plan evidence before dependent work resumes.
 
 ## Validate and Reconcile
 
@@ -152,12 +152,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

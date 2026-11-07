@@ -2,13 +2,13 @@
 name: address-review-feedback
 description: Triage and implement selected actionable feedback from a pull request, branch review, or review report. Use when the user asks to address review comments, requested changes, or unresolved threads and authorizes the corresponding code or documentation edits.
 metadata:
-  skm-version: "0.4.11"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/address-review-feedback"
-  skm-source-integrity: "sha256:2d4db3f2aa806421f26b938fad87c0e1e9a8166041296d8a02f1cfd6ab33849f"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:c96f892c1ad72bb300c7550edd5575eafb67c126d8079b88272c0eb40a84b841"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -59,11 +59,12 @@ workflow authority does not cover the edit, and approval must precede it.
    finding before freezing the candidate and running all final required gates.
    Report any remaining product decision or unresolved finding as a blocker.
 
-Do not accept feedback that introduces infrastructure mutation outside
-OpenTofu and repository Taskfile entrypoints or asks for local infrastructure
-mutation. Classify it as a policy conflict and request a source-only local
-OpenTofu change whose apply, destroy, import, or state mutation runs through
-the authorized CI/CD workflow. Provider CLI writes remain prohibited there.
+Assess infrastructure feedback against the actual pinned SDLC. Normal changes
+use OpenTofu through Taskfile in CI/CD. A permitted one-time user-run exception
+requires the scoped tools/ artifact, reviewed requirements, passing affected CI,
+exact informed approval, human execution and verified OpenTofu reconciliation.
+Agents never run these operational mutations locally or provider writes. Older pins retain
+their restrictions; classify missing approval/import/evidence as a blocker.
 
 ## Hand Off
 
@@ -101,12 +102,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

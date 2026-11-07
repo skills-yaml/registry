@@ -16,11 +16,13 @@ application/schema implementation.
 
 ## Infrastructure
 
-Read `workspace/instructions/tech/infrastructure.md` from the consuming
-repository before specifying infrastructure work. OpenTofu is the only
-implementation and state-management mechanism. Local work is limited to
-configuration changes and non-mutating validation/review through Taskfile.
-Applies, destroys, imports and state mutations run only through repository
-CI/CD. Acceptance paths using consoles, provider mutation CLIs, alternative
-IaC engines or ad hoc provisioning scripts are invalid; CI/CD does not
-authorize provider CLI writes. Record incompatible requested paths as blockers.
+Read the consuming repository's `workspace/instructions/tech/infrastructure.md`
+and actual pinned SDLC before specifying infrastructure work. Normal management
+uses OpenTofu through Taskfile/CI/CD; local agent work is non-mutating.
+When the actual pin permits a one-time user-run operation, specify tools/ source,
+exact targets and effects, preview/recovery, full applicable requirements and
+affected CI evidence, informed scoped approval and human execution. Agents never
+execute workstation mutations or provider writes. Establish supported import,
+configuration/address and state ownership before manual creation, then require
+OpenTofu import and a reviewed matching plan. Block incomplete reconciliation;
+older pins retain their restrictions.

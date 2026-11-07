@@ -1,0 +1,6 @@
+interface:
+  display_name: "wk.review"
+  short_description: "Review correctness and security risks"
+  default_prompt: "Use $wk-review to perform a read-only correctness and applicable security review of these changes."
+policy:
+  allow_implicit_invocation: false

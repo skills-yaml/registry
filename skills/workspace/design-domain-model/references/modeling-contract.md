@@ -77,4 +77,6 @@ validation and rollout/recovery limits, with no unresolved material business rul
 Assessment/review remain read-only; designs change only authorized artifacts.
 No modeling request by itself grants production migration or infrastructure
 mutation authority. Respect prospective instruction approval and the applicable
-OpenTofu/CI/CD boundary.
+pinned infrastructure policy: normal OpenTofu/CI/CD management and any
+explicitly approved one-time user-run exception. Agents never run local
+mutations from this modeling workflow.
