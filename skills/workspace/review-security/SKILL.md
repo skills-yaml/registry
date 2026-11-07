@@ -2,16 +2,16 @@
 name: review-security
 description: Perform a threat-focused review of code, configuration, dependencies, or proposed changes. Use when a change affects authentication, authorization, secrets, untrusted input, file or network access, supply chain, execution boundaries, sensitive data, or when the user requests a security review.
 metadata:
-  skm-version: "0.6.1"
+  skm-version: "0.7.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/review-security"
-  skm-source-integrity: "sha256:c7a7cae59fb68ac21e5f208efa5780448793943860fb36ab283f8234d02c7d97"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:edbded8e76400fd9ad4993a4d20fdd3fb15bbbec2921a2840e15a97d7d832042"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.7"
+  skm-dependencies: "workspace/design-domain-model@0.1.8"
 ---
 
 # Review Security
@@ -63,11 +63,14 @@ instruction-change approval as a control-integrity failure. An agent-authored
 approval record is not human evidence, and standing workflow authority does not
 cover governed instructions.
 
-Treat infrastructure mutation outside OpenTofu and repository Taskfile
-entrypoints as a confirmed policy and auditability failure. Treat any local
-infrastructure mutation or mutation outside the repository's gated CI/CD
-workflow the same way. Provider CLIs and cloud consoles are read-only
-diagnostic surfaces, never remediation paths, including inside CI/CD.
+Assess infrastructure against the actual pinned SDLC/infrastructure policy:
+normal mutation uses OpenTofu through Taskfile in CI/CD. A permitted one-time
+user-run operation needs a reviewed tools/ artifact, exact target/arguments,
+passing affected CI, informed scoped approval and reconciliation into OpenTofu
+configuration/state. Agents never execute these operational mutations locally. Verify that
+approval covers the final operation and that partial results cannot silently
+resume automation. Older pins retain their restrictions; a manual label alone
+never authorizes provider writes or bypasses these controls.
 
 Use deterministic checks and dependency advisories when available. Advisory
 matches are leads until the affected version, reachable use and conditions are
@@ -186,12 +189,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

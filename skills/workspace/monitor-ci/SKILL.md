@@ -2,13 +2,13 @@
 name: monitor-ci
 description: Monitor a continuous-integration run or pull-request checks through a terminal outcome and report meaningful transitions. Use when the user asks to watch, babysit, follow, or wait for CI without changing code or workflow configuration.
 metadata:
-  skm-version: "0.4.11"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/monitor-ci"
-  skm-source-integrity: "sha256:5fca7b395599391026daec5d626acb59e9b1a69383a8f6a5d791f1cd1b90471c"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:c80b6d41bf833ed735e11bd45925badb00658a1d2bb9d566f1a25b7f25683309"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -35,11 +35,13 @@ any governed instruction edit.
    failure instead of silently following the wrong run.
 5. Stop at a terminal outcome or the user-defined deadline.
 
-Report an infrastructure job that mutates state outside OpenTofu and repository
-Taskfile entrypoints as a policy failure. Also report any infrastructure
-mutation performed outside the trusted CI/CD workflow or through a provider CLI
-such as `gcloud`. Monitoring remains read-only and does not authorize a local or
-manual remediation path.
+Report infrastructure CI jobs against the actual pinned SDLC: normal mutation
+uses OpenTofu through Taskfile in CI/CD. A separately permitted one-time user-run
+operation requires a reviewed tools/ artifact, passing affected CI, exact scoped
+approval, human execution and verified OpenTofu reconciliation. Agents never
+run workstation mutations. Older pins retain their restrictions. Monitoring
+remains read-only and does not authorize manual remediation or claim that the
+user executed a provided command.
 
 ## Hand Off
 
@@ -87,12 +89,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

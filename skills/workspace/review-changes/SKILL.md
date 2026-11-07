@@ -2,16 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.5.7"
+  skm-version: "0.6.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/review-changes"
-  skm-source-integrity: "sha256:a426321d2b498e17c26f2b0b5455c719f6c5404fada28787964fff44661daf9d"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:052a64f6e6f474021703f54b43bf6d21056de7609c92b2f03a22026f51caddc2"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.7"
+  skm-dependencies: "workspace/design-domain-model@0.1.8"
 ---
 
 # Review Changes
@@ -51,11 +51,13 @@ Check for:
   granted instruction-change approval for its named outcome or scope;
 - unintended or unrelated changes.
 
-For infrastructure changes, report any local mutation path, any mutation
-outside the repository's CI/CD workflow, or any mutation mechanism outside
-OpenTofu and Taskfile as a blocking policy violation. This includes local
-applies, destroys, imports, state changes, and provider CLI writes even when
-they are described as emergency or functionally equivalent steps.
+For infrastructure changes, require the actual pinned SDLC and infrastructure
+policy. Normal changes use OpenTofu through Taskfile in CI/CD. A permitted
+one-time user-run exception needs tools/, exact scoped human approval after
+review/affected CI, human execution and verified OpenTofu reconciliation.
+Agents never execute these operational mutations locally. Missing import support, unsupported
+completion claims or an unapproved manual/provider path are blocking; older
+pins retain their restrictions.
 
 Run safe, relevant checks when they materially improve confidence. Do not edit
 files, resolve threads, approve, merge, or publish while operating read-only.
@@ -113,12 +115,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate

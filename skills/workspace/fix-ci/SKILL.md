@@ -2,13 +2,13 @@
 name: fix-ci
 description: Diagnose and fix failing continuous-integration checks with the smallest verified change. Use when CI or pull-request checks are failing and the user authorizes implementation, including log inspection, local reproduction, regression coverage, and rerun monitoring.
 metadata:
-  skm-version: "0.4.11"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "6a99cb76b2f06ee9e49ba8a21f29356f41d9b2d0"
+  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
   skm-source-path: "workspace/instructions/skills/fix-ci"
-  skm-source-integrity: "sha256:e89b63df53df67a0d9a719dc9ff9e5c885cefef61d37f126e458056027b7848b"
-  workspace-toolkit-version: "0.14.1"
-  workspace-docs-compatibility: "9.x"
+  skm-source-integrity: "sha256:b9b1e1c76fbd4a1dfd1caca29700d74ec0427d29d1170788aa61ac7a8efbb23c"
+  workspace-toolkit-version: "0.15.0"
+  workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -72,12 +72,14 @@ release/artifact after repair; retain all protections and approval boundaries.
    through its terminal outcome. Diagnose instead of looping on repeated
    failures.
 
-If the failure concerns infrastructure, change OpenTofu definitions and run
-only non-mutating validation locally. Any apply, destroy, import, or state
-correction must run through the repository's authorized CI/CD Taskfile workflow
-after the source fix is pushed. Do not use Terraform, another IaC engine, a
-provider mutation CLI, a console, or an imperative script as a local or CI
-workaround.
+Normal infrastructure fixes use OpenTofu through Taskfile/CI/CD, with local
+agent work limited to source changes and non-mutating validation. For a one-time
+user-run operation explicitly allowed by the actual pinned SDLC, prepare tools/,
+review applicable specs, pass affected CI, explain the exact operation/result
+and obtain scoped approval, then ask the user to execute and verify/reconcile.
+Agents never run these operational mutations locally or provider writes. Older pins retain
+their restrictions; missing approval, failed gates or missing OpenTofu import/
+ownership evidence blocks the exceptional path.
 
 Report cause, fix, local and remote validation, residual flake risk, memory
 impact, and publication status. Under a user-requested delivery or CI-repair
@@ -113,12 +115,12 @@ host protections; missing coverage/tools are gaps, never a pass.
 
 Use the verification contract for the actual pin:
 
-- v9: changed behavior and all affected direct/transitive consumers locally;
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
   every required affected CI job on the stable candidate. Docs/spec, backend
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate
