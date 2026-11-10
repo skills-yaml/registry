@@ -2,12 +2,12 @@
 name: adopt-workspace-structure
 description: Adopt, upgrade, repair, or assess workspace documentation with guided architecture and technology decisions. Use for workspace initialization, version migration, conformance repair, or adoption planning; involve the user in material choices and turn agreed deferred improvements into actionable specs.
 metadata:
-  skm-version: "0.12.0"
+  skm-version: "0.13.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
-  skm-source-integrity: "sha256:12a77ca8938ee3836833dd95d50e114dfa3b9bee90478cb2ed9b2d1db9a925bf"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:5c4a85ce9e038d99e2ba0648398ddde7796cc93867543a86e4715d2184d6a8c8"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -108,7 +108,10 @@ Choose one mode and record it:
 - **Repair**: the target version is declared but the structure is incomplete,
   duplicated, or inconsistent.
 - **Assessment**: inspect conformance and report findings without changing
-  files.
+  files. Every assessment follows the
+  [adoption assessment template](templates/adoption-assessment.md) exactly:
+  keep its sections, labels, columns, order, vocabulary and markers, and emit
+  none of its comment guidance.
 
 Treat mixed layouts as an update. Do not scaffold a second copy alongside
 existing content.

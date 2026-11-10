@@ -2,12 +2,12 @@
 name: monitor-ci
 description: Monitor a continuous-integration run or pull-request checks through a terminal outcome and report meaningful transitions. Use when the user asks to watch, babysit, follow, or wait for CI without changing code or workflow configuration.
 metadata:
-  skm-version: "0.5.0"
+  skm-version: "0.6.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/monitor-ci"
-  skm-source-integrity: "sha256:c80b6d41bf833ed735e11bd45925badb00658a1d2bb9d566f1a25b7f25683309"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:8c9df0de757256930b4ad18165a489c7c5797846aca11e2c6ceffb041331b05f"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -30,7 +30,8 @@ any governed instruction edit.
    Prefer the newest relevant run only when the target is otherwise unambiguous.
 2. Record the initial checks, statuses, URLs or identifiers, and commit revision.
 3. Poll with bounded intervals and provide concise updates when state changes or
-   at least once per minute during active work.
+   at least once per minute during active work, using the template's one-line
+   interim update format.
 4. Detect replacement, cancellation, rerun, stale revision, or authorization
    failure instead of silently following the wrong run.
 5. Stop at a terminal outcome or the user-defined deadline.
@@ -44,6 +45,11 @@ remains read-only and does not authorize manual remediation or claim that the
 user executed a provided command.
 
 ## Hand Off
+
+Every final outcome follows the [CI outcome template](templates/ci-outcome.md)
+exactly so different agents give comparably shaped answers. Keep its sections,
+summary labels, table columns, order and controlled vocabulary; use its empty,
+out-of-scope and `unknown` markers and emit none of its comment guidance.
 
 Report the final outcome, failed or incomplete checks, relevant revision, and
 the most useful next diagnostic step. A monitoring-only request remains

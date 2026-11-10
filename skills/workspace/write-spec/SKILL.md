@@ -2,16 +2,16 @@
 name: write-spec
 description: Write a development specification from an accepted request before implementation. Use when scope, behavior, acceptance criteria, affected areas, validation, risks, versions or unresolved decisions need an explicit contract.
 metadata:
-  skm-version: "0.7.0"
+  skm-version: "0.7.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/write-spec"
   skm-source-integrity: "sha256:dad056bf0da81cd91724544a919c71a915d3985bc4dc4aae2054bd57fee63944"
-  workspace-toolkit-version: "0.15.0"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.8"
+  skm-dependencies: "workspace/design-domain-model@0.2.0"
 ---
 
 # Write Spec

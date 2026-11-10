@@ -2,16 +2,16 @@
 name: review-security
 description: Perform a threat-focused review of code, configuration, dependencies, or proposed changes. Use when a change affects authentication, authorization, secrets, untrusted input, file or network access, supply chain, execution boundaries, sensitive data, or when the user requests a security review.
 metadata:
-  skm-version: "0.7.0"
+  skm-version: "0.8.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/review-security"
-  skm-source-integrity: "sha256:edbded8e76400fd9ad4993a4d20fdd3fb15bbbec2921a2840e15a97d7d832042"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:7ffd19fbd725e75c20642b78b531e9dc3e7be794de3c62b4d8dd85d35a4f311a"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.8"
+  skm-dependencies: "workspace/design-domain-model@0.2.0"
 ---
 
 # Review Security
@@ -117,6 +117,11 @@ the claim or proof renew verification. If this verification cannot be obtained,
 retain an unverified candidate and name the gap; do not claim confirmation.
 
 ## Report Findings
+
+Every security review follows the [security review template](templates/security-review-report.md)
+exactly so different agents give comparably shaped answers. Keep its sections,
+summary labels, table columns, order and controlled vocabulary; use its empty,
+out-of-scope and `unknown` markers and emit none of its comment guidance.
 
 Order findings by severity and exploitability. Include location, trust boundary,
 attack preconditions, impact, source trace, demonstrated result, preventing-control

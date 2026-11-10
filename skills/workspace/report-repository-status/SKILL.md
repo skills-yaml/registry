@@ -1,13 +1,13 @@
 ---
 name: report-repository-status
-description: Report repo status, project status or spec status, including local changes, worktrees, local/remote branches and linked specs. Recommend merge, discard candidate or keep/finish from evidence; reporting stays read-only.
+description: Report repo status, project status or spec status, including local changes, worktrees, local/remote branches and per-spec lifecycle status. Recommend merge, discard candidate or keep/finish from evidence in one fixed report template shared by every agent; reporting stays read-only.
 metadata:
-  skm-version: "0.1.8"
+  skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/report-repository-status"
-  skm-source-integrity: "sha256:f92b14c8a9089f8c29c84b39777c06da435e1dd0fc06b2f329ddf28dea1177d7"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:dd59165a38c158528ac9f5dabd7926e4ed149eea7ec59d946d27c5a3b4c8c06c"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -52,9 +52,10 @@ For a full repository report collect:
 - All requested remotes' live branch heads using read-only queries, alongside
   cached remote-tracking refs. No configured remote, failed query and missing
   live objects are separate states. State any limits/pagination/omitted scope.
-- Relevant specs/catalog, WIP or coordination evidence, release ledger and
-  available PR/check/merge/publication evidence. Host queries are optional when
-  unavailable; their absence limits readiness claims.
+- Every non-legacy spec file and catalog entry, their recorded states, open
+  acceptance/gate evidence and blocked fields; WIP or coordination evidence,
+  release ledger and available PR/check/merge/publication evidence. Host queries
+  are optional when unavailable; their absence limits readiness claims.
 
 ## Connect Changes to Specs
 
@@ -68,10 +69,20 @@ force unrelated local edits into the branch's spec or treat an active agent clai
 as proof of ownership, acceptance or integration. Changes to a done feature need
 a linked follow-up spec under applicable policy; do not reopen done history.
 
-For each associated spec summarize its state, remaining acceptance/review/gate
-work, confirmed test/main integration and separately verified publication.
 A branch named develop/main, an applied version, a clean checkout or a done label
 alone does not prove acceptance, actual merge, release or safe deletion.
+
+## Report Spec Status
+
+Report spec status for every full, project or spec status request, not only for
+specs linked to local work. Cover every in-scope backlog, development, test and
+blocked spec, plus any done spec that is requested, linked to current work or
+inconsistent; count the remaining done specs. Include legacy specs only on request.
+For each listed spec give its primary feature, catalog state, file directory and
+recorded State, consistency, delivery evidence, open acceptance/review/CI/version/
+memory gaps, linked work items and smallest next lifecycle action. Follow the
+reference's spec-status rules for mismatches, blocked fields and evidence strength.
+Report state; never move specs or edit the catalog while reporting.
 
 ## Recommend a Disposition
 
@@ -89,9 +100,14 @@ not authorization to remove it. Never infer unwanted work from age or inactivity
 
 ## Report
 
-Use the [report template](templates/status-report.md) when it helps; shorten it
-for a narrow request. Lead with the overall status and most consequential blockers,
-then show change/worktree/spec and branch/remote evidence with next steps.
+Every status response follows the [report template](templates/status-report.md)
+exactly so different agents give comparably shaped answers. Keep its sections,
+summary labels, table columns, order and controlled vocabulary; do not add,
+rename or drop any of them. A narrow request keeps every heading: fill the
+sections it covers and write `Not in scope for this request.` under the others.
+Use the template's empty, out-of-scope and `unknown` markers exactly; never leave
+a value blank or invent one. Emit none of the template's comment guidance.
+The summary leads with overall status and the most consequential blockers.
 Include source, time/revision and uncertainty so the user can assess freshness.
 Identify external worktrees with stable labels plus branch/HEAD, and use project-
 relative paths for changes. Escape untrusted labels; suppress credentials, remote
