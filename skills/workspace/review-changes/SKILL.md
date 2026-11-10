@@ -2,16 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.7.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/review-changes"
-  skm-source-integrity: "sha256:052a64f6e6f474021703f54b43bf6d21056de7609c92b2f03a22026f51caddc2"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:8d5bc1e005efa293548a9a1cc4892e1edb91c0f3b0c985f3b96355bace1693c4"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.8"
+  skm-dependencies: "workspace/design-domain-model@0.2.0"
 ---
 
 # Review Changes
@@ -65,6 +65,11 @@ Treat an unapproved governed-instruction diff as blocking; an agent-authored
 spec, checkbox, or approval record is not human approval.
 
 ## Report Findings
+
+Every review follows the [review report template](templates/review-report.md)
+exactly so different agents give comparably shaped answers. Keep its sections,
+summary labels, table columns, order and controlled vocabulary; use its empty,
+out-of-scope and `unknown` markers and emit none of its comment guidance.
 
 Lead with actionable findings ordered by severity. For each finding include the
 affected location, concrete failure mode, why it matters, and the smallest

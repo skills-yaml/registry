@@ -2,16 +2,16 @@
 name: implement-spec
 description: Implement an approved development specification through validated, reviewable changes. Use when a spec is active in development and the request authorizes code or documentation changes, including required tests, compatibility work, lifecycle reconciliation, and memory-impact completion.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/implement-spec"
   skm-source-integrity: "sha256:926e6c0507686043527cb9bd142a112c61d6aadf406332ae3f6f3ff58f2afdcc"
-  workspace-toolkit-version: "0.15.0"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.8"
+  skm-dependencies: "workspace/design-domain-model@0.2.0"
 ---
 
 # Implement Spec

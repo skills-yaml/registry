@@ -2,16 +2,16 @@
 name: wk-review
 description: Run the wk.review lifecycle facade for a read-only correctness and applicable security review of a working tree, branch, commit range, or pull request. Invoke explicitly when findings and validation gaps are needed without remediation.
 metadata:
-  skm-version: "0.4.8"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/wk-review"
-  skm-source-integrity: "sha256:ec9649b386848d6c77b6d646e0832f9d98a5d3dff9913e6d20f0a2c37bc9b73a"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:5c2958001d944e1ab43c02b82d80aab1e2c2905293734abfd54589a535fd664e"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/review-changes@0.6.0, workspace/review-security@0.7.0"
+  skm-dependencies: "workspace/review-changes@0.7.0, workspace/review-security@0.8.0"
 ---
 
 # wk.review
@@ -27,8 +27,11 @@ Compose `review-changes` and, when applicable, `review-security`.
    secrets, untrusted input, file or network access, supply chain, execution,
    tenant isolation, or sensitive data.
 4. Combine duplicate evidence without hiding either review dimension.
-5. Lead with actionable findings ordered by severity and include precise file
-   and line evidence, then assumptions, validation gaps, and disposition.
+5. Emit the fixed `review-changes` report, recording assumptions under Coverage
+   Limits; when `review-security` applies, follow it with the fixed security
+   review report and reference duplicate findings by ID. The combined disposition
+   is the review-changes Result; any confirmed vulnerability or control-integrity
+   failure makes it `changes requested`.
 
 Do not edit files, resolve review threads, publish artifacts, or remediate
 findings unless the user separately requests and authorizes that work.
