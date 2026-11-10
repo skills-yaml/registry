@@ -51,6 +51,26 @@ implementation, test requires confirmed test-target integration, done requires
 verified main merge and reconciled acceptance/records. Publication is separate.
 Older pins and explicit repository-local branch names retain their own contracts.
 
+## Spec Status Rules
+
+Enumerate spec files under each lifecycle directory and the root catalog rows
+within the project's declared spec root; do not infer specs from branch names.
+
+| Condition | Report as |
+| --- | --- |
+| Catalog state, directory and recorded State line agree and the evidence supports that state | consistent |
+| Any of the three disagree, a file has no catalog row or a row has no file | mismatch, naming each side; next step is catalog/file reconciliation |
+| They agree but the evidence contradicts the state: a test spec without verified test-target integration, or a done spec with an unmet criterion or unverified main merge | mismatch, naming the missing evidence |
+| A spec or catalog file is unreadable or outside the declared root | unverified, with the gap in Evidence Gaps |
+| Blocked spec | Previous State, Block Kind, Block Reason and Resume Condition, or each missing field |
+| Delivery event cited with exact revision/PR and confirmed by Git or host evidence | verified |
+| Delivery event cited only in the spec or catalog text | recorded only |
+| No test integration, main merge or publication evidence | none |
+
+Open acceptance lists criteria without cited evidence and pending review, CI,
+version or `Memory Impact` items. Recorded rationale does not prove current state;
+report every mismatch without correcting it.
+
 ## Recommendation Rules
 
 | Recommendation | Required evidence and next action |

@@ -2,12 +2,12 @@
 name: design-domain-model
 description: Assess, design or review business-domain models, logical data models and database/API/event schemas with explicit invariants, ownership, representation mappings and compatibility evidence. Use for new domain concepts, lifecycle or consistency rules, and schema evolution; scale simple CRUD changes to a concise model delta.
 metadata:
-  skm-version: "0.1.8"
+  skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/design-domain-model"
-  skm-source-integrity: "sha256:8084907efae20b29f45e59f2b2e2dec598122d20546ca9fbedd033a91e05332a"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:ff2d9491d182269352110c35839a6a55c83ffd1328580046a84efb1eb534fbdf"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -87,6 +87,12 @@ the smallest meaningful changed-component checks first, then affected direct and
 transitive consumers after success, using the project's native entrypoints.
 Planning proposes these stages; read-only modes inspect evidence and run only
 authorized non-mutating checks. Missing tools or coverage remain explicit gaps.
+
+Assess and review results follow the [model assessment template](templates/model-assessment.md)
+exactly so different agents give comparably shaped answers. Keep its sections,
+summary labels, table columns, order and controlled vocabulary; use its empty,
+out-of-scope and `unknown` markers and emit none of its comment guidance.
+Design mode keeps the optional [model design template](templates/model-design.md).
 
 Report the selected level, evidence revision, scenarios, important model decisions,
 representation/consumer mapping, rejected alternatives, material questions and

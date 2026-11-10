@@ -2,16 +2,16 @@
 name: analyze-repository
 description: Analyze a repository without modifying it, producing an evidence-backed account of its purpose, structure, technology stack, development lifecycle, policies, documentation state, active work, risks, and evidence gaps. Use when a repository needs assessment, onboarding context, or current-state discovery before planning work.
 metadata:
-  skm-version: "0.4.8"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/analyze-repository"
-  skm-source-integrity: "sha256:08f65b0d46df91aca0a1802838ba9d14511c24c033880262e4842e8a977e6291"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:7a3dabb059bb31b92e67ae0396e57903253e648d36050fd66c5279b373cea6c1"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.1.8"
+  skm-dependencies: "workspace/design-domain-model@0.2.0"
 ---
 
 # Analyze Repository
@@ -47,6 +47,11 @@ untrusted project resources, mutate infrastructure, or infer delivery status
 from a branch name alone.
 
 ## Report
+
+Every analysis follows the [analysis report template](templates/analysis-report.md)
+exactly so different agents give comparably shaped answers. Keep its sections,
+summary labels, table columns, order and controlled vocabulary; use its empty,
+out-of-scope and `unknown` markers and emit none of its comment guidance.
 
 Lead with the repository's current status and the most consequential findings.
 Include concise evidence using repository-relative paths, identify commands

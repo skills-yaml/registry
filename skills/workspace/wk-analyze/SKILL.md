@@ -2,16 +2,16 @@
 name: wk-analyze
 description: Run the wk.analyze lifecycle facade to produce a read-only, evidence-backed repository assessment. Invoke explicitly when the user wants repository structure, stack, SDLC, policy, documentation, active-work, risk, and gap analysis.
 metadata:
-  skm-version: "0.4.8"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/wk-analyze"
-  skm-source-integrity: "sha256:880a7a5067a1223ab89326a9b4e709a41bffc34e65a2aecf4311cda706a4b7bd"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:23c74b9cc3b5897bfbbc595f57a2504356810e96d34a6960022911086247f829"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/analyze-repository@0.4.8"
+  skm-dependencies: "workspace/analyze-repository@0.5.0"
 ---
 
 # wk.analyze
@@ -25,7 +25,8 @@ Route the request through `analyze-repository`.
    facts, documented intent, inferences, and evidence gaps.
 4. Report purpose, structure, stack, entrypoints, Workspace and spec state,
    delivery conventions, documentation and memory status, security-sensitive
-   boundaries, risks, and recommended next actions.
+   boundaries, risks, and recommended next actions exactly in the focused
+   skill's fixed analysis report template.
 
 Do not create a spec, edit documentation, install dependencies, or inspect
 sibling projects while operating through this facade.

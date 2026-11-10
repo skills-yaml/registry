@@ -2,16 +2,16 @@
 name: wk-adopt
 description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgrade a repository's Workspace structure through the focused adoption workflow. Invoke explicitly when the user requests Workspace adoption or migration.
 metadata:
-  skm-version: "0.4.7"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "2243d16f5e0b457f0eda538832b87bc2931c7b98"
+  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
-  skm-source-integrity: "sha256:afc799351bc3644e8d16a988078ff9269bcf04d751205e2753835c7e4058abd7"
-  workspace-toolkit-version: "0.15.0"
+  skm-source-integrity: "sha256:89d38a8150d5d27ffe6e5c4a6d618eb92b974de51fa43805357ca045f110be47"
+  workspace-toolkit-version: "0.16.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/adopt-workspace-structure@0.12.0"
+  skm-dependencies: "workspace/adopt-workspace-structure@0.13.0"
 ---
 
 # wk.adopt
@@ -31,7 +31,8 @@ Route the request through `adopt-workspace-structure`.
 4. Stop before governed instruction writes unless the human request explicitly
    authorizes the named adoption or migration scope.
 5. Report the adopted version, validation evidence, unresolved compatibility
-   gaps, and next lifecycle transition.
+   gaps, and next lifecycle transition. An assessment-only request reports exactly in
+   the focused skill's fixed adoption assessment template.
 
 Do not reproduce or weaken the focused skill's migration and safety rules.
 
