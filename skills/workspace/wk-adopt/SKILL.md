@@ -2,16 +2,16 @@
 name: wk-adopt
 description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgrade a repository's Workspace structure through the focused adoption workflow. Invoke explicitly when the user requests Workspace adoption or migration.
 metadata:
-  skm-version: "0.5.0"
+  skm-version: "0.5.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
+  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
   skm-source-integrity: "sha256:89d38a8150d5d27ffe6e5c4a6d618eb92b974de51fa43805357ca045f110be47"
-  workspace-toolkit-version: "0.16.0"
+  workspace-toolkit-version: "0.17.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/adopt-workspace-structure@0.13.0"
+  skm-dependencies: "workspace/adopt-workspace-structure@0.13.1"
 ---
 
 # wk.adopt
