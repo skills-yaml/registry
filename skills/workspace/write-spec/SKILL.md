@@ -2,16 +2,16 @@
 name: write-spec
 description: Write a development specification from an accepted request before implementation. Use when scope, behavior, acceptance criteria, affected areas, validation, risks, versions or unresolved decisions need an explicit contract.
 metadata:
-  skm-version: "0.7.2"
+  skm-version: "0.8.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
+  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:dad056bf0da81cd91724544a919c71a915d3985bc4dc4aae2054bd57fee63944"
-  workspace-toolkit-version: "0.17.0"
-  workspace-docs-compatibility: "10.x"
+  skm-source-integrity: "sha256:bd40e6fd5f81d6accbcf615b6b6e3563093c06b3a6d40594d23f838be2386fb8"
+  workspace-toolkit-version: "0.18.0"
+  workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.2.1"
+  skm-dependencies: "workspace/design-domain-model@0.3.0"
 ---
 
 # Write Spec
@@ -136,3 +136,16 @@ and validation results, next allowed lifecycle transition, version reservation
 and memory classification with rationale. Distinguish planned feature validation
 from checks actually run on the planning artifact, and main completion from
 separate deployment/publication.
+
+## Unfinished Work Notice
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.

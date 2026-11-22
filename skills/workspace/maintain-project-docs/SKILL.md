@@ -2,13 +2,13 @@
 name: maintain-project-docs
 description: Create, update, reconcile, or review human-facing project documentation within repository-declared documentation roots. Use when project reference, architecture, operational, onboarding, or work documentation must reflect current repository behavior without changing governed agent instructions.
 metadata:
-  skm-version: "0.3.14"
+  skm-version: "0.4.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
+  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
   skm-source-path: "workspace/instructions/skills/maintain-project-docs"
-  skm-source-integrity: "sha256:90cafe839afb6fc0ab907edf07d296cbeb8e4d469ec30087d8b798a99d6f4841"
-  workspace-toolkit-version: "0.17.0"
-  workspace-docs-compatibility: "10.x"
+  skm-source-integrity: "sha256:a64e8b88f77e2578632be70aa146c6099fe372161a6a98e583ea24803650871e"
+  workspace-toolkit-version: "0.18.0"
+  workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
 ---
@@ -101,7 +101,7 @@ Use the verification contract for the actual pin:
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor any later pin requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate
@@ -116,3 +116,14 @@ fresh evidence. Read-only work assesses this evidence; planning specifies it.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.

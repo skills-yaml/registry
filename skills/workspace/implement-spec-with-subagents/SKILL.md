@@ -2,16 +2,16 @@
 name: implement-spec-with-subagents
 description: Implement an approved development specification by splitting it into tickets, building a dependency execution graph, and running user-chosen planner, developer and reviewer subagents wave by wave. Use when a development spec should be delivered through delegated subagents rather than by one agent alone.
 metadata:
-  skm-version: "0.1.0"
+  skm-version: "0.2.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
+  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
   skm-source-path: "workspace/instructions/skills/implement-spec-with-subagents"
-  skm-source-integrity: "sha256:e8d911e868b428db8218c9668193a9ab4eec4d7b478203d4b94c8adf8bf75fb6"
-  workspace-toolkit-version: "0.17.0"
-  workspace-docs-compatibility: "10.x"
+  skm-source-integrity: "sha256:1319d2400d2e744c9fd829efa0061c8a4b44745775669b902c533c12f5e66a2c"
+  workspace-toolkit-version: "0.18.0"
+  workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.7.2, workspace/plan-implementation@0.6.2, workspace/implement-spec@0.6.2, workspace/review-changes@0.7.1, workspace/review-security@0.8.1, workspace/coordinate-multi-agent-development@0.2.14"
+  skm-dependencies: "workspace/write-spec@0.8.0, workspace/plan-implementation@0.7.0, workspace/implement-spec@0.7.0, workspace/review-changes@0.8.0, workspace/review-security@0.9.0, workspace/coordinate-multi-agent-development@0.3.0"
 ---
 
 # Implement Spec with Subagents
@@ -155,6 +155,8 @@ on confirmed integration or main events, catalog, versions and memory. Route
 whole-change findings to a developer subagent and re-review the fixed revision.
 
 Report the outcome with `templates/execution-report.md`, filling every section.
+An Unfinished Work Notice, when the task is not finished, is the only text
+allowed before it.
 
 ## Pinned SDLC Contract
 
@@ -170,3 +172,14 @@ Security, data integrity, public interfaces, governed instructions and release
 controls require independent exact-candidate review. Resolve findings by a fix
 or reviewer-agreed documented rejection. Work on one active spec per
 orchestrator and one active ticket per developer.
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.
