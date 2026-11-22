@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Domain Model"
+  short_description: "Connect domain rules to models and schemas"
+  default_prompt: "Use $design-domain-model to assess, design or review this domain model and its data and schema contracts."

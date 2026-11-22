@@ -2,16 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.7.1"
+  skm-version: "0.8.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
+  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
   skm-source-path: "workspace/instructions/skills/review-changes"
-  skm-source-integrity: "sha256:8d5bc1e005efa293548a9a1cc4892e1edb91c0f3b0c985f3b96355bace1693c4"
-  workspace-toolkit-version: "0.17.0"
-  workspace-docs-compatibility: "10.x"
+  skm-source-integrity: "sha256:1ac96924c3f0725d77507ef6e34da316166a865cd637b919bf10c1ee57e9aff2"
+  workspace-toolkit-version: "0.18.0"
+  workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.2.1"
+  skm-dependencies: "workspace/design-domain-model@0.3.0"
 ---
 
 # Review Changes
@@ -67,7 +67,8 @@ spec, checkbox, or approval record is not human approval.
 ## Report Findings
 
 Every review follows the [review report template](templates/review-report.md)
-exactly so different agents give comparably shaped answers. Keep its sections,
+exactly so different agents give comparably shaped answers. An Unfinished
+Work Notice, when the task is not finished, is the only text allowed before it. Keep its sections,
 summary labels, table columns, order and controlled vocabulary; use its empty,
 out-of-scope and `unknown` markers and emit none of its comment guidance.
 
@@ -125,7 +126,7 @@ Use the verification contract for the actual pin:
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor any later pin requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate
@@ -140,3 +141,14 @@ fresh evidence. Read-only work assesses this evidence; planning specifies it.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.

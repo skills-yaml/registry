@@ -2,16 +2,16 @@
 name: wk-deliver
 description: Deliver an approved specification or release already tested work through the repository's established workflow. Use for end-to-end delivery, release, promotion or resumption; preserve the requested scope and existing pipeline.
 metadata:
-  skm-version: "0.5.2"
+  skm-version: "0.6.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
+  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
-  skm-source-integrity: "sha256:da86b9ba75f2e219bdfbc1716a8d4d230d4bfae4711368ba241d15cc8c3a2036"
-  workspace-toolkit-version: "0.17.0"
-  workspace-docs-compatibility: "10.x"
+  skm-source-integrity: "sha256:e43ed0ec2ba3bdc47a06ac84592b84edbd2e4eacaee8db0d603213cb1ed0c6a7"
+  workspace-toolkit-version: "0.18.0"
+  workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.7.2, workspace/plan-implementation@0.6.2, workspace/implement-spec@0.6.2, workspace/review-changes@0.7.1, workspace/review-security@0.8.1, workspace/monitor-ci@0.6.1, workspace/fix-ci@0.5.2, workspace/address-review-feedback@0.5.2, workspace/coordinate-multi-agent-development@0.2.14"
+  skm-dependencies: "workspace/write-spec@0.8.0, workspace/plan-implementation@0.7.0, workspace/implement-spec@0.7.0, workspace/review-changes@0.8.0, workspace/review-security@0.9.0, workspace/monitor-ci@0.7.0, workspace/fix-ci@0.6.0, workspace/address-review-feedback@0.6.0, workspace/coordinate-multi-agent-development@0.3.0"
 ---
 
 # wk.deliver
@@ -135,7 +135,7 @@ Use the verification contract for the actual pin:
   and frontend changes skip unrelated jobs. Preserve required status names,
   validated selection and dependency stages. No blanket full-repository run.
 - v8: the same affected local boundary, then complete required gates in CI.
-  Neither v8 nor v9/v10 requires a duplicate full local run before CI. Missing CI
+  Neither v8 nor any later pin requires a duplicate full local run before CI. Missing CI
   cannot establish final acceptance; unknown impact needs investigation and
   justified CI fallback.
 - v7: affected modules during iteration, then full required final-candidate
@@ -150,3 +150,14 @@ fresh evidence. Read-only work assesses this evidence; planning specifies it.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.
