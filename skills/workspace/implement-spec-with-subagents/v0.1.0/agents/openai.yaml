@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement Spec with Subagents"
+  short_description: "Run spec tickets through planner, developer and reviewer agents"
+  default_prompt: "Use $implement-spec-with-subagents to ask which agents act as planner, developer and reviewer, split the approved spec into tickets, show the execution graph for approval, then deliver the tickets wave by wave."
