@@ -5,22 +5,22 @@ the workspace documentation structure in a repository. It covers process and
 safety; use the target version's migration notes for version-specific path
 changes.
 
-The current recommended target is `workspace-docs@10.0.0`, resolved from the
+The current recommended target is `workspace-docs@11.0.0`, resolved from the
 contained `default` pointer. Resolve that pointer to a complete version package
 and pin its concrete version before changing files. An explicit older pin uses
 its own manifest, migration notes, and lifecycle; never silently downgrade.
 
-- [Version-specific migration notes](./v10.0.0/migration.md)
-- [Required structure manifest](./v10.0.0/manifest.yaml)
-- [Generated `AGENTS.md` context template](./v10.0.0/agents-template.md)
-- [Specs README template](./v10.0.0/specs-readme-template.md)
-- [Adoption audit checklist](./v10.0.0/audit-checklist.md)
+- [Version-specific migration notes](./v11.0.0/migration.md)
+- [Required structure manifest](./v11.0.0/manifest.yaml)
+- [Generated `AGENTS.md` context template](./v11.0.0/agents-template.md)
+- [Specs README template](./v11.0.0/specs-readme-template.md)
+- [Adoption audit checklist](./v11.0.0/audit-checklist.md)
 
 ## Choose the Migration Mode
 
 Classify the current repository before changing files. The table below records
 the historical structural migration through v5. For the current default, also
-apply the v6, v7, v8, v9 and v10 migration notes in order; the target manifest is authoritative.
+apply the v6, v7, v8, v9, v10 and v11 migration notes in order; the target manifest is authoritative.
 
 | Current state | Mode | Required action |
 | --- | --- | --- |
@@ -68,7 +68,7 @@ Agents must follow these rules throughout the migration:
    relative paths. Do not search outside the repository.
 4. Compare existing files and directories with the target
    manifest (for the current default,
-   [`v10.0.0/manifest.yaml`](./v10.0.0/manifest.yaml)).
+   [`v11.0.0/manifest.yaml`](./v11.0.0/manifest.yaml)).
 5. Identify which current-project documents are authoritative, duplicated,
    obsolete, or unclassified.
 6. Confirm the target version. Resolve `default` or `latest` for discovery, but
@@ -167,8 +167,8 @@ in [`v5.0.0/migration.md`](./v5.0.0/migration.md). Start at the first version
 newer than the repository's current pin and do not skip intermediate notes.
 Continue through [v6](./v6.0.0/migration.md) and
 [v7](./v7.0.0/migration.md), then [v8](./v8.0.0/migration.md), then [v9](./v9.0.0/migration.md) and the
-[9.0.1 correction](./v9.0.1/migration.md), followed by [v10](./v10.0.0/migration.md)
-when targeting the current default.
+[9.0.1 correction](./v9.0.1/migration.md), followed by [v10](./v10.0.0/migration.md) and
+[v11](./v11.0.0/migration.md) when targeting the current default.
 
 ## Phase 4: Validate the Result
 
@@ -258,7 +258,7 @@ historical evidence, and manual policy outside the approved repair scope.
 
 ## Workspace Docs 8 Verification Boundary
 
-This historical boundary applies to an explicit v8 pin. The current v10
+This historical boundary applies to an explicit v8 pin. The current v11
 default retains affected CI and adds the separately described operations exception.
 
 For v8 adoption, run only affected Taskfile checks locally, including affected
@@ -279,12 +279,22 @@ Validate selection and required-status failure handling before relying on it.
 Old v8 references above describe historical migration; v10 retains v9's
 scoped-CI contract and adds the explicit human-run operations boundary.
 
-## Workspace Docs 10 Default and Operations Boundary
+## Workspace Docs 10 Operations Boundary
 
-The contained default selects v10. Its [SDLC](./v10.0.0/sdlc.md),
+The v10 [SDLC](./v10.0.0/sdlc.md),
 [process](./v10.0.0/process.md) and [audit checklist](./v10.0.0/audit-checklist.md)
-govern the current target. Read the [v10 migration](./v10.0.0/migration.md) before replacing older blanket
+introduced this boundary, which v11 retains. Read the [v10 migration](./v10.0.0/migration.md) before replacing older blanket
 local-operation rules. Keep agents non-mutating locally; the new exception
 prepares reviewed tools/, verifies affected CI, obtains exact human approval,
 asks the user to execute and requires outcome/OpenTofu reconciliation evidence.
 The policy migration itself does not approve any actual maintenance action.
+
+## Workspace Docs 11 Default and Unfinished Work Notice
+
+The contained default selects v11. Its [SDLC](./v11.0.0/sdlc.md),
+[process](./v11.0.0/process.md) and [audit checklist](./v11.0.0/audit-checklist.md)
+govern the current target. Read the [v11 migration](./v11.0.0/migration.md).
+A task that ends before full delivery hands off with `**Not finished:**`, then
+states progress, the cause in plain language, numbered possible fixes with who
+must act and a recommendation, and where the work is preserved. Partial work is
+never presented as complete. v11 retains the v10 operations boundary.

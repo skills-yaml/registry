@@ -2,16 +2,16 @@
 name: wk-spec
 description: Explicitly invoke wk.spec to turn an accepted request into a development specification through write-spec.
 metadata:
-  skm-version: "0.4.10"
+  skm-version: "0.5.0"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
+  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
   skm-source-path: "workspace/instructions/skills/wk-spec"
-  skm-source-integrity: "sha256:075a453b8d92bdbe8a08b692f6bbcca44c031a207ca2ff171e1221533f3305f8"
-  workspace-toolkit-version: "0.17.0"
-  workspace-docs-compatibility: "10.x"
+  skm-source-integrity: "sha256:f254ff7ef23fc762792816d4331c994b2c06cfef7a15e781dbdcf77e8bd0327b"
+  workspace-toolkit-version: "0.18.0"
+  workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.7.2"
+  skm-dependencies: "workspace/write-spec@0.8.0"
 ---
 
 # wk.spec
@@ -29,3 +29,16 @@ and its authoritative references.
 Return its spec path, ready/blocked work, unresolved decisions, validation and
 next allowed transition. This facade delivers planning artifacts; it does not
 start feature implementation or grant approval to change governed instructions.
+
+## Unfinished Work Notice
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.

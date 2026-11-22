@@ -16,8 +16,10 @@ The standard defines:
 
 ## Current Versions
 
-- `latest` points to `v10.0.0` (newest available version).
-- `default` points to `v10.0.0` (recommended stable version).
+- `latest` points to `v11.0.0` (newest available version).
+- `default` points to `v11.0.0` (recommended stable version).
+- `v11.0.0` adds the Unfinished Work Notice: a task that ends before full
+  delivery hands off with `**Not finished:**`, a plain-language cause and fixes.
 - `v10.0.0` adds reviewed, CI-verified, explicitly approved one-time human-run
   operations with mandatory OpenTofu reconciliation; normal infrastructure stays in CI.
 - `v9.0.1` corrects bounded delivery authority and release routing.
@@ -37,7 +39,7 @@ The standard defines:
 Projects should pin to a concrete version when reproducibility matters:
 
 ```text
-workspace-docs@10.0.0
+workspace-docs@11.0.0
 ```
 
 Projects may use `workspace-docs@default` while adopting the shared process.
@@ -49,8 +51,9 @@ workspace-docs/
   AGENT_MIGRATION.md
   README.md
   VERSIONING.md
-  latest -> v10.0.0
-  default -> v10.0.0
+  latest -> v11.0.0
+  default -> v11.0.0
+  v11.0.0/                   # unfinished work notice
   v10.0.0/                   # approved one-time user-run operations
   v9.0.1/                    # bounded scope and release correction
   v9.0.0/                    # preserved affected CI release
@@ -84,7 +87,7 @@ workspace-docs/
 Generated or synchronized agent context must live inside clear markers:
 
 ```md
-<!-- AGENT-CONTEXT:START workspace-docs@10.0.0 -->
+<!-- AGENT-CONTEXT:START workspace-docs@11.0.0 -->
 <!-- Generated content. Manual edits may be overwritten. -->
 <!-- AGENT-CONTEXT:END -->
 ```
