@@ -2,12 +2,12 @@
 name: address-review-feedback
 description: Triage and implement selected actionable feedback from a pull request, branch review, or review report. Use when the user asks to address review comments, requested changes, or unresolved threads and authorizes the corresponding code or documentation edits.
 metadata:
-  skm-version: "0.5.1"
+  skm-version: "0.5.2"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
+  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
   skm-source-path: "workspace/instructions/skills/address-review-feedback"
   skm-source-integrity: "sha256:c96f892c1ad72bb300c7550edd5575eafb67c126d8079b88272c0eb40a84b841"
-  workspace-toolkit-version: "0.16.0"
+  workspace-toolkit-version: "0.17.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

@@ -2,12 +2,12 @@
 name: maintain-project-docs
 description: Create, update, reconcile, or review human-facing project documentation within repository-declared documentation roots. Use when project reference, architecture, operational, onboarding, or work documentation must reflect current repository behavior without changing governed agent instructions.
 metadata:
-  skm-version: "0.3.13"
+  skm-version: "0.3.14"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
+  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
   skm-source-path: "workspace/instructions/skills/maintain-project-docs"
   skm-source-integrity: "sha256:90cafe839afb6fc0ab907edf07d296cbeb8e4d469ec30087d8b798a99d6f4841"
-  workspace-toolkit-version: "0.16.0"
+  workspace-toolkit-version: "0.17.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

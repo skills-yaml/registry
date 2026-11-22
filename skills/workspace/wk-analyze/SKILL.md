@@ -2,16 +2,16 @@
 name: wk-analyze
 description: Run the wk.analyze lifecycle facade to produce a read-only, evidence-backed repository assessment. Invoke explicitly when the user wants repository structure, stack, SDLC, policy, documentation, active-work, risk, and gap analysis.
 metadata:
-  skm-version: "0.5.0"
+  skm-version: "0.5.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "4cd12dc61260ef1a5a3f5e114e0d2c8fb04d18ff"
+  skm-source-revision: "949eef2c5beb8c50380b628826b21d27767c613d"
   skm-source-path: "workspace/instructions/skills/wk-analyze"
   skm-source-integrity: "sha256:23c74b9cc3b5897bfbbc595f57a2504356810e96d34a6960022911086247f829"
-  workspace-toolkit-version: "0.16.0"
+  workspace-toolkit-version: "0.17.0"
   workspace-docs-compatibility: "10.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/analyze-repository@0.5.0"
+  skm-dependencies: "workspace/analyze-repository@0.5.1"
 ---
 
 # wk.analyze
