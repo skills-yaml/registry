@@ -2,12 +2,12 @@
 name: maintain-project-docs
 description: Create, update, reconcile, or review human-facing project documentation within repository-declared documentation roots. Use when project reference, architecture, operational, onboarding, or work documentation must reflect current repository behavior without changing governed agent instructions.
 metadata:
-  skm-version: "0.4.0"
+  skm-version: "0.4.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/maintain-project-docs"
-  skm-source-integrity: "sha256:a64e8b88f77e2578632be70aa146c6099fe372161a6a98e583ea24803650871e"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:141f41da6532bcad9c7d4711d7b468602fd7c534c8f90d3dfa024cb4b93b5143"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -37,8 +37,12 @@ require prospective human instruction-change approval for the named scope.
 If two or more agents may mutate the repository concurrently, invoke
 `coordinate-multi-agent-development` before delegated edits. Give each
 mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+the primary checkout coordination-only. If the coordination skill is unavailable,
+continue only as a single writer when repository policy permits: stop delegated
+mutations and ensure no other agent is writing. If that cannot be guaranteed or
+policy requires coordination, stop and report the missing dependency. Ordinary
+task or delivery branches follow task authority under Workspace Docs 7; older
+pins retain their direct branch-request requirement. Always honor protections.
 
 ## Maintain the Documentation
 
@@ -72,8 +76,8 @@ missing product decision.
 ## Pinned SDLC Contract
 
 Read the repository's pinned SDLC; this skill does not override its authority
-or this skill's read-only/planning boundary. Deliver the requested scope using
-existing patterns. Report optional improvements separately and leave them
+or this skill's applicable mode and authority boundaries. Deliver the requested
+scope using existing patterns. Report optional improvements separately and leave them
 unimplemented. Before substantial scope expansion, identify the concrete
 blocker, propose the smallest solution and obtain approval. Standing workflow
 authority never grants unrelated work or governed instruction changes.
@@ -112,7 +116,7 @@ consumer checks in dependency order. Include interfaces, errors, security,
 timing, side effects, configuration, dependencies and generated outputs in
 impact analysis. Failures block dependent stages; deduplicate checks, assess
 old/new relationships for moves/deletions and group cycles. Reuse only proven-
-fresh evidence. Read-only work assesses this evidence; planning specifies it.
+fresh evidence. Apply these checks only within the authorized mode and scope.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.

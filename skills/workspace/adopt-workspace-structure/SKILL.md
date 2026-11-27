@@ -2,12 +2,12 @@
 name: adopt-workspace-structure
 description: Adopt, upgrade, repair, or assess workspace documentation with guided architecture and technology decisions. Use for workspace initialization, version migration, conformance repair, or adoption planning; involve the user in material choices and turn agreed deferred improvements into actionable specs.
 metadata:
-  skm-version: "0.14.0"
+  skm-version: "0.14.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/adopt-workspace-structure"
-  skm-source-integrity: "sha256:102641d9c7829a48258add3391a87bab6aedf32f5bec60182d34d98c8225d3c2"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:de15a0e9fd7c31939d279ef34e635382e0615d186d6d10f4bbd0f39effd0d497"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -49,8 +49,12 @@ only when pinned; report unresolved conflicts between current instruction files.
 If two or more agents may mutate the repository concurrently, invoke
 `coordinate-multi-agent-development` before delegated edits. Give each
 mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+the primary checkout coordination-only. If the coordination skill is unavailable,
+continue only as a single writer when repository policy permits: stop delegated
+mutations and ensure no other agent is writing. If that cannot be guaranteed or
+policy requires coordination, stop and report the missing dependency. Ordinary
+task or delivery branches follow task authority under Workspace Docs 7; older
+pins retain their direct branch-request requirement. Always honor protections.
 
 If no target is specified, use the concrete version referenced by the selected
 standard package's `default` pointer. Never silently select a downgrade.
@@ -96,7 +100,10 @@ Read these resources completely from the selected package:
 - `<target-version>/migration.md` for an update or repair
 
 Read intermediate migration notes when crossing more than one released
-version. Treat the target manifest as the structural source of truth.
+version. Historical migration examples are context, not commands to execute
+blindly: inspect each against the current repository, target manifest, approved
+scope, and applicable authority before acting. Treat the target manifest as the
+structural source of truth.
 
 ## Classify the Work
 

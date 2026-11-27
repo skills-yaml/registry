@@ -54,10 +54,7 @@ Severity values: `critical`, `high`, `medium`, `low`.
 | --- | --- | --- | --- |
 | <aspect> | <practice> | <repository-relative path> | <gap or `none`> |
 
-<!--
-One row each for: branching, CI/CD, release, migration, rollback, pinned SDLC
-and spec lifecycle.
--->
+<!-- One row each: branching, CI/CD, release, migration, rollback, pinned SDLC, spec lifecycle. -->
 
 ## Active Work
 
@@ -83,10 +80,7 @@ and spec lifecycle.
 | --- | --- | --- | --- | --- | --- | --- |
 | <F1> | <critical, high, medium or low> | <category> | <finding> | <repository-relative path> | <observed, documented, inferred or unknown> | <action that follows from the evidence> |
 
-<!--
-Order by severity. Report optional improvements separately from defects.
--->
-
+<!-- Order by severity; separate optional improvements from defects. -->
 ## Optional Improvements
 
 - <optional improvement kept separate from defects, or `none`>

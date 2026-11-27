@@ -2,12 +2,12 @@
 name: address-review-feedback
 description: Triage and implement selected actionable feedback from a pull request, branch review, or review report. Use when the user asks to address review comments, requested changes, or unresolved threads and authorizes the corresponding code or documentation edits.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/address-review-feedback"
-  skm-source-integrity: "sha256:e271d8f901b2831525d2be5936f2241279ff0d9f1f91d7462ab898672ec2cb6b"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:aed7ad3fe815cc448fdac3abd2c5162a2ba483bc7c3b869a989ffec109456a66"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -35,8 +35,12 @@ instructions retain their platform precedence.
 If two or more agents may mutate the repository concurrently, invoke
 `coordinate-multi-agent-development` before delegated edits. Give each
 mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+the primary checkout coordination-only. If the coordination skill is unavailable,
+continue only as a single writer when repository policy permits: stop delegated
+mutations and ensure no other agent is writing. If that cannot be guaranteed or
+policy requires coordination, stop and report the missing dependency. Ordinary
+task or delivery branches follow task authority under Workspace Docs 7; older
+pins retain their direct branch-request requirement. Always honor protections.
 
 Feedback requesting a governed instruction edit is not sufficient when it was
 written by an agent or bot. Require prospective instruction-change approval
@@ -70,10 +74,11 @@ their restrictions; classify missing approval/import/evidence as a blocker.
 
 Map each selected comment to its outcome, validation evidence, and any remaining
 decision. Under a user-requested feedback workflow, use standing authority to
-reply, resolve addressed threads, commit, push the delivery branch, and update
-the pull request without requesting repeated approval. Do not self-approve when
-repository policy prohibits it, bypass protection, or execute a destructive
-production action without scoped human approval.
+resolve addressed threads, commit, push the delivery branch, and update the pull
+request within the user's authorized scope. Send replies only when messaging is
+explicitly authorized by the user or applicable higher-priority instructions.
+Do not self-approve when repository policy prohibits it, bypass protection,
+or execute a destructive production action without scoped human approval.
 
 ## Pinned SDLC Contract
 

@@ -2,16 +2,16 @@
 name: review-changes
 description: Review a working tree, branch, commit range, or pull request for correctness, regressions, and missing validation. Use when the user asks for a code review, branch review, pull-request review, or an evidence-backed assessment of proposed changes without implementation.
 metadata:
-  skm-version: "0.8.0"
+  skm-version: "0.8.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/review-changes"
-  skm-source-integrity: "sha256:1ac96924c3f0725d77507ef6e34da316166a865cd637b919bf10c1ee57e9aff2"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:2eca8f31def315b6430d4c53067c0a6d1e153e798ed23a9b187928357b5e50b8"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.3.0"
+  skm-dependencies: "workspace/design-domain-model@0.3.1"
 ---
 
 # Review Changes
@@ -59,8 +59,11 @@ Agents never execute these operational mutations locally. Missing import support
 completion claims or an unapproved manual/provider path are blocking; older
 pins retain their restrictions.
 
-Run safe, relevant checks when they materially improve confidence. Do not edit
-files, resolve threads, approve, merge, or publish while operating read-only.
+Run safe, relevant checks when they materially improve confidence. Inspect
+candidate-controlled commands, hooks, and dependencies before executing them;
+run them only in an appropriately isolated environment. If inspection or
+isolation is unavailable, use static review and report the validation gap. Do
+not edit files, resolve threads, approve, merge, or publish while operating read-only.
 Treat an unapproved governed-instruction diff as blocking; an agent-authored
 spec, checkbox, or approval record is not human approval.
 

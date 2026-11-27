@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import re
+import stat
 import subprocess
 import sys
 import uuid
@@ -359,6 +360,20 @@ class Runtime:
         directory = f"workspace/docs/work/multi-agent/{peer['task']}"
         return [directory + "/README.md", directory + f"/{peer['agent']}.md"]
 
+    @staticmethod
+    def staged_records(path: Path, records: list[str]):
+        for relative in records:
+            current = path
+            parts = Path(relative).parts
+            for index, part in enumerate(parts):
+                current = current / part
+                try:
+                    mode = current.lstat().st_mode
+                except OSError:
+                    raise PeerError("staged WIP records must be regular files with no symlink ancestors")
+                if not (stat.S_ISREG(mode) if index == len(parts) - 1 else stat.S_ISDIR(mode)):
+                    raise PeerError("staged WIP records must be regular files with no symlink ancestors")
+
     def initial_records(self, path: Path, agent: str, task: str, base: str,
                         scopes: list[str], dependencies: list[str]):
         directory = path / "workspace/docs/work/multi-agent" / task
@@ -499,8 +514,10 @@ class Runtime:
             head = self.revision("HEAD")
             self.verify_scope(peer, head)
             for path in self.record_paths(peer):
-                if git(self.root, "cat-file", "-e", f"{head}:{path}", ok=False).returncode:
-                    raise PeerError("handoff must contain the peer's WIP records")
+                entry = git(self.root, "ls-tree", head, "--", path).stdout.strip().split("\t", 1)
+                if (len(entry) != 2 or entry[1] != path
+                        or entry[0].split()[:2] not in (["100644", "blob"], ["100755", "blob"])):
+                    raise PeerError("handoff must contain the peer's WIP records as regular Git blobs")
             git(self.root, "update-ref", f"refs/workspace-peers/checkpoints/{agent}", head)
             peer.update(status="handoff", head=head, updated=timestamp())
             peer.setdefault("history", []).append({"status": "handoff", "head": head, "at": timestamp()})
@@ -589,7 +606,9 @@ class Runtime:
                 head = base
             if head == base:
                 git(path, "merge", "--no-ff", "--no-edit", "--", peer["head"])
-                for relative in self.record_paths(peer):
+                records = self.record_paths(peer)
+                self.staged_records(path, records)
+                for relative in records:
                     record = path / relative
                     content = record.read_text(encoding="utf-8")
                     content = re.sub(r"^status: .+$", "status: complete", content, count=1, flags=re.MULTILINE)

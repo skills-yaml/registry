@@ -2,23 +2,28 @@
 name: wk-deliver
 description: Deliver an approved specification or release already tested work through the repository's established workflow. Use for end-to-end delivery, release, promotion or resumption; preserve the requested scope and existing pipeline.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/wk-deliver"
-  skm-source-integrity: "sha256:e43ed0ec2ba3bdc47a06ac84592b84edbd2e4eacaee8db0d603213cb1ed0c6a7"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:ca8badaee2327647d5adf8c0adb3ccbc3e01c68c52cd01d22487bd4fa16a765f"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.8.0, workspace/plan-implementation@0.7.0, workspace/implement-spec@0.7.0, workspace/review-changes@0.8.0, workspace/review-security@0.9.0, workspace/monitor-ci@0.7.0, workspace/fix-ci@0.6.0, workspace/address-review-feedback@0.6.0, workspace/coordinate-multi-agent-development@0.3.0"
+  skm-dependencies: "workspace/write-spec@0.8.1, workspace/plan-implementation@0.7.1, workspace/implement-spec@0.7.1, workspace/review-changes@0.8.1, workspace/review-security@0.9.1, workspace/monitor-ci@0.7.1, workspace/fix-ci@0.6.1, workspace/address-review-feedback@0.6.1, workspace/coordinate-multi-agent-development@0.3.1"
 ---
 
 # wk.deliver
 
+Use this facade only when explicitly requested.
+
 Coordinate the declared specification, planning, implementation, review,
 security, CI, and remediation dependencies. Invocation alone grants no write,
-publication, instruction-change, production, or scope authority.
+publication, instruction-change, production, or scope authority. Determine the
+requested endpoint before acting. Follow the pinned SDLC and any narrower user
+instruction for each action; do not infer release or publication from an
+implementation request or a merge.
 
 ## Release or Resume Tested Work
 
@@ -106,8 +111,8 @@ reuse only proven-fresh evidence.
 ## Pinned SDLC Contract
 
 Read the repository's pinned SDLC; this skill does not override its authority
-or this skill's read-only/planning boundary. Deliver the requested scope using
-existing patterns. Report optional improvements separately and leave them
+or this skill's applicable mode and authority boundaries. Deliver the requested
+scope using existing patterns. Report optional improvements separately and leave them
 unimplemented. Before substantial scope expansion, identify the concrete
 blocker, propose the smallest solution and obtain approval. Standing workflow
 authority never grants unrelated work or governed instruction changes.
@@ -146,7 +151,7 @@ consumer checks in dependency order. Include interfaces, errors, security,
 timing, side effects, configuration, dependencies and generated outputs in
 impact analysis. Failures block dependent stages; deduplicate checks, assess
 old/new relationships for moves/deletions and group cycles. Reuse only proven-
-fresh evidence. Read-only work assesses this evidence; planning specifies it.
+fresh evidence. Apply these checks only within the authorized mode and scope.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.

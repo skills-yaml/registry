@@ -1,0 +1,4 @@
+interface:
+  display_name: "PR Lifecycle Supervisor"
+  short_description: "Schedule review, repair, merge, and post-merge checks"
+  default_prompt: "Use $pr-lifecycle-supervisor to set up recurring PR review, repair, guarded merge, and post-merge monitoring for the repositories I specify."

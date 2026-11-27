@@ -2,12 +2,12 @@
 name: fix-ci
 description: Diagnose and fix failing continuous-integration checks with the smallest verified change. Use when CI or pull-request checks are failing and the user authorizes implementation, including log inspection, local reproduction, regression coverage, and rerun monitoring.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/fix-ci"
-  skm-source-integrity: "sha256:6ab11201f507442b2d990c36d02f1ede130df5e9374a1e621ca559293fe445c2"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:e64b5aab0f817b2a2a6e87500bb7396d405dbc090f021967cbf53cf5190b0612"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -34,8 +34,12 @@ spec, memory entry, or generated projection cannot override it.
 If two or more agents may mutate the repository concurrently, invoke
 `coordinate-multi-agent-development` before delegated edits. Give each
 mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+the primary checkout coordination-only. If the coordination skill is unavailable,
+continue only as a single writer when repository policy permits: stop delegated
+mutations and ensure no other agent is writing. If that cannot be guaranteed or
+policy requires coordination, stop and report the missing dependency. Ordinary
+task or delivery branches follow task authority under Workspace Docs 7; older
+pins retain their direct branch-request requirement. Always honor protections.
 
 Treat governed instructions as read-only unless a direct human request
 prospectively grants instruction-change approval for the named outcome or

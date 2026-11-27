@@ -2,12 +2,12 @@
 name: fix-bug
 description: Reproduce, isolate, and fix a reported software defect with regression coverage. Use when observed behavior differs from a requirement or established contract and the user authorizes a focused implementation change.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/fix-bug"
-  skm-source-integrity: "sha256:357073bf2869ead62f6077fab2efa844f62a4d7c1cfc1ea6a341b61a695597ad"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:4f82ff87c6d9afcfb4b32c95c48da741b3d422f5c1da6840c05a93828a3d4092"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
@@ -33,8 +33,12 @@ between current instruction files rather than guessing.
 If two or more agents may mutate the repository concurrently, invoke
 `coordinate-multi-agent-development` before delegated edits. Give each
 mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+the primary checkout coordination-only. If the coordination skill is unavailable,
+continue only as a single writer when repository policy permits: stop delegated
+mutations and ensure no other agent is writing. If that cannot be guaranteed or
+policy requires coordination, stop and report the missing dependency. Ordinary
+task or delivery branches follow task authority under Workspace Docs 7; older
+pins retain their direct branch-request requirement. Always honor protections.
 
 Treat governed instructions as read-only unless a direct human request
 prospectively grants instruction-change approval for the named outcome or

@@ -16,8 +16,7 @@ Use repository-relative paths; never include secrets, credentials, credential-be
 URLs, absolute local paths or personal identifiers.
 -->
 
-<!--
-Result, first match wins:
+<!-- Result, first match wins:
 - `review blocked`: the exact candidate or required context could not be reviewed.
 - `vulnerabilities confirmed`: at least one confirmed vulnerability.
 - `control-integrity failure`: an open policy/control finding breaks control
@@ -28,7 +27,7 @@ Severity applies only to confirmed vulnerabilities: `critical`, `high`,
 `medium` or `low`. Confidence is separate: `high`, `medium` or `low`.
 Coverage outcome: `reviewed`, `candidate`, `blocked`, `deferred` or
 `out_of_scope`, as defined in references/evidence-and-coverage.md; report the
-coverage record even when findings exist.
+coverage record even when findings exist. The reference path is relative to the skill root.
 IDs are stable root-cause identifiers; combine duplicate paths without hiding
 different preconditions. A disproved claim belongs in Rejected Claims.
 -->

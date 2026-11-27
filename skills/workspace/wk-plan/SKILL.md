@@ -2,16 +2,16 @@
 name: wk-plan
 description: Run the wk.plan lifecycle facade to validate or create an active specification and produce an executable implementation plan. Invoke explicitly when approved work needs ordered steps, affected files, migration handling, validation, rollback, and completion gates.
 metadata:
-  skm-version: "0.5.0"
+  skm-version: "0.5.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/wk-plan"
-  skm-source-integrity: "sha256:4451509bb09d66c475a70b69e9824403a1e1eda0fc99f94ee785bffed7764f0e"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:052a7d6b11b6a10ae8b46c988f3643f854b8fda7e2751bd84bc80df8a0333f9a"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/write-spec@0.8.0, workspace/plan-implementation@0.7.0"
+  skm-dependencies: "workspace/write-spec@0.8.1, workspace/plan-implementation@0.7.1"
 ---
 
 # wk.plan
@@ -21,7 +21,9 @@ Compose `write-spec` and `plan-implementation`.
 1. Require both focused dependencies and stop with an actionable installation
    or compatibility error when either is unavailable.
 2. Locate the active specification. If none adequately covers a user-requested
-   plan, use `write-spec` first without starting implementation.
+   plan, use `write-spec` first only when the request authorizes specification
+   writes; otherwise stop and report the missing specification and write authority.
+   Do not start implementation.
 3. Stop when the spec is ambiguous, incomplete, not in an implementable state,
    lacks required authority, or conflicts with current authoritative
    instructions.
