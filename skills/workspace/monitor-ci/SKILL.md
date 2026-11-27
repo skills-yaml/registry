@@ -2,12 +2,12 @@
 name: monitor-ci
 description: Monitor a continuous-integration run or pull-request checks through a terminal outcome and report meaningful transitions. Use when the user asks to watch, babysit, follow, or wait for CI without changing code or workflow configuration.
 metadata:
-  skm-version: "0.7.0"
+  skm-version: "0.7.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/monitor-ci"
   skm-source-integrity: "sha256:ad78aaccc7819b674f97a77a196af084d3a94c591fb9507d539cdc95f6a274a1"
-  workspace-toolkit-version: "0.18.0"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"

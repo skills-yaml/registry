@@ -2,16 +2,16 @@
 name: wk-document
 description: Run the wk.document lifecycle facade to create or maintain human-facing project documentation within repository ownership boundaries. Invoke explicitly when documentation must be reconciled with current behavior and validated.
 metadata:
-  skm-version: "0.4.0"
+  skm-version: "0.4.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/wk-document"
-  skm-source-integrity: "sha256:7f048f4159e0efcd7e52216e57003ac2330e4c58aa59e7878e7e49ffc1d2bb80"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:6875dc3eeccc950667b735e863ac9865848baffcc8092a056faa9e07c7511d82"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/maintain-project-docs@0.4.0"
+  skm-dependencies: "workspace/maintain-project-docs@0.4.1"
 ---
 
 # wk.document
@@ -41,8 +41,8 @@ from documentation changes alone.
 ## Pinned SDLC Contract
 
 Read the repository's pinned SDLC; this skill does not override its authority
-or this skill's read-only/planning boundary. Deliver the requested scope using
-existing patterns. Report optional improvements separately and leave them
+or this skill's applicable mode and authority boundaries. Deliver the requested
+scope using existing patterns. Report optional improvements separately and leave them
 unimplemented. Before substantial scope expansion, identify the concrete
 blocker, propose the smallest solution and obtain approval. Standing workflow
 authority never grants unrelated work or governed instruction changes.
@@ -81,7 +81,7 @@ consumer checks in dependency order. Include interfaces, errors, security,
 timing, side effects, configuration, dependencies and generated outputs in
 impact analysis. Failures block dependent stages; deduplicate checks, assess
 old/new relationships for moves/deletions and group cycles. Reuse only proven-
-fresh evidence. Read-only work assesses this evidence; planning specifies it.
+fresh evidence. Apply these checks only within the authorized mode and scope.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.

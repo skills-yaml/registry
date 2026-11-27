@@ -2,16 +2,16 @@
 name: implement-spec
 description: Implement an approved development specification through validated, reviewable changes. Use when a spec is active in development and the request authorizes code or documentation changes, including required tests, compatibility work, lifecycle reconciliation, and memory-impact completion.
 metadata:
-  skm-version: "0.7.0"
+  skm-version: "0.7.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/implement-spec"
-  skm-source-integrity: "sha256:d07c2bd424ff943cd14092fc20382357b66c18d67a550673ed126f4fc2d933fa"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:418515985488d5b9e608fa144e5e975c382944804bed6b0ba0aa408ad5609e75"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.3.0"
+  skm-dependencies: "workspace/design-domain-model@0.3.1"
 ---
 
 # Implement Spec
@@ -36,8 +36,12 @@ instructions retain their platform precedence.
 If two or more agents may mutate the repository concurrently, invoke
 `coordinate-multi-agent-development` before delegated edits. Give each
 mutating agent a dedicated detached worktree and repository WIP record; keep
-the primary checkout coordination-only. Ordinary task or delivery branches follow task authority under Workspace Docs 7;
-older pins retain their direct branch-request requirement. Always honor protections.
+the primary checkout coordination-only. If the coordination skill is unavailable,
+continue only as a single writer when repository policy permits: stop delegated
+mutations and ensure no other agent is writing. If that cannot be guaranteed or
+policy requires coordination, stop and report the missing dependency. Ordinary
+task or delivery branches follow task authority under Workspace Docs 7; older
+pins retain their direct branch-request requirement. Always honor protections.
 
 Before editing governed instructions (`AGENTS.md`, `DESIGN.md`, canonical files
 under `workspace/instructions/`, or instruction-approval controls), verify
@@ -128,8 +132,8 @@ existing authorization and deployment boundaries.
 ## Pinned SDLC Contract
 
 Read the repository's pinned SDLC; this skill does not override its authority
-or this skill's read-only/planning boundary. Deliver the requested scope using
-existing patterns. Report optional improvements separately and leave them
+or this skill's applicable mode and authority boundaries. Deliver the requested
+scope using existing patterns. Report optional improvements separately and leave them
 unimplemented. Before substantial scope expansion, identify the concrete
 blocker, propose the smallest solution and obtain approval. Standing workflow
 authority never grants unrelated work or governed instruction changes.
@@ -168,7 +172,7 @@ consumer checks in dependency order. Include interfaces, errors, security,
 timing, side effects, configuration, dependencies and generated outputs in
 impact analysis. Failures block dependent stages; deduplicate checks, assess
 old/new relationships for moves/deletions and group cycles. Reuse only proven-
-fresh evidence. Read-only work assesses this evidence; planning specifies it.
+fresh evidence. Apply these checks only within the authorized mode and scope.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.
