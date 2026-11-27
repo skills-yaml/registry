@@ -2,16 +2,16 @@
 name: write-spec
 description: Write a development specification from an accepted request before implementation. Use when scope, behavior, acceptance criteria, affected areas, validation, risks, versions or unresolved decisions need an explicit contract.
 metadata:
-  skm-version: "0.8.0"
+  skm-version: "0.8.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/write-spec"
-  skm-source-integrity: "sha256:bd40e6fd5f81d6accbcf615b6b6e3563093c06b3a6d40594d23f838be2386fb8"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:439fe84fd04c9510928af4e208ea8b3239f41edd006c618867db8aaf0d85091a"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/design-domain-model@0.3.0"
+  skm-dependencies: "workspace/design-domain-model@0.3.1"
 ---
 
 # Write Spec
@@ -61,6 +61,9 @@ member specs in `workspace/releases.json`; declare baseline, target, owner,
 timing and rationale through the required shared reservation transaction.
 Reuse an already-applied shared release. A backlog idea does not apply a
 development bump. Recheck occupancy at handoff.
+When a release has multiple member specs, record the required merge and
+publication order. If one member publishes first, determine whether a fresh
+version is needed before another changed payload can integrate.
 
 Load only the conditional material triggered by the affected areas:
 
@@ -80,6 +83,13 @@ Load only the conditional material triggered by the affected areas:
   agent-authored approval record grants no authority to edit those instructions.
 
 ## 4. Draft the Specification
+
+For a new non-legacy spec, start from the [general spec template](templates/development-spec.md)
+when the consuming repository has no more specific template. Follow its actual
+pinned policy, replace every placeholder, select the true lifecycle state, and
+omit inapplicable optional sections. Keep the spec's status rationale consistent
+with its catalog row. The template is a starting structure, not approval or
+evidence that a planned check has passed.
 
 Include:
 
@@ -115,7 +125,9 @@ Preserve done history through linked follow-ups. Lifecycle transitions need
 the actual pinned integration/completion evidence, never a branch name.
 
 Self-review links, terminology, required contents, acceptance testability and
-policy consistency. Each requirement must have supporting repository evidence,
+policy consistency. Check required field labels, unfilled placeholders, and
+planned-versus-observed evidence. Each requirement must have supporting
+repository evidence,
 a user decision, or a labeled unresolved input. Every acceptance criterion
 needs a planned check, inspection, demonstration or user decision. Report
 uncovered criteria as gaps; dependent work stays unready until resolved.

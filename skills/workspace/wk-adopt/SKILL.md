@@ -2,16 +2,16 @@
 name: wk-adopt
 description: Run the wk.adopt lifecycle facade to assess, adopt, repair, or upgrade a repository's Workspace structure through the focused adoption workflow. Invoke explicitly when the user requests Workspace adoption or migration.
 metadata:
-  skm-version: "0.6.0"
+  skm-version: "0.6.1"
   skm-source-repository: "https://github.com/skills-yaml/workspace.git"
-  skm-source-revision: "15cbe089f67a672f5bb8eb8858e748967c631f22"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
   skm-source-path: "workspace/instructions/skills/wk-adopt"
-  skm-source-integrity: "sha256:8b2c02845f6a3dfa8e5a26158aca6d34a5cb293aa9f60147ad07e046be3732bb"
-  workspace-toolkit-version: "0.18.0"
+  skm-source-integrity: "sha256:22eda8133f07efa916ff766b8f3e63c8a76234b448f86f03cfed7b2dc46154eb"
+  workspace-toolkit-version: "0.19.0"
   workspace-docs-compatibility: "11.x"
   minimum-skm-version: "0.7.0"
   skm-adapter-compatibility: "2.x"
-  skm-dependencies: "workspace/adopt-workspace-structure@0.14.0"
+  skm-dependencies: "workspace/adopt-workspace-structure@0.14.1"
 ---
 
 # wk.adopt
@@ -46,8 +46,8 @@ changes require independent review before the pinned final verification.
 ## Pinned SDLC Contract
 
 Read the repository's pinned SDLC; this skill does not override its authority
-or this skill's read-only/planning boundary. Deliver the requested scope using
-existing patterns. Report optional improvements separately and leave them
+or this skill's applicable mode and authority boundaries. Deliver the requested
+scope using existing patterns. Report optional improvements separately and leave them
 unimplemented. Before substantial scope expansion, identify the concrete
 blocker, propose the smallest solution and obtain approval. Standing workflow
 authority never grants unrelated work or governed instruction changes.
@@ -86,7 +86,7 @@ consumer checks in dependency order. Include interfaces, errors, security,
 timing, side effects, configuration, dependencies and generated outputs in
 impact analysis. Failures block dependent stages; deduplicate checks, assess
 old/new relationships for moves/deletions and group cycles. Reuse only proven-
-fresh evidence. Read-only work assesses this evidence; planning specifies it.
+fresh evidence. Apply these checks only within the authorized mode and scope.
 Work on one active task per agent. Split oversized specs into bounded ordered
 steps with prerequisites, acceptance mapping and focused validation; use linked
 child specs for independently deliverable work and preserve overall acceptance.

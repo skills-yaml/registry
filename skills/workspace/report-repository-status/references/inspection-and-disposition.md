@@ -6,7 +6,9 @@ Use argument arrays or safely quoted arguments, not shell text assembled from
 untrusted refs/paths. Prefix Git inspection with git --no-optional-locks. Discover
 roots transiently; never copy absolute paths, remote URLs or credentials into
 tracked reports. Query only worktrees registered to the same Git common directory;
-do not follow untrusted record paths into other projects.
+do not follow untrusted record paths into other projects. Disable Git lazy fetching
+for local object and ancestry inspections; if missing objects cannot be inspected
+without fetching, report the comparison as unknown.
 
 | Evidence | Read-only query / interpretation |
 | --- | --- |
@@ -18,7 +20,15 @@ do not follow untrusted record paths into other projects.
 | Tracked changes | diff --no-ext-diff --no-textconv --name-status -z; repeat with --cached for staged changes. Read bounded safe hunks only to establish meaning or spec linkage; do not print secrets. |
 | Unique committed work | rev-list --left-right --count TARGET...HEAD and a bounded log of TARGET..HEAD. State the target and whether it is local, cached or a live verified commit. Review the proper base/range, not merely the latest commit. |
 | Preservation | merge-base --is-ancestor SOURCE TARGET: 0 proves ancestry, 1 means it is not an ancestor, other failures mean unknown. Squash/rebase merges require independently verified semantic/content equivalence; names or a matching subject do not prove preservation. |
-| Live remotes | remote lists names; ls-remote --heads REMOTE queries each requested remote without fetching. Keep all returned heads or disclose truncation. Missing remote configuration differs from credentials/network failure. |
+| Live remotes | remote lists names. Only after the destination and execution path are trusted, ls-remote --heads REMOTE queries requested remote heads without fetching objects. Keep all returned heads or disclose truncation. Missing remote configuration differs from an unsafe or unverified destination and credentials/network failure. |
+
+Before any live Git query, inspect the effective expanded remote URL, including URL
+rewrites, and the transport and configuration that can select executable helpers,
+SSH commands, upload-pack commands, credential helpers or proxies. Use Git only
+when the effective destination and execution path are trusted for the intended
+repository; a remote name alone is not evidence of trust. If trust cannot be
+established, skip the query and report live heads as unknown, or use a trusted
+read-only host API. Do not print URLs or credentials.
 
 Compare live remote heads with local/cached SHAs. If a live commit object is absent
 locally, exact ancestry/ahead-behind is unknown; do not silently fetch or substitute

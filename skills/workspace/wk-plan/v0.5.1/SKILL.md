@@ -1,0 +1,104 @@
+---
+name: wk-plan
+description: Run the wk.plan lifecycle facade to validate or create an active specification and produce an executable implementation plan. Invoke explicitly when approved work needs ordered steps, affected files, migration handling, validation, rollback, and completion gates.
+metadata:
+  skm-version: "0.5.1"
+  skm-source-repository: "https://github.com/skills-yaml/workspace.git"
+  skm-source-revision: "59e8ad3a02a57ad1b5b659fd9deb752e627ee893"
+  skm-source-path: "workspace/instructions/skills/wk-plan"
+  skm-source-integrity: "sha256:052a7d6b11b6a10ae8b46c988f3643f854b8fda7e2751bd84bc80df8a0333f9a"
+  workspace-toolkit-version: "0.19.0"
+  workspace-docs-compatibility: "11.x"
+  minimum-skm-version: "0.7.0"
+  skm-adapter-compatibility: "2.x"
+  skm-dependencies: "workspace/write-spec@0.8.1, workspace/plan-implementation@0.7.1"
+---
+
+# wk.plan
+
+Compose `write-spec` and `plan-implementation`.
+
+1. Require both focused dependencies and stop with an actionable installation
+   or compatibility error when either is unavailable.
+2. Locate the active specification. If none adequately covers a user-requested
+   plan, use `write-spec` first only when the request authorizes specification
+   writes; otherwise stop and report the missing specification and write authority.
+   Do not start implementation.
+3. Stop when the spec is ambiguous, incomplete, not in an implementable state,
+   lacks required authority, or conflicts with current authoritative
+   instructions.
+4. Otherwise use `plan-implementation` to produce dependency-ordered,
+   reviewable steps with concrete affected areas, compatibility and migration
+   handling, per-step validation, rollback, and completion gates.
+5. Report assumptions, blockers, and the exact implementation handoff.
+
+Do not edit product code or treat planning as authority to deliver changes.
+
+## Pinned Workflow Routing
+
+Have the focused plan declare module inputs, dependencies, consumers,
+resources, freshness, review/finding resolution, and the pinned final gates. Plan
+changed-component checks first, then affected direct/transitive consumer stages
+gated on upstream success, with selection reasons, fallback, and coverage gaps.
+Under v7,
+plan main completion separately from deployment/publication and include blocked
+resume conditions where needed. Planning does not start deferred implementation.
+
+## Pinned SDLC Contract
+
+Read the repository's pinned SDLC; this skill does not override its authority
+or this skill's read-only/planning boundary. Deliver the requested scope using
+existing patterns. Report optional improvements separately and leave them
+unimplemented. Before substantial scope expansion, identify the concrete
+blocker, propose the smallest solution and obtain approval. Standing workflow
+authority never grants unrelated work or governed instruction changes.
+
+For v7 and later, ordinary task branches and safe delivery follow task authority.
+Done means verified main merge with acceptance, documentation, catalog, versions
+and memory reconciled; publication is separate. Preserve done history with
+linked follow-ups. Blocked work records previous stage, kind, reason and resume
+condition; resume that stage with renewed evidence. Shared test integration is
+the default; a documented direct route preserves the same gates.
+
+Security, data integrity, public interfaces, governed instructions and release
+controls require independent exact-candidate review. Other non-trivial changes
+require it except small low-risk changes with focused tests. Resolve findings
+by a fix or reviewer-agreed documented rejection; optional suggestions remain
+outside scope. Finish relevant review, fixes, artifacts and knowable records
+before final verification. Later edits renew affected evidence. Verify actual
+combined integration/main revisions, record acceptance evidence and preserve
+host protections; missing coverage/tools are gaps, never a pass.
+
+Use the verification contract for the actual pin:
+
+- v9 and later: changed behavior and all affected direct/transitive consumers locally;
+  every required affected CI job on the stable candidate. Docs/spec, backend
+  and frontend changes skip unrelated jobs. Preserve required status names,
+  validated selection and dependency stages. No blanket full-repository run.
+- v8: the same affected local boundary, then complete required gates in CI.
+  Neither v8 nor any later pin requires a duplicate full local run before CI. Missing CI
+  cannot establish final acceptance; unknown impact needs investigation and
+  justified CI fallback.
+- v7: affected modules during iteration, then full required final-candidate
+  checks/tests after review and fixes. Earlier pins retain their own contract.
+
+During development and review fixes, pass changed-component checks before
+consumer checks in dependency order. Include interfaces, errors, security,
+timing, side effects, configuration, dependencies and generated outputs in
+impact analysis. Failures block dependent stages; deduplicate checks, assess
+old/new relationships for moves/deletions and group cycles. Reuse only proven-
+fresh evidence. Read-only work assesses this evidence; planning specifies it.
+Work on one active task per agent. Split oversized specs into bounded ordered
+steps with prerequisites, acceptance mapping and focused validation; use linked
+child specs for independently deliverable work and preserve overall acceptance.
+
+For v11 and later, follow the pinned SDLC's Unfinished Work Notice: if the task
+ends before its requested outcome is fully delivered, start the final hand-off
+with `**Not finished:**` and one plain sentence naming what is not done. Then
+state what was done so far, why it stopped in everyday words, numbered possible
+fixes saying who must act with one recommended, and where the work is
+preserved. The notice is the only text allowed before a fixed report template,
+which still follows in full. A report that delivers its findings is finished
+even when they show failures. Explain any error or internal term, never
+present partial work as complete, and relay unfinished subagent or peer
+hand-offs the same way.
